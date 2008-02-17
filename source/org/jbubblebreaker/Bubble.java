@@ -1,4 +1,3 @@
-package org.jbubblebreaker;
 /*
  * Copyright 2008 Sven Strickroth <email@cs-ware.de>
  * 
@@ -16,6 +15,8 @@ package org.jbubblebreaker;
  * You should have received a copy of the GNU General Public License     
  * along with JBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
  */
+
+package org.jbubblebreaker;
 
 import java.awt.Color;
 import java.awt.Graphics;
