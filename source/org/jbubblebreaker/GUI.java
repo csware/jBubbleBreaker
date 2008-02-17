@@ -76,7 +76,7 @@ public class GUI extends JFrame implements MouseListener {
 		
 		possiblePoints.setVisible(false);
 		
-		int horizontal = 400 / rows;
+		int horizontal = 400 / cols;
 		int vertikal = 400 / rows;
 		playground = new Bubble[rows][cols];
 		for(int i=0; i < rows; i++) {
