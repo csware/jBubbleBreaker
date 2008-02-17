@@ -177,7 +177,29 @@ public class GUI extends JFrame implements MouseListener {
 		marked=0;
 		this.setTitle("JBubbleBreaker Punkte: "+ points);
 		playgroundPanel.repaint();
-		// check if still solveable
+		if (isSolveable() == false) {
+			System.out.println("ENDE!!!");
+			this.setTitle("JBubbleBreaker Punkte: "+ points+"ENDE!!!");
+		}
+	}
+
+	private boolean isSolveable() {
+		int row = rows - 1;
+		int col = cols - 1;
+		while(col > 0 && playground[row][col] != null) {
+			while(row > 0 && playground[row][col] != null) {
+				if (playground[row-1][col] != null && playground[row][col].getColor() == playground[row-1][col].getColor()) {
+					return true;
+				}
+				if (playground[row][col-1] != null && playground[row][col].getColor() == playground[row][col-1].getColor()) {
+					return true;
+				}
+				row--;
+			}
+			col--;
+			row = rows - 1;
+		}
+		return false;
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
