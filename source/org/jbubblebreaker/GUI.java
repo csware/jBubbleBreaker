@@ -67,6 +67,7 @@ public class GUI extends JFrame implements MouseListener {
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
 		getContentPane().add(playgroundPanel, BorderLayout.CENTER);
+		playgroundPanel.addMouseListener(this);
 		playgroundPanel.setSize(500,600);
 		playgroundPanel.setLayout(null);
 		playgroundPanel.repaint();
@@ -204,6 +205,10 @@ public class GUI extends JFrame implements MouseListener {
 
 	public void mouseClicked(MouseEvent arg0) {
 		this.setTitle("JBubbleBreaker Punkte: "+ points);
+		if (arg0.getSource() == playgroundPanel) {
+			unmarkAll();
+			return;
+		}
 		Bubble my = (Bubble)(arg0.getSource());
 		if (my==null) { return; }
 		//System.out.println(my.getRow() +"x"+ my.getCol());
