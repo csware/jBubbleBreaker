@@ -17,12 +17,14 @@ package org.jbubblebreaker;
  * along with JBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * @author Sven Strickroth
@@ -30,6 +32,8 @@ import javax.swing.JLabel;
 @SuppressWarnings("serial")
 public class GUI extends JFrame implements MouseListener {
 
+	private JPanel infoPanel = new JPanel();
+	private JPanel playgroundPanel = new JPanel();
 	private int rows = 12;
 	private int cols = 12;
 	private int marked = 0;
@@ -61,10 +65,16 @@ public class GUI extends JFrame implements MouseListener {
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width-getWidth())/2,(Toolkit.getDefaultToolkit().getScreenSize().height-getHeight())/2);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		getContentPane().add(infoPanel, BorderLayout.SOUTH);
+		getContentPane().add(playgroundPanel, BorderLayout.CENTER);
+		playgroundPanel.setSize(500,600);
+		playgroundPanel.setLayout(null);
+		playgroundPanel.repaint();
+
 		possiblePoints.setSize(50,50);
+		playgroundPanel.add(possiblePoints);
 		
 		possiblePoints.setVisible(false);
-		this.getContentPane().add(possiblePoints);
 		
 		int horizontal = 400 / rows;
 		int vertikal = 400 / rows;
@@ -72,7 +82,7 @@ public class GUI extends JFrame implements MouseListener {
 		for(int i=0; i < rows; i++) {
 			for(int j=0; j < cols; j++) {
 				playground[i][j] = new Bubble(horizontal,vertikal,i,j,this);
-				this.getContentPane().add(playground[i][j]);
+				playgroundPanel.add(playground[i][j]);
 			}
 		}
 	}
@@ -127,7 +137,7 @@ public class GUI extends JFrame implements MouseListener {
 				//System.out.println(i);
 				if (playground[i][k] != null && playground[i][k].isMarked() == true) {
 					//System.out.println("wech:"+i);
-					this.remove(playground[i][k]);
+					playgroundPanel.remove(playground[i][k]);
 					playground[i][k] = null;
 					for(int j=i; j > 0; j--) {
 						playground[j][k] = playground[j-1][k];
@@ -159,7 +169,7 @@ public class GUI extends JFrame implements MouseListener {
 		possiblePoints.setVisible(false);
 		marked=0;
 		this.setTitle("JBubbleBreaker Punkte: "+ points);
-		this.repaint();
+		playgroundPanel.repaint();
 		// check if still solveable
 	}
 
