@@ -19,11 +19,8 @@ package org.jbubblebreaker;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -34,6 +31,7 @@ public class GUI extends JFrame {
 
 	private JPanel infoPanel = new JPanel();
 	private Game playground;
+
 	/**
 	 * Launch the application
 	 * @param args

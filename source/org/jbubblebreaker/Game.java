@@ -61,25 +61,17 @@ public class Game extends MouseAdapter {
 		circle.setMark(true);
 		int color = circle.getColor();
 
-		if (col+1 < playground.getCols()) {
-			if (playground.getColor(row, col + 1) == color && playground.isMarked(row, col + 1) == false) {
-				findsame(row,col + 1);
-			}
+		if (playground.getColor(row, col + 1) == color && playground.isMarked(row, col + 1) == false) {
+			findsame(row,col + 1);
 		}
-		if (col >= 1) {
-			if (playground.getColor(row, col - 1) == color && playground.isMarked(row, col - 1) == false) {
-				findsame(row,col - 1);
-			}
+		if (playground.getColor(row, col - 1) == color && playground.isMarked(row, col - 1) == false) {
+			findsame(row,col - 1);
 		}
-		if (row+1 < playground.getRows()) {
-			if (playground.getColor(row + 1, col) == color && playground.isMarked(row+1, col) == false) {
-				findsame(row + 1,col);
-			}
+		if (playground.getColor(row + 1, col) == color && playground.isMarked(row+1, col) == false) {
+			findsame(row + 1,col);
 		}
-		if (row >= 1) {
-			if (playground.getColor(row - 1, col) == color && playground.isMarked(row - 1, col) == false) {
-				findsame(row - 1,col);
-			}
+		if (playground.getColor(row - 1, col) == color && playground.isMarked(row - 1, col) == false) {
+			findsame(row - 1,col);
 		}
 	}
 
