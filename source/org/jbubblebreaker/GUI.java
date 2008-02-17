@@ -150,10 +150,16 @@ public class GUI extends JFrame implements MouseListener {
 				}
 			}
 		}
+		int firstEmpty = -1;
+		for(int k=0; k < cols; k++) {
+			if (playground[rows-1][k] == null && firstEmpty == -1) {
+				firstEmpty = k;
+			}
+		}
 		for(int k=cols-1; k > 0; k--) {
-			if (playground[rows-1][k] == null && playground[rows-1][k-1] != null) {
+			while (playground[rows-1][k] == null && firstEmpty <= k) {
 				for(int j=k; j > 0; j--) {
-					// System.out.println("wandern "+(j-1)+" nach "+j);
+					//System.out.println("wandern "+(j-1)+" nach "+j);
 					for(int i=0; i < rows; i++) {
 						playground[i][j] = playground[i][j-1];
 						if (playground[i][j] != null) {
@@ -164,6 +170,7 @@ public class GUI extends JFrame implements MouseListener {
 				for(int i=0; i < rows; i++) {
 					playground[i][0] = null;					
 				}
+				firstEmpty++;
 			}
 		}
 		possiblePoints.setVisible(false);
