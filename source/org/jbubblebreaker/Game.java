@@ -21,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -31,11 +32,13 @@ public class Game extends MouseAdapter {
 	private JPanel playgroundPanel = new JPanel();
 	private JLabel possiblePoints = new JLabel("2000");
 	private Playground playground;
+	JLabel pointsLabel;
 	private int points = 0;
 	
-	public Game(int rows, int cols) {
+	public Game(int rows, int cols, JLabel pointsLabel) {
 		playground = new Playground(rows, cols, this);
 
+		this.pointsLabel = pointsLabel;
 		possiblePoints.setSize(50,50);
 		playgroundPanel.add(possiblePoints);
 		possiblePoints.setVisible(false);
@@ -129,11 +132,10 @@ public class Game extends MouseAdapter {
 		
 		marked=0;
 		possiblePoints.setVisible(false);
-		//this.setTitle("JBubbleBreaker Punkte: "+ points);
+		pointsLabel.setText("Punkte: "+ points);
 		playgroundPanel.repaint();
 		if (isSolveable() == false) {
-			System.out.println("ENDE!!!");
-			//this.setTitle("JBubbleBreaker Punkte: "+ points+"ENDE!!!");
+			JOptionPane.showMessageDialog(null, "Spielende. Punkte: "+points, "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -148,14 +150,14 @@ public class Game extends MouseAdapter {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		//this.setTitle("JBubbleBreaker Punkte: "+ points);
+		pointsLabel.setText("Punkte: "+ points);
 		if (arg0.getSource() == playgroundPanel) {
 			unmarkAll();
 			return;
 		}
 		Bubble my = (Bubble)(arg0.getSource());
 		if (my == null) { return; }
-		System.out.println(my.getRow() +"x"+ my.getCol());
+		//System.out.println(my.getRow() +"x"+ my.getCol());
 		if (marked != 0) {
 			if (my.isMarked() == false) {
 				unmarkAll();

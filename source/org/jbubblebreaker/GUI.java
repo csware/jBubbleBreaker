@@ -21,6 +21,7 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -31,18 +32,14 @@ public class GUI extends JFrame {
 
 	private JPanel infoPanel = new JPanel();
 	private Game playground;
-
+	JLabel pointsLabel = new JLabel();
+	
 	/**
-	 * Launch the application
+	 * Launch JBubbleBreaker
 	 * @param args
 	 */
 	public static void main(String args[]) {
-		try {
-			GUI frame = new GUI();
-			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new GUI();
 	}
 
 	/**
@@ -50,16 +47,23 @@ public class GUI extends JFrame {
 	 */
 	private GUI() {
 		super("JBubbleBreaker");
-		setLayout(null);
-		setSize(407,427);
-		setResizable(false);
+		setLayout(new BorderLayout());
+		setSize(407,450);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width-getWidth())/2,(Toolkit.getDefaultToolkit().getScreenSize().height-getHeight())/2);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
-		playground = new Game(12,12);
+		infoPanel.setSize(60, 60);
+		playground = new Game(12, 12, pointsLabel);
 		getContentPane().add(playground.getPanel(), BorderLayout.CENTER);
 
-		playground.getPanel().setSize(500,600);
+		infoPanel.setLayout(new BorderLayout());
+
+		infoPanel.add(pointsLabel, BorderLayout.WEST);
+		JLabel gameModeLabel = new JLabel();
+		gameModeLabel.setText("Standard");
+		infoPanel.add(gameModeLabel, BorderLayout.EAST);
+		pointsLabel.setText("Punkte: 0");
+		setVisible(true);
 	}
 }
