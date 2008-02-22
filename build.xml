@@ -2,13 +2,9 @@
 <project name="SiS" default="generateAll" basedir=".">
 	<property file="application.properties" />
 	<property environment="env"/>
-
-	<target name="firstTimeEclipseSetup" description="Generates the application-file and .classpathfile for eclipse.">
-		<exec executable="${basedir}/setup.bat" dir="${basedir}" failonerror="true" searchpath="true" />
-	</target>
-
 	<target name="generateAll" description="Generates all Stubs and Skeletons for our interfaces">
 		<antcall target="generateJavaDoc" />
+		<antcall target="createJar" />
 	</target>
 	<target name="generateJavaDoc" description="Generate JavaDoc">
 		<delete dir="${basedir}/${doc.dir}" />
@@ -33,13 +29,21 @@
 			<link href="http://java.sun.com/javase/6/docs/api/"/>
 		</javadoc>
 	</target>
-	<target name="CreateJar">
+	<target name="createJar" depends="compile" description="Generates the jar-file">
 		<jar destfile="${basedir}/jbubblebreaker.jar" basedir="${basedir}/bin">
-		    <manifest>
+			<manifest>
 				<attribute name="Main-Class" value="org.jbubblebreaker.GUI"/>
-		    	<attribute name="Built-By" value="${user.name}"/>
-		    </manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+			</manifest>
+			<fileset dir="${basedir}">
+				<include name="COPYING"/>
+			</fileset>
 		</jar>
+	</target>
+	<target name="compile" description="Compiles the source">
+		<delete dir="${basedir}/${bin.dir}" />
+		<mkdir dir="${basedir}/${bin.dir}" />
+		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" />
 	</target>
 	<target name="clean" description="Remove all generated files">
 		<delete dir="${basedir}/${bin.dir}" />
