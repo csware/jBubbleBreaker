@@ -20,15 +20,37 @@ package org.jbubblebreaker;
 import java.awt.event.MouseListener;
 
 /**
+ * Provides the playground/Bubble matrix
  * @author Sven Strickroth
  */
 public class Playground {
-	private int cols = 12;
-	private int rows = 12;
-	private int horizontal = 0;
-	private int vertikal = 0;
+	/**
+	 * stores the width/column-count of the matrix
+	 */
+	private int cols;
+	/**
+	 * stores the height/row-count of the matrix
+	 */
+	private int rows;
+	/**
+	 * width of the playground JPanel
+	 */
+	private int horizontal;
+	/**
+	 * height of the playground JPanel
+	 */
+	private int vertikal;
+	/**
+	 * stores the matrix
+	 */
 	private Bubble[][] playground;
 
+	/**
+	 * Creates a new Playground/Matrix (and JPanel)
+	 * @param rows row count
+	 * @param cols col count
+	 * @param ml MouseListener
+	 */
 	public Playground(int rows, int cols, MouseListener ml) {
 		this.cols = cols;
 		this.rows = rows;
@@ -42,6 +64,12 @@ public class Playground {
 		}
 	}
 
+	/**
+	 * Returns the color-index of a  Bubble at a specific position in the matrix
+	 * @param x row-index
+	 * @param y column-index
+	 * @return Bubble-Color-index, -1 if this Bubble doesn't exist 
+	 */
 	public int getColor(int x, int y) {
 		if (isEmpty(x,y) == true) {
 			return -1;
@@ -50,6 +78,12 @@ public class Playground {
 		}
 	}
 	
+	/**
+	 * Returns the Bubble of a  Bubble at a specific position in the matrix
+	 * @param x row-index
+	 * @param y column-index
+	 * @return Bubble-reference, null if this Bubble doesn't exist
+	 */
 	public Bubble getBubble(int x, int y) {
 		if (isEmpty(x,y) == false) {
 			return playground[x][y];
@@ -58,6 +92,12 @@ public class Playground {
 		}
 	}
 
+	/**
+	 * Checks if at a specific position a Bubble exists 
+	 * @param x row-index
+	 * @param y column-index
+	 * @return exists a Bubble at x,y?
+	 */
 	public boolean isEmpty(int x, int y) {
 		if (x < 0 || y < 0 || x >= rows || y >= cols) {
 			return true;
@@ -65,6 +105,12 @@ public class Playground {
 		return (playground[x][y]==null);
 	}
 
+	/**
+	 * Checks if at a specific position a Bubble is marked
+	 * @param x row-index
+	 * @param y column-index
+	 * @return is marked?, false if Bubble doesn't exist
+	 */
 	public boolean isMarked(int x, int y) {
 		if (isEmpty(x,y) == true) {
 			return false;
@@ -72,7 +118,13 @@ public class Playground {
 		return playground[x][y].isMarked();
 	}
 
-	
+	/**
+	 * Moves a specific Bubble to a new location in the matrix, regardless if on the destination there is a Bubble
+	 * @param x old row-index
+	 * @param y old column-index
+	 * @param toX new row-index
+	 * @param toY new column-index
+	 */
 	public void moveTo(int x, int y, int toX, int toY) {
 		if (x != toX || y != toY) {
 			playground[toX][toY] = playground[x][y];
@@ -83,6 +135,11 @@ public class Playground {
 		}
 	}
 
+	/**
+	 * Unmark a specific Bubble 
+	 * @param x row-index
+	 * @param y column-index
+	 */
 	public void unMark(int x, int y) {
 		if (isEmpty(x,y) == false) {
 			playground[x][y].setMark(false);
@@ -90,14 +147,16 @@ public class Playground {
 	}
 
 	/**
-	 * @return the cols
+	 * Returns the column-count of the matrix
+	 * @return playground width/column count
 	 */
 	public int getCols() {
 		return cols;
 	}
 
 	/**
-	 * @return the rows
+	 * Returns the row-count of the matrix
+	 * @return playground height/row count
 	 */
 	public int getRows() {
 		return rows;

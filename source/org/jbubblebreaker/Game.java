@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
+ * Provides the JBubbleBreaker logic
  * @author Sven Strickroth
  */
 public class Game extends MouseAdapter {
@@ -53,11 +54,20 @@ public class Game extends MouseAdapter {
 		playgroundPanel.repaint();
 	}
 
+	/**
+	 * Returns the JPanel with the Bubbles inside
+	 * @return playground-JPanel
+	 */
 	public JPanel getPanel() {
 		return playgroundPanel;
 	}
-	
-	public void findsame(int row, int col) {
+
+	/**
+	 * Find reculsively all Bubbles with the same color-index which are next to each other 
+	 * @param row row-index to start the search
+	 * @param col column-index to start the search
+	 */
+	private void findsame(int row, int col) {
 		Bubble circle = playground.getBubble(row, col);
 		if (circle == null) { return; }
 		marked++;
@@ -78,6 +88,10 @@ public class Game extends MouseAdapter {
 		}
 	}
 
+	/**
+	 * Checks if the current game is solveable
+	 * @return playground solveable?
+	 */
 	private boolean isSolveable() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
@@ -97,8 +111,13 @@ public class Game extends MouseAdapter {
 		return false;
 	}
 
+	/**
+	 * Remove all marked Bubbles, starting on row, col
+	 * @param row row-index
+	 * @param col column-index
+	 */
 	private void removeBubbles(int row, int col) {
-		// erstmal nur in der Spalte löschen
+		// first of all delete bubbles in col
 		for(int k=0; k < playground.getCols(); k++) {
 			for(int i=0; i < playground.getRows(); i++) {
 				//System.out.println(i);
@@ -132,13 +151,16 @@ public class Game extends MouseAdapter {
 		
 		marked=0;
 		possiblePoints.setVisible(false);
-		pointsLabel.setText("Punkte: "+ points);
+		pointsLabel.setText("Points: "+ points);
 		playgroundPanel.repaint();
 		if (isSolveable() == false) {
 			JOptionPane.showMessageDialog(null, "Spielende. Punkte: "+points, "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
+	/**
+	 * Unmarks all Bubbles
+	 */
 	private void unmarkAll() {
 		marked=0;
 		for(int i=0; i < playground.getRows(); i++) {
@@ -149,8 +171,9 @@ public class Game extends MouseAdapter {
 		possiblePoints.setVisible(false);
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		pointsLabel.setText("Punkte: "+ points);
+		pointsLabel.setText("Points: "+ points);
 		if (arg0.getSource() == playgroundPanel) {
 			unmarkAll();
 			return;

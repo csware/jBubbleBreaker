@@ -18,21 +18,28 @@
 package org.jbubblebreaker;
 
 import java.awt.BorderLayout;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 /**
+ * JBubbleBreaker GUI
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class GUI extends JFrame {
-
+public class GUI extends MyJFrame implements ActionListener {
 	private JPanel infoPanel = new JPanel();
 	private Game playground;
 	JLabel pointsLabel = new JLabel();
+
+	private JMenuItem menuHelpInfo,menuFileNew,menuFileStatistics,menuFileClose;
 	
 	/**
 	 * Launch JBubbleBreaker
@@ -43,14 +50,12 @@ public class GUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame
+	 * Create the JFrame
 	 */
 	private GUI() {
-		super("JBubbleBreaker");
+		super("JBubbleBreaker",null,407,470,true,true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);	
 		setLayout(new BorderLayout());
-		setSize(407,450);
-		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width-getWidth())/2,(Toolkit.getDefaultToolkit().getScreenSize().height-getHeight())/2);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
 		infoPanel.setSize(60, 60);
@@ -63,7 +68,48 @@ public class GUI extends JFrame {
 		JLabel gameModeLabel = new JLabel();
 		gameModeLabel.setText("Standard");
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
-		pointsLabel.setText("Punkte: 0");
+		pointsLabel.setText("Points: 0");
+		
+		// insert Menu
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		JMenu menuFile = new JMenu("File");
+		menuBar.add(menuFile);
+		JMenu menuHelp = new JMenu("?");
+		menuBar.add(menuHelp);
+		menuFileNew = new JMenuItem("New");
+		menuFileNew.addActionListener(this);
+		menuFileNew.setMnemonic('n');
+		menuFileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
+		menuFile.add(menuFileNew);
+		menuFileStatistics = new JMenuItem("Statistics");
+		menuFileStatistics.addActionListener(this);
+		menuFileStatistics.setMnemonic('s');
+		menuFile.add(menuFileStatistics);
+		menuFileClose = new JMenuItem("Quit");
+		menuFileClose.addActionListener(this);
+		menuFileClose.setMnemonic('q');
+		menuFileClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,ActionEvent.ALT_MASK));
+		menuFile.add(menuFileClose);
+		menuHelpInfo = new JMenuItem("About");
+		menuHelpInfo.addActionListener(this);
+		menuHelpInfo.setMnemonic('a');
+		menuHelp.add(menuHelpInfo);
 		setVisible(true);
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == menuFileClose) {
+			dispose();
+		} else if (arg0.getSource() == menuHelpInfo) {
+			new AboutBox(this);
+		} else if (arg0.getSource() == menuFileNew) {
+			remove(playground.getPanel());
+			playground = new Game(12, 12, pointsLabel);
+			getContentPane().add(playground.getPanel(), BorderLayout.CENTER);
+			repaint();
+			setVisible(false);
+			setVisible(true);
+		}
 	}
 }
