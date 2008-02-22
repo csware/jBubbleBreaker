@@ -6,6 +6,10 @@
 		<antcall target="generateJavaDoc" />
 		<antcall target="createJar" />
 	</target>
+	<target name="run" description="Runs JBubbleBreaker" depends="createJar">
+		<antcall target="createJar" />
+		<java jar="${basedir}/jbubblebreaker.jar" fork="true" />
+	</target>
 	<target name="generateJavaDoc" description="Generate JavaDoc">
 		<delete dir="${basedir}/${doc.dir}" />
 		<mkdir dir="${basedir}/${doc.dir}" />
@@ -32,7 +36,7 @@
 	<target name="createJar" depends="compile" description="Generates the jar-file">
 		<jar destfile="${basedir}/jbubblebreaker.jar" basedir="${basedir}/bin">
 			<manifest>
-				<attribute name="Main-Class" value="org.jbubblebreaker.GUI"/>
+				<attribute name="Main-Class" value="${main.class}"/>
 				<attribute name="Built-By" value="${user.name}"/>
 			</manifest>
 			<fileset dir="${basedir}">
