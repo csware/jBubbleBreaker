@@ -106,12 +106,7 @@ public class GUI extends MyJFrame implements ActionListener {
 		} else if (arg0.getSource() == menuHelpInfo) {
 			new AboutBox(this);
 		} else if (arg0.getSource() == menuFileNew) {
-			remove(playground.getPanel());
-			playground = new GameDefault(12, 12, pointsLabel);
-			getContentPane().add(playground.getPanel(), BorderLayout.CENTER);
-			repaint();
-			setVisible(false);
-			setVisible(true);
+			playground.newGame();
 		}
 	}
 }

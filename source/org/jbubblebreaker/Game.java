@@ -61,21 +61,47 @@ public abstract class Game extends MouseAdapter {
 	 * @param pointsLabel reference to the points Label in the GUI
 	 */
 	public Game(int rows, int cols, JLabel pointsLabel) {
+		playgroundPanel.setLayout(null);
+		
 		playground = new Playground(rows, cols, this);
-
+		
 		this.pointsLabel = pointsLabel;
 		possiblePoints.setSize(50,50);
 		playgroundPanel.add(possiblePoints);
 		possiblePoints.setVisible(false);
 		
-		for(int i=0; i < rows; i++) {
-			for(int j=0; j < cols; j++) {
+		newGame();
+		playgroundPanel.addMouseListener(this);
+		playgroundPanel.repaint();
+	}
+
+	/**
+	 * Creates a new game.
+	 * Resets all values and creates a new Bubble matrix.
+	 */
+	final public void newGame() {
+		points = 0;
+		marked = 0;
+		possiblePoints.setVisible(false);
+		int row = playground.getRows() - 1;
+		int col = playground.getCols() - 1;
+		while(col >= 0 && playground.isEmpty(row,col) == false) {
+			while(row >= 0 && playground.isEmpty(row, col) == false) {
+				System.out.println(row+"x"+col);
+				playgroundPanel.remove(playground.getBubble(row, col));
+				row--;
+			}
+			col--;
+			row = playground.getRows() - 1;
+		}
+		playground.newGame();
+		for(int i=0; i < playground.getRows(); i++) {
+			for(int j=0; j < playground.getCols(); j++) {
 				playgroundPanel.add(playground.getBubble(i, j));
 			}
 		}
-		playgroundPanel.addMouseListener(this);
-		playgroundPanel.setLayout(null);
 		playgroundPanel.repaint();
+		pointsLabel.setText("Points: "+ points);
 	}
 
 	/**

@@ -46,6 +46,11 @@ public class Playground {
 	private Bubble[][] playground;
 
 	/**
+	 * stores the reference to the MouseListener
+	 */
+	MouseListener mouseListener;
+	
+	/**
 	 * Creates a new Playground/Matrix (and JPanel)
 	 * @param rows row count
 	 * @param cols col count
@@ -57,13 +62,17 @@ public class Playground {
 		horizontal = 400 / cols;
 		vertikal = 400 / rows;
 		playground = new Bubble[rows][cols];
+		mouseListener = ml;
+	}
+
+	public void newGame() {
 		for(int i=0; i < rows; i++) {
 			for(int j=0; j < cols; j++) {
-				playground[i][j] = new Bubble(horizontal,vertikal, i, j, ml);
+				playground[i][j] = new Bubble(horizontal,vertikal, i, j, mouseListener);
 			}
 		}
 	}
-
+	
 	/**
 	 * Returns the color-index of a  Bubble at a specific position in the matrix
 	 * @param x row-index
