@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project name="SiS" default="generateAll" basedir=".">
+	<property file="application.properties" />
+	<property environment="env"/>
+
+	<target name="firstTimeEclipseSetup" description="Generates the application-file and .classpathfile for eclipse.">
+		<exec executable="${basedir}/setup.bat" dir="${basedir}" failonerror="true" searchpath="true" />
+	</target>
+
+	<target name="generateAll" description="Generates all Stubs and Skeletons for our interfaces">
+		<antcall target="generateJavaDoc" />
+	</target>
+	<target name="generateJavaDoc" description="Generate JavaDoc">
+		<delete dir="${basedir}/${doc.dir}" />
+		<mkdir dir="${basedir}/${doc.dir}" />
+		<javadoc
+			access="private"
+			author="true"
+			destdir="${doc.dir}"
+			doctitle="SiS API"
+			nodeprecated="false"
+			nodeprecatedlist="false"
+			noindex="false"
+			nonavbar="false"
+			notree="false"
+			packagenames="*"
+			source="1.6"
+			sourcepath="${source.dir}"
+			splitindex="true"
+			use="true"
+			executable="${env.JAVA_HOME}/bin/javadoc"
+			version="true">
+			<link href="http://java.sun.com/javase/6/docs/api/"/>
+		</javadoc>
+	</target>
+	<target name="CreateJar">
+		<jar destfile="${basedir}/jbubblebreaker.jar" basedir="${basedir}/bin">
+		    <manifest>
+				<attribute name="Main-Class" value="org.jbubblebreaker.GUI"/>
+		    	<attribute name="Built-By" value="${user.name}"/>
+		    </manifest>
+		</jar>
+	</target>
+	<target name="clean" description="Remove all generated files">
+		<delete dir="${basedir}/${bin.dir}" />
+		<delete dir="${basedir}/${doc.dir}" />
+		<delete file="${basedir}/jbubblebreaker.jar" />
+	</target>
+</project>
