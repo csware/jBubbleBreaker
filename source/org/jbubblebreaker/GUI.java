@@ -29,6 +29,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import org.jbubblebreaker.gamemodes.*;
+
 /**
  * JBubbleBreaker GUI
  * @author Sven Strickroth
@@ -59,14 +61,14 @@ public class GUI extends MyJFrame implements ActionListener {
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
 		infoPanel.setSize(60, 60);
-		playground = new Game(12, 12, pointsLabel);
+		playground = new GameDefault(12, 12, pointsLabel);
 		getContentPane().add(playground.getPanel(), BorderLayout.CENTER);
 
 		infoPanel.setLayout(new BorderLayout());
 
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
 		JLabel gameModeLabel = new JLabel();
-		gameModeLabel.setText("Standard");
+		gameModeLabel.setText(playground.getMode());
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
 		pointsLabel.setText("Points: 0");
 		
@@ -105,7 +107,7 @@ public class GUI extends MyJFrame implements ActionListener {
 			new AboutBox(this);
 		} else if (arg0.getSource() == menuFileNew) {
 			remove(playground.getPanel());
-			playground = new Game(12, 12, pointsLabel);
+			playground = new GameDefault(12, 12, pointsLabel);
 			getContentPane().add(playground.getPanel(), BorderLayout.CENTER);
 			repaint();
 			setVisible(false);

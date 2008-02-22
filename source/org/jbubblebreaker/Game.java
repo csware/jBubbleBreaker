@@ -28,12 +28,12 @@ import javax.swing.JPanel;
  * Provides the JBubbleBreaker logic
  * @author Sven Strickroth
  */
-public class Game extends MouseAdapter {
+public abstract class Game extends MouseAdapter {
 	private int marked = 0;
-	private JPanel playgroundPanel = new JPanel();
-	private JLabel possiblePoints = new JLabel("2000");
-	private Playground playground;
-	JLabel pointsLabel;
+	protected JPanel playgroundPanel = new JPanel();
+	protected JLabel possiblePoints = new JLabel("2000");
+	protected Playground playground;
+	private JLabel pointsLabel;
 	private int points = 0;
 	
 	public Game(int rows, int cols, JLabel pointsLabel) {
@@ -58,7 +58,7 @@ public class Game extends MouseAdapter {
 	 * Returns the JPanel with the Bubbles inside
 	 * @return playground-JPanel
 	 */
-	public JPanel getPanel() {
+	final public JPanel getPanel() {
 		return playgroundPanel;
 	}
 
@@ -116,48 +116,14 @@ public class Game extends MouseAdapter {
 	 * @param row row-index
 	 * @param col column-index
 	 */
-	private void removeBubbles(int row, int col) {
-		// first of all delete bubbles in col
-		for(int k=0; k < playground.getCols(); k++) {
-			for(int i=0; i < playground.getRows(); i++) {
-				//System.out.println(i);
-				if (playground.isMarked(i,k) == true) {
-					//System.out.println("wech:"+i);
-					playgroundPanel.remove(playground.getBubble(i,k));
-					for(int j=i; j > 0; j--) {
-						playground.moveTo(j-1, k, j, k);
-						//System.out.println("wandern "+(j-1)+" nach "+j);
-					}
-				}
-			}
-		}
-		int firstEmpty = -1;
-		for(int k=0; k < playground.getCols(); k++) {
-			if (playground.isEmpty(playground.getRows()-1, k) == true && firstEmpty == -1) {
-				firstEmpty = k;
-			}
-		}
-		for(int k=playground.getCols()-1; k > 0; k--) {
-			while (playground.isEmpty(playground.getRows()-1, k) == true && firstEmpty <= k) {
-				for(int j=k; j > 0; j--) {
-					//System.out.println("wandern "+(j-1)+" nach "+j);
-					for(int i=0; i < playground.getRows(); i++) {
-						playground.moveTo(i, j-1, i, j);
-					}
-				}
-				firstEmpty++;
-			}
-		}
-		
-		marked=0;
-		possiblePoints.setVisible(false);
-		pointsLabel.setText("Points: "+ points);
-		playgroundPanel.repaint();
-		if (isSolveable() == false) {
-			JOptionPane.showMessageDialog(null, "Spielende. Punkte: "+points, "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
+	protected void removeBubbles(int row, int col) {};
 
+	/**
+	 * Returns the game-Mode
+	 * @return the gameMode name 
+	 */
+	protected String getMode() { return ""; };
+	
 	/**
 	 * Unmarks all Bubbles
 	 */
@@ -172,7 +138,7 @@ public class Game extends MouseAdapter {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	final public void mouseClicked(MouseEvent arg0) {
 		pointsLabel.setText("Points: "+ points);
 		if (arg0.getSource() == playgroundPanel) {
 			unmarkAll();
@@ -187,6 +153,13 @@ public class Game extends MouseAdapter {
 			} else {
 				points += (marked*(marked-1));
 				removeBubbles(my.getRow(),my.getCol());
+				pointsLabel.setText("Points: "+ points);
+				playgroundPanel.repaint();
+				marked=0;
+				possiblePoints.setVisible(false);
+				if (isSolveable() == false) {
+					JOptionPane.showMessageDialog(null, "Game over. Points: "+ getPoints(), "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 			return;
 		}
@@ -198,5 +171,12 @@ public class Game extends MouseAdapter {
 		if (marked==1) {
 			unmarkAll();
 		}
+	}
+
+	/**
+	 * @return the points
+	 */
+	final public int getPoints() {
+		return points;
 	}
 }
