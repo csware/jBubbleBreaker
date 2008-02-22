@@ -30,12 +30,33 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class Bubble extends JPanel {
+	/**
+	 * stores the height of the Bubble
+	 */
 	private int height;
+	/**
+	 * stores the width of the Bubble
+	 */
 	private int width;
+	/**
+	 * stores the row of the Bubble-position
+	 */
 	private int row;
+	/**
+	 * stores the column of the Bubble-position
+	 */
 	private int col;
+	/**
+	 * is the Bubble marked
+	 */
 	private boolean marked = false;
+	/**
+	 * stores the color of this Bubble
+	 */
 	private int color;
+	/**
+	 * stores all Possible Colors
+	 */
 	final private Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA}; 
 
 	/**
