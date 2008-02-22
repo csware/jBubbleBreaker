@@ -34,8 +34,8 @@ public class GameDefault extends Game {
 	 * @param cols of the matrix
 	 * @param pointsLabel reference to the points Label in the GUI
 	 */
-	public GameDefault(int windowWidth, int windowHeight, int rows, int cols, JLabel pointsLabel) {
-		super(windowWidth, windowHeight, rows, cols, pointsLabel);
+	public GameDefault(int rows, int cols, JLabel pointsLabel) {
+		super(rows, cols, pointsLabel);
 	}
 	
 	@Override

@@ -78,12 +78,19 @@ public class Bubble extends JPanel {
 		this.addMouseListener(ml);
 	}
 	
+	/**
+	 * Resize and move optical position of a Bubble if width or height changed
+	 * @param width new width
+	 * @param height new height
+	 */
 	public void resized(int width, int height) {
-		this.width=width;
-		this.height=height;
-		this.setSize(width, height);
-		this.setLocation(col*width, row*height);
-		repaint();
+		if (this.width != width || this.height != height) {
+			this.width=width;
+			this.height=height;
+			this.setSize(width, height);
+			this.setLocation(col*width, row*height);
+			repaint();
+		}
 	}
 	
 	/**

@@ -17,6 +17,8 @@
  */
 package org.jbubblebreaker;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -60,11 +62,11 @@ public abstract class Game extends MouseAdapter {
 	 * @param cols of the matrix
 	 * @param pointsLabel reference to the points Label in the GUI
 	 */
-	public Game(int windowWidth, int windowHeight, int rows, int cols, JLabel pointsLabel) {
+	public Game(int rows, int cols, JLabel pointsLabel) {
 		playgroundPanel.setLayout(null);
 		
-		playground = new Playground(windowWidth, windowHeight, rows, cols, this);
-		
+		playground = new Playground(playgroundPanel.getWidth(), playgroundPanel.getHeight(), rows, cols, this);
+
 		this.pointsLabel = pointsLabel;
 		pointsLabel.setText("Points: "+ points);
 		
@@ -73,12 +75,14 @@ public abstract class Game extends MouseAdapter {
 		possiblePoints.setVisible(false);
 		
 		newGame();
+		
+		playgroundPanel.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent arg0) {
+				playground.resized(playgroundPanel.getWidth(), playgroundPanel.getHeight());
+				playgroundPanel.repaint();
+			}
+		});
 		playgroundPanel.addMouseListener(this);
-		playgroundPanel.repaint();
-	}
-
-	final public void resized(int windowWidth, int windowHeight) {
-		playground.resized(windowWidth, windowHeight);
 	}
 	
 	/**

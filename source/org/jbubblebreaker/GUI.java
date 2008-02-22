@@ -20,8 +20,6 @@ package org.jbubblebreaker;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
@@ -60,11 +58,6 @@ public class GUI extends MyJFrame implements ActionListener {
 	private GUI() {
 		super("JBubbleBreaker",null,407,470,true,true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);	
-		addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent arg0) {
-				game.resized(size().width,size().height);
-			}
-		});
 		setLayout(new BorderLayout());
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
@@ -119,7 +112,7 @@ public class GUI extends MyJFrame implements ActionListener {
 			getContentPane().remove(game.getPanel());
 		}
 		
-		game = new GameOngoing(getSize().width, getSize().height, 12, 12, pointsLabel);
+		game = new GameOngoing(12, 12, pointsLabel);
 		getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		gameModeLabel.setText(game.getMode());
 	}

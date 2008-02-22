@@ -65,20 +65,27 @@ public class Playground {
 		mouseListener = ml;
 	}
 
+	/**
+	 * Resizes the playground if changed to the new dimension
+	 * @param windowWidth new width of the playground
+	 * @param windowHeight new height of the playground
+	 */
 	public void resized(int windowWidth, int windowHeight) {
-		horizontal = windowWidth / cols;
-		vertikal = windowHeight / rows;
-		int row = cols - 1;
-		int col = rows - 1;
-		while(col >= 0 && isEmpty(row,col) == false) {
-			while(row >= 0 && isEmpty(row, col) == false) {
-				if (isEmpty(row, col) == false) {
-					getBubble(row, col).resized(horizontal, vertikal);
+		if (windowWidth / cols != horizontal || vertikal != windowHeight / rows) {
+			horizontal = windowWidth / cols;
+			vertikal = windowHeight / rows;
+			int row = cols - 1;
+			int col = rows - 1;
+			while(col >= 0 && isEmpty(row,col) == false) {
+				while(row >= 0 && isEmpty(row, col) == false) {
+					if (isEmpty(row, col) == false) {
+						getBubble(row, col).resized(horizontal, vertikal);
+					}
+					row--;
 				}
-				row--;
+				col--;
+				row = rows - 1;
 			}
-			col--;
-			row = rows - 1;
 		}
 	}
 
