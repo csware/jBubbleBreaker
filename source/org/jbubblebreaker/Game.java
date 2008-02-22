@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * Provides the JBubbleBreaker logic
+ * Provides the JBubbleBreaker core 
  * @author Sven Strickroth
  */
 public abstract class Game extends MouseAdapter {
@@ -66,6 +66,8 @@ public abstract class Game extends MouseAdapter {
 		playground = new Playground(rows, cols, this);
 		
 		this.pointsLabel = pointsLabel;
+		pointsLabel.setText("Points: "+ points);
+		
 		possiblePoints.setSize(50,50);
 		playgroundPanel.add(possiblePoints);
 		possiblePoints.setVisible(false);

@@ -17,8 +17,6 @@
  */
 package org.jbubblebreaker.gamemodes;
 
-import org.jbubblebreaker.Game;
-
 import javax.swing.JLabel;
 
 /**
