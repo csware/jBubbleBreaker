@@ -83,6 +83,8 @@ public abstract class Game extends MouseAdapter {
 		points = 0;
 		marked = 0;
 		possiblePoints.setVisible(false);
+		
+		// remove all Bubbles from playgroundPanel 
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
 		while(col >= 0 && playground.isEmpty(row,col) == false) {
@@ -93,16 +95,23 @@ public abstract class Game extends MouseAdapter {
 			col--;
 			row = playground.getRows() - 1;
 		}
-		playground.newGame();
-		for(int i=0; i < playground.getRows(); i++) {
-			for(int j=0; j < playground.getCols(); j++) {
-				playgroundPanel.add(playground.getBubble(i, j));
-			}
-		}
+		fillPlayground();
 		playgroundPanel.repaint();
 		pointsLabel.setText("Points: "+ points);
 	}
 
+	/**
+	 * fills the playground/matrix with Bubbles
+	 */
+	protected void fillPlayground() {
+		for(int i=0; i < playground.getRows(); i++) {
+			for(int j=0; j < playground.getCols(); j++) {
+				playground.newBubble(i, j);
+				playgroundPanel.add(playground.getBubble(i, j));
+			}
+		}
+	}
+	
 	/**
 	 * Returns the JPanel with the Bubbles inside
 	 * @return playground-JPanel

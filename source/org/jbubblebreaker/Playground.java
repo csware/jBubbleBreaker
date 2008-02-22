@@ -51,7 +51,7 @@ public class Playground {
 	MouseListener mouseListener;
 	
 	/**
-	 * Creates a new Playground/Matrix (and JPanel)
+	 * Creates a new empty Playground/Matrix
 	 * @param rows row count
 	 * @param cols col count
 	 * @param ml MouseListener
@@ -65,11 +65,26 @@ public class Playground {
 		mouseListener = ml;
 	}
 
-	public void newGame() {
-		for(int i=0; i < rows; i++) {
-			for(int j=0; j < cols; j++) {
-				playground[i][j] = new Bubble(horizontal,vertikal, i, j, mouseListener);
-			}
+	/**
+	 * Creates a new Bubble on the playground at position x,y
+	 * @param x row-index
+	 * @param y column-index
+	 */
+	public void newBubble(int x, int y) {
+		if (x >= 0 || y >= 0 || x < rows || y < cols) {
+			playground[x][y] = new Bubble(horizontal,vertikal, x, y, mouseListener);
+		}
+	}
+
+	/**
+	 * Creates a new Bubble on the playground at position x,y with a special color
+	 * @param x row-index
+	 * @param y column-index
+	 * @param colorIndex color-index
+	 */
+	public void newBubble(int x, int y, int colorIndex) {
+		if (x >= 0 || y >= 0 || x < rows || y < cols) {
+			playground[x][y] = new Bubble(horizontal,vertikal, x, y, mouseListener, colorIndex);
 		}
 	}
 	
@@ -131,8 +146,8 @@ public class Playground {
 	 * Moves a specific Bubble to a new location in the matrix, regardless if on the destination there is a Bubble
 	 * @param x old row-index
 	 * @param y old column-index
-	 * @param toX new row-index
-	 * @param toY new column-index
+	 * @param toX new row-index 0 <= toX < rows, x != toX
+	 * @param toY new column-index 0 <= toY < rows, y != toY
 	 */
 	public void moveTo(int x, int y, int toX, int toY) {
 		if (x != toX || y != toY) {
@@ -144,6 +159,17 @@ public class Playground {
 		}
 	}
 
+	/**
+	 * Removes a Bubble on a specific location from the matrix
+	 * @param x row-index
+	 * @param y column-index
+	 */
+	public void removeBubble(int x, int y) {
+		if (isEmpty(x,y) == false) {
+			playground[x][y] = null;
+		}
+	}
+	
 	/**
 	 * Unmark a specific Bubble 
 	 * @param x row-index
