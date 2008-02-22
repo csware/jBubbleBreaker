@@ -87,7 +87,6 @@ public abstract class Game extends MouseAdapter {
 		int col = playground.getCols() - 1;
 		while(col >= 0 && playground.isEmpty(row,col) == false) {
 			while(row >= 0 && playground.isEmpty(row, col) == false) {
-				System.out.println(row+"x"+col);
 				playgroundPanel.remove(playground.getBubble(row, col));
 				row--;
 			}
