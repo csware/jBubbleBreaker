@@ -38,7 +38,7 @@ import org.jbubblebreaker.gamemodes.*;
 @SuppressWarnings("serial")
 public class GUI extends MyJFrame implements ActionListener {
 	private JPanel infoPanel = new JPanel();
-	private Game playground;
+	private Game game;
 	JLabel pointsLabel = new JLabel();
 
 	private JMenuItem menuHelpInfo,menuFileNew,menuFileStatistics,menuFileClose;
@@ -61,14 +61,14 @@ public class GUI extends MyJFrame implements ActionListener {
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
 		infoPanel.setSize(60, 60);
-		playground = new GameDefault(12, 12, pointsLabel);
-		getContentPane().add(playground.getPanel(), BorderLayout.CENTER);
+		game = new GameOngoing(12, 12, pointsLabel);
+		getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 
 		infoPanel.setLayout(new BorderLayout());
 
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
 		JLabel gameModeLabel = new JLabel();
-		gameModeLabel.setText(playground.getMode());
+		gameModeLabel.setText(game.getMode());
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
 		pointsLabel.setText("Points: 0");
 		
@@ -106,7 +106,7 @@ public class GUI extends MyJFrame implements ActionListener {
 		} else if (arg0.getSource() == menuHelpInfo) {
 			new AboutBox(this);
 		} else if (arg0.getSource() == menuFileNew) {
-			playground.newGame();
+			game.newGame();
 		}
 	}
 }
