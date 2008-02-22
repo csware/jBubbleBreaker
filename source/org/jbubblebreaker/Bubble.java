@@ -31,13 +31,9 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Bubble extends JPanel {
 	/**
-	 * stores the height of the Bubble
+	 * stores the radian of the Bubble
 	 */
-	private int height;
-	/**
-	 * stores the width of the Bubble
-	 */
-	private int width;
+	private int radian;
 	/**
 	 * stores the row of the Bubble-position
 	 */
@@ -61,49 +57,44 @@ public class Bubble extends JPanel {
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
-	 * @param width width of Bubble
-	 * @param height height of Bubble
+	 * @param radian radian of Bubble
 	 * @param row Row of Bubble
 	 * @param col Col of Bubble
 	 * @param ml MouseListener
 	 */
-	public Bubble(int width, int height, int row, int col, MouseListener ml) {
-		this.width=width;
-		this.height=height;
-		this.setSize(width, height);
+	public Bubble(int radian, int row, int col, MouseListener ml) {
+		this.radian=radian;
+		this.setSize(radian, radian);
 		this.row = row;
 		this.col = col;
-		this.setLocation(col*width, row*height);
+		this.setLocation(col*radian, row*radian);
 		color = (int)(Math.random()*colors.length);
 		this.addMouseListener(ml);
 	}
 	
 	/**
-	 * Resize and move optical position of a Bubble if width or height changed
-	 * @param width new width
-	 * @param height new height
+	 * Resize and move optical position of a Bubble if the radian changed
+	 * @param radian new radian of the Bubble
 	 */
-	public void resized(int width, int height) {
-		if (this.width != width || this.height != height) {
-			this.width=width;
-			this.height=height;
-			this.setSize(width, height);
-			this.setLocation(col*width, row*height);
+	public void resized(int radian) {
+		if (this.radian != radian) {
+			this.radian=radian;
+			this.setSize(radian, radian);
+			this.setLocation(col*radian, row*radian);
 			repaint();
 		}
 	}
-	
+
 	/**
 	 * Create a Bubble on a specific position, size and color
-	 * @param width width of Bubble
-	 * @param height height of Bubble
+	 * @param radian radian of Bubble
 	 * @param row Row of Bubble
 	 * @param col Col of Bubble
 	 * @param ml MouseListener
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public Bubble(int width, int height, int row, int col, MouseListener ml, int colorIndex) {
-		this(width,height,row,col,ml);
+	public Bubble(int radian, int row, int col, MouseListener ml, int colorIndex) {
+		this(radian,row,col,ml);
 		if (colorIndex >= 0 && colorIndex < colors.length) {
 			color = colorIndex;
 		}
@@ -158,7 +149,7 @@ public class Bubble extends JPanel {
 	public void moveTo(int row, int col) {
 		this.row = row;
 		this.col = col;
-		this.setLocation(col*width, row*height);
+		this.setLocation(col*radian, row*radian);
 	}
 	
 	@Override
@@ -166,10 +157,10 @@ public class Bubble extends JPanel {
 		super.paint(g);
 		if (marked == true) {
 			g.setColor(Color.GRAY);
-			g.fillRect(0, 0, width, height);
+			g.fillRect(0, 0, radian, radian);
 		}
 		g.setColor(colors[color]);
-		g.fillOval(0, 0, width, height);
+		g.fillOval(0, 0, radian, radian);
 
 	}
 }

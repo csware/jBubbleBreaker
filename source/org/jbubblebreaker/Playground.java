@@ -33,13 +33,9 @@ public class Playground {
 	 */
 	private int rows;
 	/**
-	 * width of the playground JPanel
+	 * radian of the bubbles
 	 */
-	private int horizontal;
-	/**
-	 * height of the playground JPanel
-	 */
-	private int vertikal;
+	private int radian;
 	/**
 	 * stores the matrix
 	 */
@@ -59,8 +55,8 @@ public class Playground {
 	public Playground(int windowWidth, int windowHeight, int rows, int cols, MouseListener ml) {
 		this.cols = cols;
 		this.rows = rows;
-		horizontal = windowWidth / cols;
-		vertikal = windowHeight / rows;
+		
+		radian = calulateRadian(windowWidth, windowHeight);
 		playground = new Bubble[rows][cols];
 		mouseListener = ml;
 	}
@@ -71,15 +67,14 @@ public class Playground {
 	 * @param windowHeight new height of the playground
 	 */
 	public void resized(int windowWidth, int windowHeight) {
-		if (windowWidth / cols != horizontal || vertikal != windowHeight / rows) {
-			horizontal = windowWidth / cols;
-			vertikal = windowHeight / rows;
+		if (radian != calulateRadian(windowWidth, windowHeight)) {
+			radian = calulateRadian(windowWidth, windowHeight);
 			int row = cols - 1;
 			int col = rows - 1;
 			while(col >= 0 && isEmpty(row,col) == false) {
 				while(row >= 0 && isEmpty(row, col) == false) {
 					if (isEmpty(row, col) == false) {
-						getBubble(row, col).resized(horizontal, vertikal);
+						getBubble(row, col).resized(radian);
 					}
 					row--;
 				}
@@ -89,6 +84,19 @@ public class Playground {
 		}
 	}
 
+	/**
+	 * Calculates the best radian for the Bubbles from the window-size
+	 * @param windowWidth window/jpanel width
+	 * @param windowHeight window/jpanel height
+	 * @return calculated radian for the Bubbles
+	 */
+	private int calulateRadian(int windowWidth, int windowHeight) {
+		if (windowWidth / cols < windowHeight / rows) {
+			return windowWidth / cols;
+		} else {
+			return windowHeight / rows;
+		}
+	}
 	
 	/**
 	 * Creates a new Bubble on the playground at position x,y
@@ -97,7 +105,7 @@ public class Playground {
 	 */
 	public void newBubble(int x, int y) {
 		if (x >= 0 || y >= 0 || x < rows || y < cols) {
-			playground[x][y] = new Bubble(horizontal,vertikal, x, y, mouseListener);
+			playground[x][y] = new Bubble(radian, x, y, mouseListener);
 		}
 	}
 
@@ -109,7 +117,7 @@ public class Playground {
 	 */
 	public void newBubble(int x, int y, int colorIndex) {
 		if (x >= 0 || y >= 0 || x < rows || y < cols) {
-			playground[x][y] = new Bubble(horizontal,vertikal, x, y, mouseListener, colorIndex);
+			playground[x][y] = new Bubble(radian, x, y, mouseListener, colorIndex);
 		}
 	}
 	
