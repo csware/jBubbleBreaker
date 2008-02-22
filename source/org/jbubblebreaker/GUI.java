@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 Sven Strickroth <email@cs-ware.de>
  * 
- * This file is part of JBubbleBreaker.                                  
+ * This file is part of JBubbleBreaker.
  * 
  * JBubbleBreaker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as     
@@ -103,7 +103,7 @@ public class GUI extends MyJFrame implements ActionListener {
 		menuHelp.add(menuHelpInfo);
 		setVisible(true);
 	}
-	
+
 	/**
 	 * starts a new game and ask the user for details
 	 */
@@ -111,7 +111,7 @@ public class GUI extends MyJFrame implements ActionListener {
 		if (game != null) {
 			getContentPane().remove(game.getPanel());
 		}
-		
+
 		game = new GameOngoing(12, 12, pointsLabel);
 		getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		gameModeLabel.setText(game.getMode());

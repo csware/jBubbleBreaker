@@ -1,7 +1,7 @@
 /*
- * Copyright 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2007-2008 Sven Strickroth <email@cs-ware.de>
  * 
- * This file is part of JBubbleBreaker.                                  
+ * This file is part of JBubbleBreaker.
  * 
  * JBubbleBreaker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as     

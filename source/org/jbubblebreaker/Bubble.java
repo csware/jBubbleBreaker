@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 Sven Strickroth <email@cs-ware.de>
  * 
- * This file is part of JBubbleBreaker.                                  
+ * This file is part of JBubbleBreaker.
  * 
  * JBubbleBreaker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as     
@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License     
  * along with JBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.jbubblebreaker;
 
 import java.awt.Color;
@@ -73,19 +72,6 @@ public class Bubble extends JPanel {
 	}
 	
 	/**
-	 * Resize and move optical position of a Bubble if the radian changed
-	 * @param radian new radian of the Bubble
-	 */
-	public void resized(int radian) {
-		if (this.radian != radian) {
-			this.radian=radian;
-			this.setSize(radian, radian);
-			this.setLocation(col*radian, row*radian);
-			repaint();
-		}
-	}
-
-	/**
 	 * Create a Bubble on a specific position, size and color
 	 * @param radian radian of Bubble
 	 * @param row Row of Bubble
@@ -97,6 +83,19 @@ public class Bubble extends JPanel {
 		this(radian,row,col,ml);
 		if (colorIndex >= 0 && colorIndex < colors.length) {
 			color = colorIndex;
+		}
+	}
+
+	/**
+	 * Resize and move optical position of a Bubble if the radian changed
+	 * @param radian new radian of the Bubble
+	 */
+	public void resized(int radian) {
+		if (this.radian != radian) {
+			this.radian=radian;
+			this.setSize(radian, radian);
+			this.setLocation(col*radian, row*radian);
+			repaint();
 		}
 	}
 
