@@ -174,8 +174,18 @@ public abstract class Game extends MouseAdapter {
 	 * @param row row-index
 	 * @param col column-index
 	 */
-	protected void removeBubbles(int row, int col) {};
+	protected void removeMarkedBubbles(int row, int col) {};
 
+	/**
+	 * Removes a special Bubble
+	 * @param row row-index
+	 * @param col col-index
+	 */
+	final protected void removeBubble(int row, int col) {
+		playgroundPanel.remove(playground.getBubble(row,col));
+		playground.removeBubble(row,col);
+	}
+	
 	/**
 	 * Returns the game-Mode
 	 * @return the gameMode name 
@@ -210,7 +220,7 @@ public abstract class Game extends MouseAdapter {
 				unmarkAll();
 			} else {
 				points += getCalculatedPoints();
-				removeBubbles(my.getRow(),my.getCol());
+				removeMarkedBubbles(my.getRow(),my.getCol());
 				pointsLabel.setText("Points: "+ points);
 				playgroundPanel.repaint();
 				marked=0;

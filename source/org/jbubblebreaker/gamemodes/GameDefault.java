@@ -31,7 +31,7 @@ public class GameDefault extends Game {
 	};
 	
 	@Override
-	protected void removeBubbles(int row, int col) {
+	protected void removeMarkedBubbles(int row, int col) {
 		// first of all delete bubbles in col
 		for(int k=0; k < playground.getCols(); k++) {
 			for(int i=0; i < playground.getRows(); i++) {
