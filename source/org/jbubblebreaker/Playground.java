@@ -139,8 +139,8 @@ public class Playground {
 			playground[toX][toY] = playground[x][y];
 			if (isEmpty(toX,toY) == false) {
 				playground[toX][toY].moveTo(toX,toY);
-				playground[x][y] = null;
 			}
+			playground[x][y] = null;
 		}
 	}
 
