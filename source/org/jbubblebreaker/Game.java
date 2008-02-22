@@ -89,7 +89,7 @@ public abstract class Game extends MouseAdapter {
 		int col = playground.getCols() - 1;
 		while(col >= 0 && playground.isEmpty(row,col) == false) {
 			while(row >= 0 && playground.isEmpty(row, col) == false) {
-				playgroundPanel.remove(playground.getBubble(row, col));
+				removeBubble(row, col);
 				row--;
 			}
 			col--;
@@ -170,9 +170,9 @@ public abstract class Game extends MouseAdapter {
 	}
 
 	/**
-	 * Remove all marked Bubbles, starting on row, col
-	 * @param row row-index
-	 * @param col column-index
+	 * Remove all marked Bubbles
+	 * @param row row-index of a marked Bubble, unused atm
+	 * @param col column-index of a marked Bubble, unused atm
 	 */
 	protected void removeMarkedBubbles(int row, int col) {};
 

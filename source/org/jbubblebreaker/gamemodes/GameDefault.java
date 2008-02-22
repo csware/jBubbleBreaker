@@ -38,7 +38,7 @@ public class GameDefault extends Game {
 				//System.out.println(i);
 				if (playground.isMarked(i,k) == true) {
 					//System.out.println("wech:"+i);
-					playgroundPanel.remove(playground.getBubble(i,k));
+					removeBubble(i, k);
 					for(int j=i; j > 0; j--) {
 						playground.moveTo(j-1, k, j, k);
 						//System.out.println("wandern "+(j-1)+" nach "+j);
