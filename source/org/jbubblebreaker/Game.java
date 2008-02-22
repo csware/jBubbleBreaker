@@ -103,14 +103,7 @@ public abstract class Game extends MouseAdapter {
 	/**
 	 * fills the playground/matrix with Bubbles
 	 */
-	protected void fillPlayground() {
-		for(int i=0; i < playground.getRows(); i++) {
-			for(int j=0; j < playground.getCols(); j++) {
-				playground.newBubble(i, j);
-				playgroundPanel.add(playground.getBubble(i, j));
-			}
-		}
-	}
+	protected void fillPlayground() { }
 	
 	/**
 	 * Returns the JPanel with the Bubbles inside
@@ -121,53 +114,17 @@ public abstract class Game extends MouseAdapter {
 	}
 
 	/**
-	 * Find reculsively all Bubbles with the same color-index which are next to each other 
+	 * Find (reculsively) all Bubbles with the same color-index which are next to each other 
 	 * @param row row-index to start the search
 	 * @param col column-index to start the search
 	 */
-	protected void findsame(int row, int col) {
-		Bubble circle = playground.getBubble(row, col);
-		if (circle == null) { return; }
-		marked++;
-		circle.setMark(true);
-		int color = circle.getColor();
-
-		if (playground.getColor(row, col + 1) == color && playground.isMarked(row, col + 1) == false) {
-			findsame(row,col + 1);
-		}
-		if (playground.getColor(row, col - 1) == color && playground.isMarked(row, col - 1) == false) {
-			findsame(row,col - 1);
-		}
-		if (playground.getColor(row + 1, col) == color && playground.isMarked(row+1, col) == false) {
-			findsame(row + 1,col);
-		}
-		if (playground.getColor(row - 1, col) == color && playground.isMarked(row - 1, col) == false) {
-			findsame(row - 1,col);
-		}
-	}
+	protected void findsame(int row, int col) {}
 
 	/**
 	 * Checks if the current game is solveable
 	 * @return playground solveable?
 	 */
-	protected boolean isSolveable() {
-		int row = playground.getRows() - 1;
-		int col = playground.getCols() - 1;
-		while(col > 0 && playground.isEmpty(row,col) == false) {
-			while(row > 0 && playground.isEmpty(row, col) == false) {
-				if (playground.isEmpty(row - 1, col) == false && playground.getColor(row, col) == playground.getColor(row - 1, col)) {
-					return true;
-				}
-				if (playground.isEmpty(row, col - 1) == false && playground.getColor(row, col) == playground.getColor(row, col - 1)) {
-					return true;
-				}
-				row--;
-			}
-			col--;
-			row = playground.getRows() - 1;
-		}
-		return false;
-	}
+	protected boolean isSolveable() { return false; }
 
 	/**
 	 * Remove all marked Bubbles
@@ -245,9 +202,7 @@ public abstract class Game extends MouseAdapter {
 	 * Calculates the points
 	 * @return calculated points
 	 */
-	protected Integer getCalculatedPoints() {
-		return (marked*(marked-1));
-	}
+	protected Integer getCalculatedPoints() { return 0;	}
 
 	/**
 	 * Return the points of the user in the current game

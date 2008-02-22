@@ -5,6 +5,7 @@
  */
 package org.jbubblebreaker.gamemodes;
 
+import org.jbubblebreaker.Bubble;
 import org.jbubblebreaker.Game;
 
 import javax.swing.JLabel;
@@ -24,12 +25,69 @@ public class GameDefault extends Game {
 	public GameDefault(int rows, int cols, JLabel pointsLabel) {
 		super(rows, cols, pointsLabel);
 	}
-
+	
 	@Override
 	public String getMode() {
 		return "Default";
 	};
+
+	@Override
+	protected void fillPlayground() {
+		for(int i=0; i < playground.getRows(); i++) {
+			for(int j=0; j < playground.getCols(); j++) {
+				playground.newBubble(i, j);
+				playgroundPanel.add(playground.getBubble(i, j));
+			}
+		}
+	}
 	
+	@Override
+	protected void findsame(int row, int col) {
+		Bubble circle = playground.getBubble(row, col);
+		if (circle == null) { return; }
+		marked++;
+		circle.setMark(true);
+		int color = circle.getColor();
+
+		if (playground.getColor(row, col + 1) == color && playground.isMarked(row, col + 1) == false) {
+			findsame(row,col + 1);
+		}
+		if (playground.getColor(row, col - 1) == color && playground.isMarked(row, col - 1) == false) {
+			findsame(row,col - 1);
+		}
+		if (playground.getColor(row + 1, col) == color && playground.isMarked(row+1, col) == false) {
+			findsame(row + 1,col);
+		}
+		if (playground.getColor(row - 1, col) == color && playground.isMarked(row - 1, col) == false) {
+			findsame(row - 1,col);
+		}
+	}
+
+	@Override
+	protected boolean isSolveable() {
+		int row = playground.getRows() - 1;
+		int col = playground.getCols() - 1;
+		while(col > 0 && playground.isEmpty(row,col) == false) {
+			while(row > 0 && playground.isEmpty(row, col) == false) {
+				if (playground.isEmpty(row - 1, col) == false && playground.getColor(row, col) == playground.getColor(row - 1, col)) {
+					return true;
+				}
+				if (playground.isEmpty(row, col - 1) == false && playground.getColor(row, col) == playground.getColor(row, col - 1)) {
+					return true;
+				}
+				row--;
+			}
+			col--;
+			row = playground.getRows() - 1;
+		}
+		return false;
+	}
+
+	@Override
+	protected Integer getCalculatedPoints() {
+		return (marked*(marked-1));
+	}
+
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		// first of all delete bubbles in col
