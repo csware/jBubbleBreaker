@@ -17,16 +17,16 @@ public class GameDefault extends Game {
 
 	/**
 	 * Creates a game with default rules
-	 * @param rows
-	 * @param cols
-	 * @param pointsLabel
+	 * @param rows of the matrix
+	 * @param cols of the matrix
+	 * @param pointsLabel reference to the points Label in the GUI
 	 */
 	public GameDefault(int rows, int cols, JLabel pointsLabel) {
 		super(rows, cols, pointsLabel);
 	}
 
 	@Override
-	protected String getMode() {
+	public String getMode() {
 		return "Default";
 	};
 	

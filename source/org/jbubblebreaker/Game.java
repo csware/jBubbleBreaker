@@ -29,13 +29,37 @@ import javax.swing.JPanel;
  * @author Sven Strickroth
  */
 public abstract class Game extends MouseAdapter {
-	private int marked = 0;
+	/**
+	 * Stores the number of marked Bubbles
+	 */
+	protected int marked = 0;
+	/**
+	 * Stores the JPanel with the Bubble-matrix
+	 */
 	protected JPanel playgroundPanel = new JPanel();
-	protected JLabel possiblePoints = new JLabel("2000");
+	/**
+	 * Stores a JLabel where the possible points are shown
+	 */
+	protected JLabel possiblePoints = new JLabel("0");
+	/**
+	 * Stores the playground, the matrix of Bubbles
+	 */
 	protected Playground playground;
+	/**
+	 * Stores a reference of the points label in the GUI
+	 */
 	private JLabel pointsLabel;
+	/**
+	 * Stores the points the user gained
+	 */
 	private int points = 0;
 	
+	/**
+	 * Prepares a new playground
+	 * @param rows of the matrix
+	 * @param cols of the matrix
+	 * @param pointsLabel reference to the points Label in the GUI
+	 */
 	public Game(int rows, int cols, JLabel pointsLabel) {
 		playground = new Playground(rows, cols, this);
 
@@ -67,7 +91,7 @@ public abstract class Game extends MouseAdapter {
 	 * @param row row-index to start the search
 	 * @param col column-index to start the search
 	 */
-	private void findsame(int row, int col) {
+	protected void findsame(int row, int col) {
 		Bubble circle = playground.getBubble(row, col);
 		if (circle == null) { return; }
 		marked++;
@@ -92,7 +116,7 @@ public abstract class Game extends MouseAdapter {
 	 * Checks if the current game is solveable
 	 * @return playground solveable?
 	 */
-	private boolean isSolveable() {
+	protected boolean isSolveable() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
 		while(col > 0 && playground.isEmpty(row,col) == false) {
@@ -122,7 +146,7 @@ public abstract class Game extends MouseAdapter {
 	 * Returns the game-Mode
 	 * @return the gameMode name 
 	 */
-	protected String getMode() { return ""; };
+	public String getMode() { return "overwrite me!"; };
 	
 	/**
 	 * Unmarks all Bubbles
@@ -151,7 +175,7 @@ public abstract class Game extends MouseAdapter {
 			if (my.isMarked() == false) {
 				unmarkAll();
 			} else {
-				points += (marked*(marked-1));
+				points += getCalculatedPoints();
 				removeBubbles(my.getRow(),my.getCol());
 				pointsLabel.setText("Points: "+ points);
 				playgroundPanel.repaint();
@@ -165,7 +189,7 @@ public abstract class Game extends MouseAdapter {
 		}
 		marked=0;
 		findsame(my.getRow(),my.getCol());
-		possiblePoints.setText(""+(marked*(marked-1)));
+		possiblePoints.setText(getCalculatedPoints().toString());
 		possiblePoints.setLocation((int)my.getLocation().getX()+10,(int)my.getLocation().getY()-12);
 		possiblePoints.setVisible(true);
 		if (marked==1) {
@@ -174,6 +198,15 @@ public abstract class Game extends MouseAdapter {
 	}
 
 	/**
+	 * Calculates the points
+	 * @return calculated points
+	 */
+	protected Integer getCalculatedPoints() {
+		return (marked*(marked-1));
+	}
+
+	/**
+	 * Return the points of the user in the current game
 	 * @return the points
 	 */
 	final public int getPoints() {
