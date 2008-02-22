@@ -46,6 +46,7 @@ public class GameDefault extends Game {
 				}
 			}
 		}
+		// now remove empty columns
 		int firstEmpty = -1;
 		for(int k=0; k < playground.getCols(); k++) {
 			if (playground.isEmpty(playground.getRows()-1, k) == true && firstEmpty == -1) {
