@@ -60,7 +60,7 @@ public class Bubble extends JPanel {
 	final private Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA}; 
 
 	/**
-	 * Create an Bubble on a specific position and size
+	 * Create a Bubble on a specific position and size with a random color
 	 * @param width width of Bubble
 	 * @param height height of Bubble
 	 * @param row Row of Bubble
@@ -76,6 +76,22 @@ public class Bubble extends JPanel {
 		this.setLocation(col*width, row*height);
 		color = (int)(Math.random()*colors.length);
 		this.addMouseListener(ml);
+	}
+	
+	/**
+	 * Create a Bubble on a specific position, size and color
+	 * @param width width of Bubble
+	 * @param height height of Bubble
+	 * @param row Row of Bubble
+	 * @param col Col of Bubble
+	 * @param ml MouseListener
+	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
+	 */
+	public Bubble(int width, int height, int row, int col, MouseListener ml, int colorIndex) {
+		this(width,height,row,col,ml);
+		if (colorIndex >= 0 && colorIndex < colors.length) {
+			color = colorIndex;
+		}
 	}
 
 	/**
