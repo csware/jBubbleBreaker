@@ -60,10 +60,10 @@ public abstract class Game extends MouseAdapter {
 	 * @param cols of the matrix
 	 * @param pointsLabel reference to the points Label in the GUI
 	 */
-	public Game(int rows, int cols, JLabel pointsLabel) {
+	public Game(int windowWidth, int windowHeight, int rows, int cols, JLabel pointsLabel) {
 		playgroundPanel.setLayout(null);
 		
-		playground = new Playground(rows, cols, this);
+		playground = new Playground(windowWidth, windowHeight, rows, cols, this);
 		
 		this.pointsLabel = pointsLabel;
 		pointsLabel.setText("Points: "+ points);
@@ -77,6 +77,10 @@ public abstract class Game extends MouseAdapter {
 		playgroundPanel.repaint();
 	}
 
+	final public void resized(int windowWidth, int windowHeight) {
+		playground.resized(windowWidth, windowHeight);
+	}
+	
 	/**
 	 * Creates a new game.
 	 * Resets all values and creates a new Bubble matrix.

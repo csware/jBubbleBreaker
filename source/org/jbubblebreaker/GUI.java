@@ -20,6 +20,8 @@ package org.jbubblebreaker;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
@@ -29,7 +31,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import org.jbubblebreaker.gamemodes.*;
+import org.jbubblebreaker.gamemodes.GameOngoing;
 
 /**
  * JBubbleBreaker GUI
@@ -39,9 +41,10 @@ import org.jbubblebreaker.gamemodes.*;
 public class GUI extends MyJFrame implements ActionListener {
 	private JPanel infoPanel = new JPanel();
 	private Game game;
-	JLabel pointsLabel = new JLabel();
-
-	private JMenuItem menuHelpInfo,menuFileNew,menuFileStatistics,menuFileClose;
+	private JLabel pointsLabel = new JLabel();
+	private JLabel gameModeLabel = new JLabel();
+	
+	private JMenuItem menuHelpInfo,menuFileNew,menuFileNewDots,menuFileStatistics,menuFileClose;
 	
 	/**
 	 * Launch JBubbleBreaker
@@ -57,18 +60,21 @@ public class GUI extends MyJFrame implements ActionListener {
 	private GUI() {
 		super("JBubbleBreaker",null,407,470,true,true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);	
+		addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent arg0) {
+				game.resized(size().width,size().height);
+			}
+		});
 		setLayout(new BorderLayout());
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
 		infoPanel.setSize(60, 60);
-		game = new GameOngoing(12, 12, pointsLabel);
-		getContentPane().add(game.getPanel(), BorderLayout.CENTER);
+		newOtherGame();
 
 		infoPanel.setLayout(new BorderLayout());
 
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
-		JLabel gameModeLabel = new JLabel();
-		gameModeLabel.setText(game.getMode());
+		
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
 		pointsLabel.setText("Points: 0");
 		
@@ -84,6 +90,11 @@ public class GUI extends MyJFrame implements ActionListener {
 		menuFileNew.setMnemonic('n');
 		menuFileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
 		menuFile.add(menuFileNew);
+		menuFileNewDots = new JMenuItem("New...");
+		menuFileNewDots.addActionListener(this);
+		menuFileNewDots.setMnemonic('e');
+		menuFileNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3,0));
+		menuFile.add(menuFileNewDots);
 		menuFileStatistics = new JMenuItem("Statistics");
 		menuFileStatistics.addActionListener(this);
 		menuFileStatistics.setMnemonic('s');
@@ -99,6 +110,19 @@ public class GUI extends MyJFrame implements ActionListener {
 		menuHelp.add(menuHelpInfo);
 		setVisible(true);
 	}
+	
+	/**
+	 * starts a new game and ask the user for details
+	 */
+	public void newOtherGame() {
+		if (game != null) {
+			getContentPane().remove(game.getPanel());
+		}
+		
+		game = new GameOngoing(getSize().width, getSize().height, 12, 12, pointsLabel);
+		getContentPane().add(game.getPanel(), BorderLayout.CENTER);
+		gameModeLabel.setText(game.getMode());
+	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == menuFileClose) {
@@ -107,6 +131,8 @@ public class GUI extends MyJFrame implements ActionListener {
 			new AboutBox(this);
 		} else if (arg0.getSource() == menuFileNew) {
 			game.newGame();
+		} else if (arg0.getSource() == menuFileNewDots) {
+			newOtherGame();
 		}
 	}
 }

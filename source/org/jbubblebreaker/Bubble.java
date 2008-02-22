@@ -78,6 +78,14 @@ public class Bubble extends JPanel {
 		this.addMouseListener(ml);
 	}
 	
+	public void resized(int width, int height) {
+		this.width=width;
+		this.height=height;
+		this.setSize(width, height);
+		this.setLocation(col*width, row*height);
+		repaint();
+	}
+	
 	/**
 	 * Create a Bubble on a specific position, size and color
 	 * @param width width of Bubble

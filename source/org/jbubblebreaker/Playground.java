@@ -56,15 +56,33 @@ public class Playground {
 	 * @param cols col count
 	 * @param ml MouseListener
 	 */
-	public Playground(int rows, int cols, MouseListener ml) {
+	public Playground(int windowWidth, int windowHeight, int rows, int cols, MouseListener ml) {
 		this.cols = cols;
 		this.rows = rows;
-		horizontal = 400 / cols;
-		vertikal = 400 / rows;
+		horizontal = windowWidth / cols;
+		vertikal = windowHeight / rows;
 		playground = new Bubble[rows][cols];
 		mouseListener = ml;
 	}
 
+	public void resized(int windowWidth, int windowHeight) {
+		horizontal = windowWidth / cols;
+		vertikal = windowHeight / rows;
+		int row = cols - 1;
+		int col = rows - 1;
+		while(col >= 0 && isEmpty(row,col) == false) {
+			while(row >= 0 && isEmpty(row, col) == false) {
+				if (isEmpty(row, col) == false) {
+					getBubble(row, col).resized(horizontal, vertikal);
+				}
+				row--;
+			}
+			col--;
+			row = rows - 1;
+		}
+	}
+
+	
 	/**
 	 * Creates a new Bubble on the playground at position x,y
 	 * @param x row-index

@@ -31,8 +31,8 @@ public class GameOngoing extends GameDefault {
 	 * @param cols of the matrix
 	 * @param pointsLabel reference to the points Label in the GUI
 	 */
-	public GameOngoing(int rows, int cols, JLabel pointsLabel) {
-		super(rows, cols, pointsLabel);
+	public GameOngoing(int windowWidth, int windowHeight, int rows, int cols, JLabel pointsLabel) {
+		super(windowWidth, windowHeight, rows, cols, pointsLabel);
 	}
 
 	@Override
