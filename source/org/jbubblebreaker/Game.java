@@ -86,7 +86,7 @@ public abstract class Game extends MouseAdapter {
 	 * sets the label where to show the points
 	 * @param pointsLabel reference to the points Label in the GUI
 	 */
-	final public void setPointsLabel(JLabel pointsLabel) {
+	final void setPointsLabel(JLabel pointsLabel) {
 		this.pointsLabel = pointsLabel;
 		pointsLabel.setText("Points: "+ points);
 	}
@@ -160,6 +160,31 @@ public abstract class Game extends MouseAdapter {
 	 */
 	protected void removeMarkedBubbles(int row, int col) {};
 
+	/**
+	 * Creates a new Bubble on the playground at position x,y if the position is empty
+	 * @param row row-index
+	 * @param col column-index
+	 */
+	final protected void newBubble(int row, int col) {
+		if (playground.isEmpty(row, col) == true) {
+			playground.newBubble(row, col);
+			playgroundPanel.add(playground.getBubble(row, col));
+		}
+	}
+
+	/**
+	 * Creates a new Bubble on the playground at position x,y with a special color if the position is empty
+	 * @param row row-index
+	 * @param col column-index
+	 * @param colorIndex color-index
+	 */
+	final protected void newBubble(int row, int col, int colorIndex) {
+		if (playground.isEmpty(row, col) == true) {
+			playground.newBubble(row, col, colorIndex);
+			playgroundPanel.add(playground.getBubble(row, col));
+		}
+	}
+	
 	/**
 	 * Removes a special Bubble
 	 * @param row row-index

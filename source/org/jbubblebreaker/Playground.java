@@ -103,7 +103,7 @@ public class Playground {
 	 * @param x row-index
 	 * @param y column-index
 	 */
-	public void newBubble(int x, int y) {
+	void newBubble(int x, int y) {
 		if (x >= 0 || y >= 0 || x < getRows() || y < getCols()) {
 			playground[x][y] = new Bubble(radian, x, y, mouseListener);
 		}
@@ -115,7 +115,7 @@ public class Playground {
 	 * @param y column-index
 	 * @param colorIndex color-index
 	 */
-	public void newBubble(int x, int y, int colorIndex) {
+	void newBubble(int x, int y, int colorIndex) {
 		if (x >= 0 || y >= 0 || x < getRows() || y < getCols()) {
 			playground[x][y] = new Bubble(radian, x, y, mouseListener, colorIndex);
 		}
@@ -141,7 +141,7 @@ public class Playground {
 	 * @param y column-index
 	 * @return Bubble-reference, null if this Bubble doesn't exist
 	 */
-	public Bubble getBubble(int x, int y) {
+	Bubble getBubble(int x, int y) {
 		if (isEmpty(x,y) == false) {
 			return playground[x][y];
 		} else {
@@ -197,7 +197,7 @@ public class Playground {
 	 * @param x row-index
 	 * @param y column-index
 	 */
-	public void removeBubble(int x, int y) {
+	void removeBubble(int x, int y) {
 		if (isEmpty(x,y) == false) {
 			playground[x][y] = null;
 		}

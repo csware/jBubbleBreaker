@@ -52,8 +52,7 @@ public class GameDefault extends Game {
 	protected void fillPlayground() {
 		for(int i=0; i < playground.getRows(); i++) {
 			for(int j=0; j < playground.getCols(); j++) {
-				playground.newBubble(i, j);
-				playgroundPanel.add(playground.getBubble(i, j));
+				newBubble(i, j);
 			}
 		}
 	}

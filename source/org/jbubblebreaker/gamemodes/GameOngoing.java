@@ -54,8 +54,7 @@ public class GameOngoing extends GameDefault {
 		for(int k=0; k < playground.getCols(); k++) {
 			if (playground.isEmpty(playground.getRows()-1, k) == true) {
 				for(int i=playground.getRows() - 1; i >= Math.random()*(playground.getRows() - 1); i--) {
-					playground.newBubble(i, k);
-					playgroundPanel.add(playground.getBubble(i, k));
+					newBubble(i, k);
 				}
 			} else {
 				break;
