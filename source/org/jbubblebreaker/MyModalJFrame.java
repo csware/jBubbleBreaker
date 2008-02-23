@@ -31,7 +31,7 @@ public class MyModalJFrame extends MyJFrame implements WindowListener {
 	/**
 	 * Stores the reference to the owner jFrame
 	 */	
-	private JFrame parentJFrame = null;
+	protected JFrame parentJFrame = null;
 
 	/**
 	 * Creates a modal JFrame

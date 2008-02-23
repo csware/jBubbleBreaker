@@ -29,8 +29,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import org.jbubblebreaker.gamemodes.GameOngoing;
-
 /**
  * JBubbleBreaker GUI
  * @author Sven Strickroth
@@ -39,7 +37,7 @@ import org.jbubblebreaker.gamemodes.GameOngoing;
 public class GUI extends MyJFrame implements ActionListener {
 	private JPanel infoPanel = new JPanel();
 	private Game game;
-	private JLabel pointsLabel = new JLabel();
+	JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
 	
 	private JMenuItem menuHelpInfo,menuFileNew,menuFileNewDots,menuFileStatistics,menuFileClose;
@@ -91,6 +89,7 @@ public class GUI extends MyJFrame implements ActionListener {
 		menuFileStatistics = new JMenuItem("Statistics");
 		menuFileStatistics.addActionListener(this);
 		menuFileStatistics.setMnemonic('s');
+		menuFileStatistics.setEnabled(false);
 		menuFile.add(menuFileStatistics);
 		menuFileClose = new JMenuItem("Quit");
 		menuFileClose.addActionListener(this);
@@ -101,20 +100,26 @@ public class GUI extends MyJFrame implements ActionListener {
 		menuHelpInfo.addActionListener(this);
 		menuHelpInfo.setMnemonic('a');
 		menuHelp.add(menuHelpInfo);
-		setVisible(true);
 	}
 
 	/**
 	 * starts a new game and ask the user for details
 	 */
-	public void newOtherGame() {
+	private void newOtherGame() {
+		setVisible(false);
 		if (game != null) {
 			getContentPane().remove(game.getPanel());
 		}
+		game=null;
+		new NewGameAskUser(this);
+	}
 
-		game = new GameOngoing(12, 12, pointsLabel);
-		getContentPane().add(game.getPanel(), BorderLayout.CENTER);
+	public void startNewGame(Game game) {
+		this.game = game;
 		gameModeLabel.setText(game.getMode());
+		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
+		repaint();
+		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
