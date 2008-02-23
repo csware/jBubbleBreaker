@@ -48,9 +48,9 @@ public abstract class Game extends MouseAdapter {
 	 */
 	protected Playground playground;
 	/**
-	 * Stores a reference of the points label in the GUI
+	 * Stores a reference of the points label in the GUI, instantiate on creation with a JPanel to avoid null-PounterExceptions
 	 */
-	private JLabel pointsLabel;
+	private JLabel pointsLabel = new JLabel();
 	/**
 	 * Stores the points the user gained
 	 */
@@ -75,7 +75,6 @@ public abstract class Game extends MouseAdapter {
 		
 		playgroundPanel.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent arg0) {
-				System.out.println(playground);
 				playground.resized(playgroundPanel.getWidth(), playgroundPanel.getHeight());
 				playgroundPanel.repaint();
 			}
