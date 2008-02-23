@@ -113,6 +113,10 @@ public abstract class Game extends MouseAdapter {
 		}
 		fillPlayground();
 		playgroundPanel.repaint();
+		playgroundPanel.setEnabled(true);
+		if (isSolveable() == false) {
+			gameOver();
+		}
 	}
 
 	/**
@@ -135,6 +139,14 @@ public abstract class Game extends MouseAdapter {
 	 */
 	protected void findsame(int row, int col) {}
 
+	/**
+	 * This method is called, when game is not solveable any more 
+	 */
+	private void gameOver() {
+		playgroundPanel.setEnabled(false);
+		JOptionPane.showMessageDialog(null, "Game over. Points: "+ getPoints(), "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
 	/**
 	 * Checks if the current game is solveable
 	 * @return playground solveable?
@@ -180,7 +192,7 @@ public abstract class Game extends MouseAdapter {
 	@Override
 	final public void mouseClicked(MouseEvent arg0) {
 		pointsLabel.setText("Points: "+ points);
-		if (arg0.getSource() == playgroundPanel) {
+		if (arg0.getSource() == playgroundPanel || playgroundPanel.isEnabled() == false) {
 			unmarkAll();
 			return;
 		}
@@ -198,7 +210,7 @@ public abstract class Game extends MouseAdapter {
 				marked=0;
 				possiblePoints.setVisible(false);
 				if (isSolveable() == false) {
-					JOptionPane.showMessageDialog(null, "Game over. Points: "+ getPoints(), "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+					gameOver();
 				}
 			}
 			return;
