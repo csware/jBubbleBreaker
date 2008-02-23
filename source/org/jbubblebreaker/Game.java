@@ -42,7 +42,7 @@ public abstract class Game extends MouseAdapter {
 	/**
 	 * Stores a JLabel where the possible points are shown
 	 */
-	protected JLabel possiblePoints = new JLabel("0");
+	private JLabel possiblePoints = new JLabel("0");
 	/**
 	 * Stores the playground, the matrix of Bubbles
 	 */
@@ -75,6 +75,7 @@ public abstract class Game extends MouseAdapter {
 		
 		playgroundPanel.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent arg0) {
+				System.out.println(playground);
 				playground.resized(playgroundPanel.getWidth(), playgroundPanel.getHeight());
 				playgroundPanel.repaint();
 			}
