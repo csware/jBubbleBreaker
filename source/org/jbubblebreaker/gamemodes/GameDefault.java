@@ -17,7 +17,6 @@
  */
 package org.jbubblebreaker.gamemodes;
 
-import org.jbubblebreaker.Bubble;
 import org.jbubblebreaker.Game;
 import org.jbubblebreaker.GameSize;
 
@@ -61,11 +60,10 @@ public class GameDefault extends Game {
 	
 	@Override
 	protected void findsame(int row, int col) {
-		Bubble circle = playground.getBubble(row, col);
-		if (circle == null) { return; }
+		if (playground.isEmpty(row, col) == true) { return; }
 		marked++;
-		circle.setMark(true);
-		int color = circle.getColor();
+		playground.setMark(row, col, true);
+		int color = playground.getColor(row, col);
 
 		if (playground.getColor(row, col + 1) == color && playground.isMarked(row, col + 1) == false) {
 			findsame(row,col + 1);

@@ -204,13 +204,29 @@ public class Playground {
 	}
 	
 	/**
-	 * Unmark a specific Bubble 
+	 * Mark a specific Bubble 
 	 * @param x row-index
 	 * @param y column-index
 	 */
-	public void unMark(int x, int y) {
+	public void setMark(int x, int y, boolean setTo) {
 		if (isEmpty(x,y) == false) {
-			playground[x][y].setMark(false);
+			playground[x][y].setMark(setTo);
+		}
+	}
+
+	/**
+	 * Unmarks all Bubbles on the playground 
+	 */
+	public void unMarkAll() {
+		int row = getRows() - 1;
+		int col = getCols() - 1;
+		while(col >= 0 && isEmpty(row,col) == false) {
+			while(row >= 0 && isEmpty(row, col) == false) {
+				setMark(row, col, false);
+				row--;
+			}
+			col--;
+			row = rows - 1;
 		}
 	}
 

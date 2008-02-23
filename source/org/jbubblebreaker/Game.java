@@ -183,11 +183,7 @@ public abstract class Game extends MouseAdapter {
 	 */
 	private void unmarkAll() {
 		marked=0;
-		for(int i=0; i < playground.getRows(); i++) {
-			for(int j=0; j < playground.getCols(); j++) {
-				playground.unMark(i, j);
-			}
-		}
+		playground.unMarkAll();
 		possiblePoints.setVisible(false);
 	}
 
