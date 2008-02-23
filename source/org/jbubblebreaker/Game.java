@@ -166,8 +166,10 @@ public abstract class Game extends MouseAdapter {
 	 * @param col col-index
 	 */
 	final protected void removeBubble(int row, int col) {
-		playgroundPanel.remove(playground.getBubble(row,col));
-		playground.removeBubble(row,col);
+		if (playground.isEmpty(row,col) == false) {
+			playgroundPanel.remove(playground.getBubble(row,col));
+			playground.removeBubble(row,col);
+		}
 	}
 	
 	/**
