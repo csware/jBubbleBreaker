@@ -24,7 +24,8 @@ import javax.swing.JLabel;
  * @author Sven Strickroth
  */
 public class GameOngoing extends GameDefault {
-
+	static public String name = "Ongoing";
+	
 	/**
 	 * Creates a game with rules for an ongoing game
 	 * @param rows of the matrix
@@ -37,7 +38,7 @@ public class GameOngoing extends GameDefault {
 
 	@Override
 	public String getMode() {
-		return "Ongoing";
+		return name;
 	};
 	
 	@Override

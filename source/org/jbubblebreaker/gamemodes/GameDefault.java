@@ -27,7 +27,8 @@ import javax.swing.JLabel;
  * @author Sven Strickroth
  */
 public class GameDefault extends Game {
-
+	static public String name = "Default";
+	
 	/**
 	 * Creates a game with default rules
 	 * @param rows of the matrix
@@ -40,7 +41,7 @@ public class GameDefault extends Game {
 	
 	@Override
 	public String getMode() {
-		return "Default";
+		return name;
 	};
 
 	@Override

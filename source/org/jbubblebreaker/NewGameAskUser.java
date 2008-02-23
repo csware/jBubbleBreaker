@@ -17,15 +17,15 @@
  */
 package org.jbubblebreaker;
 
-import org.jbubblebreaker.gamemodes.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -57,8 +57,10 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 
 		comboBox.setBounds(107, 5, 91, 22);
 		getContentPane().add(comboBox);
-		comboBox.addItem("Default");
-		comboBox.addItem("Ongoing");
+		Iterator iterator = JBubbleBreaker.getModes().iterator();
+		while(iterator.hasNext()) {
+			comboBox.addItem(((GameMode)iterator.next()).getModiName());
+		}
 
 		rowsLabel.setBounds(10, 42, 91, 14);
 		rowsLabel.setText("Rows:");
@@ -69,41 +71,50 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 		columnsLabel.setText("Columns:");
 		getContentPane().add(columnsLabel);
 
-
 		startButton.setBounds(10, 111, 188, 23);
 		startButton.setText("Start!");
 		getContentPane().add(startButton);
 		startButton.addActionListener(this);
 
 		rowsSlider = new JSlider();
-		rowsSlider.setValue(12);
 		rowsSlider.setBounds(107, 33, 91, 23);
 		rowsSlider.setMaximum(15);
 		rowsSlider.setMinimum(5);
 		getContentPane().add(rowsSlider);
 		rowsSlider.addChangeListener(this);
+		rowsSlider.setValue(12);
 		
 		columnsSlider = new JSlider();
-		columnsSlider.setValue(12);
 		columnsSlider.setMinimum(5);
 		columnsSlider.setMaximum(15);
 		columnsSlider.setBounds(107, 71, 91, 23);
 		getContentPane().add(columnsSlider);
 		columnsSlider.addChangeListener(this);
-
+		columnsSlider.setValue(12);
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		if (comboBox.getSelectedItem().equals("Default")) {
-			((GUI)parentJFrame).startNewGame(new GameDefault(rowsSlider.getValue(),columnsSlider.getValue(),((GUI)parentJFrame).pointsLabel));
-		} else {
-			((GUI)parentJFrame).startNewGame(new GameOngoing(rowsSlider.getValue(),columnsSlider.getValue(),((GUI)parentJFrame).pointsLabel));
+		Game game = null;
+		Iterator<GameMode> iterator = JBubbleBreaker.getModes().iterator();
+		while(iterator.hasNext()) {
+			GameMode modus = iterator.next();
+			try {
+				if (modus.getModiName().equals(comboBox.getSelectedItem())) {
+					game = (Game)modus.getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue(),((GUI)parentJFrame).pointsLabel} );
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "For some reason ("+e.getLocalizedMessage()+") JBubbleBreaker is not able to start the mode "+modus.getModiName()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
+			}
 		}
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		dispose();
+		if (game != null) {
+			((GUI)parentJFrame).startNewGame(game);
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			dispose();
+		}
 	}
 
 	public void stateChanged(ChangeEvent arg0) {

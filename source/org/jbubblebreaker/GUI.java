@@ -39,15 +39,18 @@ public class GUI extends MyJFrame implements ActionListener {
 	private Game game;
 	JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
+	private static boolean started = false;
 	
 	private JMenuItem menuHelpInfo,menuFileNew,menuFileNewDots,menuFileStatistics,menuFileClose;
-	
+
 	/**
-	 * Launch JBubbleBreaker
-	 * @param args
+	 * Start GUI, but only once 
 	 */
-	public static void main(String args[]) {
-		new GUI();
+	public static void startGUI() {
+		if (started == false) {
+			new GUI();
+			started = true;
+		}
 	}
 
 	/**
