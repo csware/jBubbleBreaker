@@ -19,8 +19,6 @@ package org.jbubblebreaker.gamemodes;
 
 import org.jbubblebreaker.GameSize;
 
-import javax.swing.JLabel;
-
 /**
  * Ongoing Rules
  * @author Sven Strickroth
@@ -39,10 +37,9 @@ public class GameOngoing extends GameDefault {
 	 * Creates a game with rules for an ongoing game
 	 * @param rows of the matrix
 	 * @param cols of the matrix
-	 * @param pointsLabel reference to the points Label in the GUI
 	 */
-	public GameOngoing(int rows, int cols, JLabel pointsLabel) {
-		super(rows, cols, pointsLabel);
+	public GameOngoing(int rows, int cols) {
+		super(rows, cols);
 	}
 
 	@Override

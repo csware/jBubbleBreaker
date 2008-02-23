@@ -110,10 +110,10 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 				GameMode modus = iterator.next();
 				try {
 					if (modus.getModiName().equals(comboBox.getSelectedItem())) {
-						game = (Game)modus.getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue(),((GUI)parentJFrame).pointsLabel} );
+						game = (Game)modus.getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue()} );
 					}
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "For some reason ("+e.getLocalizedMessage()+") JBubbleBreaker is not able to start the mode "+modus.getModiName()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "For some reason ("+e+") JBubbleBreaker is not able to start the mode "+modus.getModiName()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			if (game != null) {

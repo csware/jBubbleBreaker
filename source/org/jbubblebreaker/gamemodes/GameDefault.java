@@ -21,8 +21,6 @@ import org.jbubblebreaker.Bubble;
 import org.jbubblebreaker.Game;
 import org.jbubblebreaker.GameSize;
 
-import javax.swing.JLabel;
-
 /**
  * Default Rules
  * @author Sven Strickroth
@@ -41,10 +39,9 @@ public class GameDefault extends Game {
 	 * Creates a game with default rules
 	 * @param rows of the matrix
 	 * @param cols of the matrix
-	 * @param pointsLabel reference to the points Label in the GUI
 	 */
-	public GameDefault(int rows, int cols, JLabel pointsLabel) {
-		super(rows, cols, pointsLabel);
+	public GameDefault(int rows, int cols) {
+		super(rows, cols);
 	}
 	
 	@Override

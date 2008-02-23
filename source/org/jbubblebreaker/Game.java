@@ -60,16 +60,13 @@ public abstract class Game extends MouseAdapter {
 	 * Prepares a new playground
 	 * @param rows of the matrix
 	 * @param cols of the matrix
-	 * @param pointsLabel reference to the points Label in the GUI
+
 	 */
-	public Game(int rows, int cols, JLabel pointsLabel) {
+	public Game(int rows, int cols) {
 		playgroundPanel.setLayout(null);
 		
 		playground = new Playground(playgroundPanel.getWidth(), playgroundPanel.getHeight(), rows, cols, this);
 
-		this.pointsLabel = pointsLabel;
-		pointsLabel.setText("Points: "+ points);
-		
 		possiblePoints.setSize(50,50);
 		playgroundPanel.add(possiblePoints);
 		possiblePoints.setVisible(false);
@@ -83,6 +80,15 @@ public abstract class Game extends MouseAdapter {
 			}
 		});
 		playgroundPanel.addMouseListener(this);
+	}
+	
+	/**
+	 * sets the label where to show the points
+	 * @param pointsLabel reference to the points Label in the GUI
+	 */
+	final public void setPointsLabel(JLabel pointsLabel) {
+		this.pointsLabel = pointsLabel;
+		pointsLabel.setText("Points: "+ points);
 	}
 	
 	/**
@@ -107,7 +113,6 @@ public abstract class Game extends MouseAdapter {
 		}
 		fillPlayground();
 		playgroundPanel.repaint();
-		pointsLabel.setText("Points: "+ points);
 	}
 
 	/**

@@ -37,7 +37,7 @@ import javax.swing.KeyStroke;
 public class GUI extends MyJFrame implements ActionListener {
 	private JPanel infoPanel = new JPanel();
 	private Game game;
-	JLabel pointsLabel = new JLabel();
+	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
 	
@@ -121,6 +121,7 @@ public class GUI extends MyJFrame implements ActionListener {
 		this.game = game;
 		gameModeLabel.setText(game.getMode());
 		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
+		game.setPointsLabel(pointsLabel);
 		repaint();
 		setVisible(true);
 	}

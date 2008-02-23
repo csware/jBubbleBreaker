@@ -57,7 +57,7 @@ public class GameMode {
 	}
 
 	/**
-	 * Returns the reference to the constructor with (int, int, JPanel) parameters
+	 * Returns the reference to the constructor with (int, int) parameters
 	 * @return the constructor
 	 */
 	public Constructor getConstructor() {

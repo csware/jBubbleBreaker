@@ -58,7 +58,7 @@ public class JBubbleBreaker {
 		}
 		if (newMode != null && possibleNewMode.getSuperclass() != null && possibleNewMode.getSuperclass().getName().equals("org.jbubblebreaker.Game")) {
 			try {
-				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),(GameSize) newMode.getDeclaredField("allowedSize").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class, javax.swing.JLabel.class})));
+				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),(GameSize) newMode.getDeclaredField("allowedSize").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class})));
 			} catch (IllegalArgumentException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
 			} catch (ClassCastException e) {
@@ -70,7 +70,7 @@ public class JBubbleBreaker {
 			} catch (SecurityException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a SecurityException was thrown: "+e.getLocalizedMessage()));
 			} catch (NoSuchMethodException e) {
-				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have a constructor for (int, int, JPanel)."));
+				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have a constructor for (int, int)."));
 			}
 		} else {
 			throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it must extend org.jbubblebreaker.Game."));
