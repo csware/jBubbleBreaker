@@ -69,8 +69,8 @@ public class Playground {
 	public void resized(int windowWidth, int windowHeight) {
 		if (radian != calulateRadian(windowWidth, windowHeight)) {
 			radian = calulateRadian(windowWidth, windowHeight);
-			int row = cols - 1;
-			int col = rows - 1;
+			int row = getRows() - 1;
+			int col = getCols() - 1;
 			while(col >= 0 && isEmpty(row,col) == false) {
 				while(row >= 0 && isEmpty(row, col) == false) {
 					if (isEmpty(row, col) == false) {
@@ -91,10 +91,10 @@ public class Playground {
 	 * @return calculated radian for the Bubbles
 	 */
 	private int calulateRadian(int windowWidth, int windowHeight) {
-		if (windowWidth / cols < windowHeight / rows) {
-			return windowWidth / cols;
+		if (windowWidth / getCols() < windowHeight / getRows()) {
+			return windowWidth / getCols();
 		} else {
-			return windowHeight / rows;
+			return windowHeight / getRows();
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class Playground {
 	 * @param y column-index
 	 */
 	public void newBubble(int x, int y) {
-		if (x >= 0 || y >= 0 || x < rows || y < cols) {
+		if (x >= 0 || y >= 0 || x < getRows() || y < getCols()) {
 			playground[x][y] = new Bubble(radian, x, y, mouseListener);
 		}
 	}
@@ -116,7 +116,7 @@ public class Playground {
 	 * @param colorIndex color-index
 	 */
 	public void newBubble(int x, int y, int colorIndex) {
-		if (x >= 0 || y >= 0 || x < rows || y < cols) {
+		if (x >= 0 || y >= 0 || x < getRows() || y < getCols()) {
 			playground[x][y] = new Bubble(radian, x, y, mouseListener, colorIndex);
 		}
 	}
@@ -156,7 +156,7 @@ public class Playground {
 	 * @return exists a Bubble at x,y?
 	 */
 	public boolean isEmpty(int x, int y) {
-		if (x < 0 || y < 0 || x >= rows || y >= cols) {
+		if (x < 0 || y < 0 || x >= getRows() || y >= getCols()) {
 			return true;
 		}
 		return (playground[x][y]==null);
