@@ -79,8 +79,8 @@ public class GameDefault extends Game {
 	protected boolean isSolveable() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
-		while(col > 0 && playground.isEmpty(row,col) == false) {
-			while(row > 0 && playground.isEmpty(row, col) == false) {
+		while(col >= 0 && playground.isEmpty(row,col) == false) {
+			while(row >= 0 && playground.isEmpty(row, col) == false) {
 				if (playground.isEmpty(row - 1, col) == false && playground.getColor(row, col) == playground.getColor(row - 1, col)) {
 					return true;
 				}
