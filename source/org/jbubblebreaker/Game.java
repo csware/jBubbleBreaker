@@ -181,7 +181,7 @@ public abstract class Game extends MouseAdapter {
 	/**
 	 * Unmarks all Bubbles
 	 */
-	private void unmarkAll() {
+	private void unMarkAll() {
 		marked=0;
 		playground.unMarkAll();
 		possiblePoints.setVisible(false);
@@ -191,7 +191,7 @@ public abstract class Game extends MouseAdapter {
 	final public void mouseClicked(MouseEvent arg0) {
 		pointsLabel.setText("Points: "+ points);
 		if (arg0.getSource() == playgroundPanel || playgroundPanel.isEnabled() == false) {
-			unmarkAll();
+			unMarkAll();
 			return;
 		}
 		Bubble my = (Bubble)(arg0.getSource());
@@ -199,7 +199,7 @@ public abstract class Game extends MouseAdapter {
 		//System.out.println(my.getRow() +"x"+ my.getCol());
 		if (marked != 0) {
 			if (my.isMarked() == false) {
-				unmarkAll();
+				unMarkAll();
 			} else {
 				points += getCalculatedPoints();
 				removeMarkedBubbles(my.getRow(),my.getCol());
@@ -219,7 +219,7 @@ public abstract class Game extends MouseAdapter {
 		possiblePoints.setLocation((int)my.getLocation().getX()+10,(int)my.getLocation().getY()-12);
 		possiblePoints.setVisible(true);
 		if (marked==1) {
-			unmarkAll();
+			unMarkAll();
 		}
 	}
 
