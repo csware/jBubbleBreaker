@@ -32,15 +32,20 @@ public class GameMode {
 	 * Stores the constuctor for this mode
 	 */
 	private Constructor constructor;
+	/**
+	 * Stores the possible matrix-sizes for this mode
+	 */
+	private GameSize allowedSize;
 
 	/**
 	 * Creates a datastorage for a game mode
 	 * @param modiName Mode name
 	 * @param constructor Reference of the constructor
 	 */
-	public GameMode(String modiName, Constructor constructor) {
+	public GameMode(String modiName, GameSize allowedSize, Constructor constructor) {
 		this.modiName = modiName;
 		this.constructor = constructor;
+		this.allowedSize = allowedSize;
 	}
 
 	/**
@@ -57,5 +62,13 @@ public class GameMode {
 	 */
 	public Constructor getConstructor() {
 		return constructor;
+	}
+	
+	/**
+	 * Returns the minimal size for this mode, 0 if there is not limit
+	 * @return allowed sizes array
+	 */
+	public GameSize getAllowedSize() {
+		return allowedSize;
 	}
 }

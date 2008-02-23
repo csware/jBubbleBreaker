@@ -17,6 +17,8 @@
  */
 package org.jbubblebreaker.gamemodes;
 
+import org.jbubblebreaker.GameSize;
+
 import javax.swing.JLabel;
 
 /**
@@ -24,7 +26,14 @@ import javax.swing.JLabel;
  * @author Sven Strickroth
  */
 public class GameOngoing extends GameDefault {
+	/**
+	 * Stores the name of this Game-Mode
+	 */
 	static public String name = "Ongoing";
+	/**
+	 * Stores the possible matrix-sizes for this mode
+	 */
+	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
 	
 	/**
 	 * Creates a game with rules for an ongoing game

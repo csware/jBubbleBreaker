@@ -58,13 +58,13 @@ public class JBubbleBreaker {
 		}
 		if (newMode != null && possibleNewMode.getSuperclass() != null && possibleNewMode.getSuperclass().getName().equals("org.jbubblebreaker.Game")) {
 			try {
-				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class, javax.swing.JLabel.class})));
+				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),(GameSize) newMode.getDeclaredField("allowedSize").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class, javax.swing.JLabel.class})));
 			} catch (IllegalArgumentException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
 			} catch (ClassCastException e) {
-				throw(new ClassCastException(mode+" is no JBubbleBreaker extension, it doesn't have the static name-field with type String."));
+				throw(new ClassCastException(mode+" is no JBubbleBreaker extension, it doesn't have the static name-field with type String or the static allowedSize-field with type GameSize."));
 			} catch (NoSuchFieldException e) {
-				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have the static name-field."));
+				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have the static name- or allowedSize-field."));
 			} catch (IllegalAccessException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a IllegalAccessException was thrown: "+e.getLocalizedMessage()));
 			} catch (SecurityException e) {

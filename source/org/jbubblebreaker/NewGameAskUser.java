@@ -55,13 +55,6 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 		gameModeLabel.setText("Game mode:");
 		getContentPane().add(gameModeLabel);
 
-		comboBox.setBounds(107, 5, 91, 22);
-		getContentPane().add(comboBox);
-		Iterator iterator = JBubbleBreaker.getModes().iterator();
-		while(iterator.hasNext()) {
-			comboBox.addItem(((GameMode)iterator.next()).getModiName());
-		}
-
 		rowsLabel.setBounds(10, 42, 91, 14);
 		rowsLabel.setText("Rows:");
 		getContentPane().add(rowsLabel);
@@ -78,19 +71,24 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 
 		rowsSlider = new JSlider();
 		rowsSlider.setBounds(107, 33, 91, 23);
-		rowsSlider.setMaximum(15);
-		rowsSlider.setMinimum(5);
 		getContentPane().add(rowsSlider);
 		rowsSlider.addChangeListener(this);
 		rowsSlider.setValue(12);
 		
 		columnsSlider = new JSlider();
-		columnsSlider.setMinimum(5);
-		columnsSlider.setMaximum(15);
 		columnsSlider.setBounds(107, 71, 91, 23);
 		getContentPane().add(columnsSlider);
 		columnsSlider.addChangeListener(this);
 		columnsSlider.setValue(12);
+
+		comboBox.setBounds(107, 5, 91, 22);
+		comboBox.addActionListener(this);
+		getContentPane().add(comboBox);
+		Iterator iterator = JBubbleBreaker.getModes().iterator();
+		while(iterator.hasNext()) {
+			comboBox.addItem(((GameMode)iterator.next()).getModiName());
+		}
+
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -98,22 +96,31 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		Game game = null;
-		Iterator<GameMode> iterator = JBubbleBreaker.getModes().iterator();
-		while(iterator.hasNext()) {
-			GameMode modus = iterator.next();
-			try {
-				if (modus.getModiName().equals(comboBox.getSelectedItem())) {
-					game = (Game)modus.getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue(),((GUI)parentJFrame).pointsLabel} );
+		if (arg0.getSource() == comboBox) {
+			GameSize mySize = JBubbleBreaker.getModes().get(comboBox.getSelectedIndex()).getAllowedSize();
+			rowsSlider.setMaximum(mySize.getMaxRows());
+			rowsSlider.setMinimum(mySize.getMinRows());
+			columnsSlider.setMinimum(mySize.getMinColumns());
+			columnsSlider.setMaximum(mySize.getMaxColumns());
+		} else {
+			Game game = null;
+			// TODO: JBubbleBreaker.getModes().get(comboBox.getSelectedIndex())
+			Iterator<GameMode> iterator = JBubbleBreaker.getModes().iterator();
+			while(iterator.hasNext()) {
+				GameMode modus = iterator.next();
+				try {
+					if (modus.getModiName().equals(comboBox.getSelectedItem())) {
+						game = (Game)modus.getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue(),((GUI)parentJFrame).pointsLabel} );
+					}
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "For some reason ("+e.getLocalizedMessage()+") JBubbleBreaker is not able to start the mode "+modus.getModiName()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 				}
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "For some reason ("+e.getLocalizedMessage()+") JBubbleBreaker is not able to start the mode "+modus.getModiName()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 			}
-		}
-		if (game != null) {
-			((GUI)parentJFrame).startNewGame(game);
-			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			dispose();
+			if (game != null) {
+				((GUI)parentJFrame).startNewGame(game);
+				setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				dispose();
+			}
 		}
 	}
 

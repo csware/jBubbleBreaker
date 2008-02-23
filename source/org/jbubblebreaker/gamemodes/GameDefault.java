@@ -19,6 +19,7 @@ package org.jbubblebreaker.gamemodes;
 
 import org.jbubblebreaker.Bubble;
 import org.jbubblebreaker.Game;
+import org.jbubblebreaker.GameSize;
 
 import javax.swing.JLabel;
 
@@ -27,7 +28,14 @@ import javax.swing.JLabel;
  * @author Sven Strickroth
  */
 public class GameDefault extends Game {
+	/**
+	 * Stores the name of this Game-Mode
+	 */
 	static public String name = "Default";
+	/**
+	 * Stores the possible matrix-sizes for this mode
+	 */
+	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
 	
 	/**
 	 * Creates a game with default rules
