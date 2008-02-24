@@ -102,10 +102,14 @@ public class Playground {
 	 * Creates a new Bubble on the playground at position x,y
 	 * @param x row-index
 	 * @param y column-index
+	 * @return true if Bubble created, false otherwise
 	 */
-	void newBubble(int x, int y) {
-		if (x >= 0 || y >= 0 || x < getRows() || y < getCols()) {
+	boolean newBubble(int x, int y) {
+		if (x >= 0 && y >= 0 && x < getRows() && y < getCols()) {
 			playground[x][y] = new Bubble(radian, x, y, mouseListener);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -114,10 +118,14 @@ public class Playground {
 	 * @param x row-index
 	 * @param y column-index
 	 * @param colorIndex color-index
+	 * @return true if Bubble created, false otherwise
 	 */
-	void newBubble(int x, int y, int colorIndex) {
-		if (x >= 0 || y >= 0 || x < getRows() || y < getCols()) {
+	boolean newBubble(int x, int y, int colorIndex) {
+		if (x >= 0 && y >= 0 && x < getRows() && y < getCols()) {
 			playground[x][y] = new Bubble(radian, x, y, mouseListener, colorIndex);
+			return true;
+		} else {
+			return false;
 		}
 	}
 	

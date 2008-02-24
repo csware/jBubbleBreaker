@@ -167,8 +167,9 @@ public abstract class Game extends MouseAdapter {
 	 */
 	final protected void newBubble(int row, int col) {
 		if (playground.isEmpty(row, col) == true) {
-			playground.newBubble(row, col);
-			playgroundPanel.add(playground.getBubble(row, col));
+			if (playground.newBubble(row, col) == true) {
+				playgroundPanel.add(playground.getBubble(row, col));
+			}
 		}
 	}
 
