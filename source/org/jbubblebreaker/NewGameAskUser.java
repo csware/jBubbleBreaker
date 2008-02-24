@@ -104,17 +104,10 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 			columnsSlider.setMaximum(mySize.getMaxColumns());
 		} else {
 			Game game = null;
-			// TODO: JBubbleBreaker.getModes().get(comboBox.getSelectedIndex())
-			Iterator<GameMode> iterator = JBubbleBreaker.getModes().iterator();
-			while(iterator.hasNext()) {
-				GameMode modus = iterator.next();
-				try {
-					if (modus.getModiName().equals(comboBox.getSelectedItem())) {
-						game = (Game)modus.getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue()} );
-					}
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "For some reason ("+e+") JBubbleBreaker is not able to start the mode "+modus.getModiName()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
-				}
+			try {
+				game = (Game)JBubbleBreaker.getModes().get(comboBox.getSelectedIndex()).getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue()} );
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "For some reason ("+e+") JBubbleBreaker is not able to start the mode "+comboBox.getSelectedItem()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 			}
 			if (game != null) {
 				((GUI)parentJFrame).startNewGame(game);
