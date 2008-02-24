@@ -56,7 +56,7 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 		okButton.addActionListener(this);
 		getContentPane().add(okButton);
 
-		JLabel lblCopyright = new JLabel("Coded by Sven Strickroth, 2008");
+		JLabel lblCopyright = new JLabel("Coded by Sven Strickroth, 2007 - 2008");
 		lblCopyright.setVerticalAlignment(SwingConstants.TOP);
 		lblCopyright.setBounds(64, 61, 250, 25);
 		getContentPane().add(lblCopyright);
@@ -70,7 +70,7 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 	}
 	
 	static public String getVersion() {
-		return "0.1";
+		return "0.2";
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
