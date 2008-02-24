@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -35,14 +36,13 @@ import javax.swing.KeyStroke;
  */
 @SuppressWarnings("serial")
 public class GUI extends MyJFrame implements ActionListener {
-	final private static String icon = "jbubblebreaker.png";
 	private JPanel infoPanel = new JPanel();
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
 	
-	private JMenuItem menuHelpInfo,menuFileNew,menuFileNewDots,menuFileStatistics,menuFileClose;
+	private JMenuItem menuHelpInfo,menuFileNew,menuFileNewDots,menuFileStatistics,menuFileGuestMode,menuFileClose;
 
 	/**
 	 * Start GUI, but only once 
@@ -58,7 +58,7 @@ public class GUI extends MyJFrame implements ActionListener {
 	 * Create the JFrame
 	 */
 	private GUI() {
-		super("JBubbleBreaker",icon,407,470,true,true);
+		super("JBubbleBreaker","jbubblebreaker.png",407,470,true,true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);	
 		setLayout(new BorderLayout());
 
@@ -72,7 +72,6 @@ public class GUI extends MyJFrame implements ActionListener {
 		
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
 		pointsLabel.setText("Points: 0");
-		
 		// insert Menu
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -93,8 +92,11 @@ public class GUI extends MyJFrame implements ActionListener {
 		menuFileStatistics = new JMenuItem("Statistics");
 		menuFileStatistics.addActionListener(this);
 		menuFileStatistics.setMnemonic('s');
-		menuFileStatistics.setEnabled(false);
 		menuFile.add(menuFileStatistics);
+		menuFileGuestMode = new JCheckBoxMenuItem("Guest Mode");
+		menuFileGuestMode.addActionListener(this);
+		menuFileGuestMode.setMnemonic('g');
+		menuFile.add(menuFileGuestMode);
 		menuFileClose = new JMenuItem("Quit");
 		menuFileClose.addActionListener(this);
 		menuFileClose.setMnemonic('q');
@@ -134,8 +136,13 @@ public class GUI extends MyJFrame implements ActionListener {
 			new AboutBox(this);
 		} else if (arg0.getSource() == menuFileNew) {
 			game.newGame();
+		} else if (arg0.getSource() == menuFileStatistics) {
+			new Statistics(this);
 		} else if (arg0.getSource() == menuFileNewDots) {
 			newOtherGame();
+		} else if (arg0.getSource() == menuFileGuestMode) {
+			Statistics.setGuestMode(!Statistics.isGuestMode());
+			menuFileGuestMode.setSelected(Statistics.isGuestMode());
 		}
 	}
 }

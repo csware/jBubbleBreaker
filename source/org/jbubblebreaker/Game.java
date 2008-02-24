@@ -144,6 +144,7 @@ public abstract class Game extends MouseAdapter {
 	 */
 	private void gameOver() {
 		playgroundPanel.setEnabled(false);
+		Statistics.updateStatistics(getMode(), playground.getRows(), playground.getCols(), getPoints());
 		JOptionPane.showMessageDialog(null, "Game over. Points: "+ getPoints(), "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
