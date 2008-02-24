@@ -37,6 +37,8 @@ public class JBubbleBreaker {
 	public static void main(String[] args)  {
 		addMode("org.jbubblebreaker.gamemodes.GameDefault");
 		addMode("org.jbubblebreaker.gamemodes.GameOngoing");
+		addMode("org.jbubblebreaker.gamemodes.GameShift");
+		addMode("org.jbubblebreaker.gamemodes.GameShiftOngoing");
 		GUI.startGUI();
 	}
 	
