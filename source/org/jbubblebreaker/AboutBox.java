@@ -31,10 +31,10 @@ import javax.swing.SwingConstants;
  */
 @SuppressWarnings("serial")
 public class AboutBox extends MyModalJFrame implements ActionListener {
-	final private static String icon = "mainicon.png";
+	final private static String icon = "jbubblebreaker.png";
 	
 	public AboutBox(JFrame parentJFrame) {
-		super("About JBubbleBreaker",null, 332, 175, false, parentJFrame);
+		super("About JBubbleBreaker",icon, 332, 175, false, parentJFrame);
 
 		setLayout(null);
 		

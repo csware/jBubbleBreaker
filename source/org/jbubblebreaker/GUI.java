@@ -35,6 +35,7 @@ import javax.swing.KeyStroke;
  */
 @SuppressWarnings("serial")
 public class GUI extends MyJFrame implements ActionListener {
+	final private static String icon = "jbubblebreaker.png";
 	private JPanel infoPanel = new JPanel();
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
@@ -57,7 +58,7 @@ public class GUI extends MyJFrame implements ActionListener {
 	 * Create the JFrame
 	 */
 	private GUI() {
-		super("JBubbleBreaker",null,407,470,true,true);
+		super("JBubbleBreaker",icon,407,470,true,true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);	
 		setLayout(new BorderLayout());
 

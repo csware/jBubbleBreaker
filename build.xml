@@ -47,6 +47,9 @@
 	<target name="compile" description="Compiles the source">
 		<delete dir="${basedir}/${bin.dir}" />
 		<mkdir dir="${basedir}/${bin.dir}" />
+		<copy todir="${basedir}/${bin.dir}/images">
+			<fileset dir="${basedir}/images" />
+		</copy>
 		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" />
 	</target>
 	<target name="clean" description="Remove all generated files">
