@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="SiS" default="generateAll" basedir=".">
+<project name="JBubbleBreaker" default="generateAll" basedir=".">
 	<property file="application.properties" />
 	<property environment="env"/>
 	<target name="generateAll" description="Generates all Stubs and Skeletons for our interfaces">
