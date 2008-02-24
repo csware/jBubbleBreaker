@@ -40,6 +40,9 @@ public class JBubbleBreaker {
 		addMode("org.jbubblebreaker.gamemodes.GameShift");
 		addMode("org.jbubblebreaker.gamemodes.GameShiftOngoing");
 		addMode("org.jbubblebreaker.gamemodes.GameShiftOngoing2");
+		addMode("org.jbubblebreaker.gamemodes.GameSpeed");
+		addMode("org.jbubblebreaker.gamemodes.GameOngoingSpeed");
+		addMode("org.jbubblebreaker.gamemodes.GameShiftSpeed");
 		GUI.startGUI();
 	}
 	
