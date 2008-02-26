@@ -79,8 +79,8 @@ public abstract class Bubble extends JPanel {
 	}
 
 	/**
-	 * Returns the game-Mode
-	 * @return the gameMode name 
+	 * Returns the bubble type
+	 * @return the bubble type name 
 	 */
 	public abstract String getName();
 	
