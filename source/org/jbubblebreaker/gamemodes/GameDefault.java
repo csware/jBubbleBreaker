@@ -26,7 +26,7 @@ import org.jbubblebreaker.GameSize;
  */
 public class GameDefault extends Game {
 	/**
-	 * Stores the name of this Game-Mode
+	 * Stores the name of this game mode
 	 */
 	static public String name = "Default";
 	/**
@@ -39,8 +39,8 @@ public class GameDefault extends Game {
 	 * @param rows of the matrix
 	 * @param cols of the matrix
 	 */
-	public GameDefault(int rows, int cols) {
-		super(rows, cols);
+	public GameDefault(int rows, int cols, int bubbleType) {
+		super(rows, cols, bubbleType);
 	}
 	
 	@Override

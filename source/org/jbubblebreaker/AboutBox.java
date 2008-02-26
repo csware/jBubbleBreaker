@@ -70,7 +70,7 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 	}
 	
 	static public String getVersion() {
-		return "0.2";
+		return "0.3";
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {

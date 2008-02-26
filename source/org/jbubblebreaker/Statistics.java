@@ -72,7 +72,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 	}
 
 		private class TableTableModel extends AbstractTableModel {
-			private final String[] COLUMN_NAMES = new String[] {"Mode", "Rows","Columns","Games played","Max. Points","Avg. Points"};
+			private final String[] COLUMN_NAMES = new String[] {"Mode", "Colors", "Rows","Columns","Games played","Max. Points","Avg. Points"};
 			private List<StatisticData> myData = getStatistics();
 
 			public int getRowCount() {
@@ -91,12 +91,14 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 				if (columnIndex == 0) {
 					return myData.get(rowIndex).getMode();
 				} else if (columnIndex == 1) {
-					return myData.get(rowIndex).getRows();
+					return myData.get(rowIndex).getColors();
 				} else if (columnIndex == 2) {
-					return myData.get(rowIndex).getCols();
+					return myData.get(rowIndex).getRows();
 				} else if (columnIndex == 3) {
-					return myData.get(rowIndex).getCountOfGames();
+					return myData.get(rowIndex).getCols();
 				} else if (columnIndex == 4) {
+					return myData.get(rowIndex).getCountOfGames();
+				} else if (columnIndex == 5) {
 					return myData.get(rowIndex).getMaxPoints();
 				} else {
 					return myData.get(rowIndex).getAveragePoints();
@@ -116,12 +118,12 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 				}
 			}
 		}
-	
+
 	public void actionPerformed(ActionEvent arg0) {
 		dispose();
 	}
-	
-	static void updateStatistics(String mode, int rows, int cols, int points) {
+
+	static void updateStatistics(String mode, int colors, int rows, int cols, int points) {
 		if (isGuestMode() == false) {
 			ObjectOutputStream out = null;
 			try {
@@ -130,14 +132,14 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 				boolean found = false;
 				while(myIterator.hasNext()) {
 					StatisticData myItem = myIterator.next(); 
-					if (myItem.getMode().equals(mode) && myItem.getRows() == rows && myItem.getCols() == cols) {
+					if (myItem.getMode().equals(mode) && myItem.getColors() == colors && myItem.getRows() == rows && myItem.getCols() == cols) {
 						myItem.newGame(points);
 						found = true;
 					}
 					out.writeObject(myItem);
 				}
 				if (found == false) {
-					out.writeObject(new StatisticData(mode, rows, cols, points));
+					out.writeObject(new StatisticData(mode, colors, rows, cols, points));
 				}
 				out.close();
 			} catch (FileNotFoundException e) {

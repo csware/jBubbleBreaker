@@ -42,8 +42,8 @@ public class GameOngoingSpeed extends GameOngoing {
 	 * @param rows of the matrix
 	 * @param cols of the matrix
 	 */
-	public GameOngoingSpeed(int rows, int cols) {
-		super(rows, cols);
+	public GameOngoingSpeed(int rows, int cols, int bubbleType) {
+		super(rows, cols, bubbleType);
 	}
 
 	@Override

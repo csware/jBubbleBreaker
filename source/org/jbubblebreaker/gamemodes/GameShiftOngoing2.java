@@ -38,8 +38,8 @@ public class GameShiftOngoing2 extends GameShift {
 	 * @param rows of the matrix
 	 * @param cols of the matrix
 	 */
-	public GameShiftOngoing2(int rows, int cols) {
-		super(rows, cols);
+	public GameShiftOngoing2(int rows, int cols, int bubbleType) {
+		super(rows, cols, bubbleType);
 	}
 	
 	@Override

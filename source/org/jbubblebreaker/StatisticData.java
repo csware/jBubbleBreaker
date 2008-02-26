@@ -26,14 +26,16 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class StatisticData implements Serializable {
 	private String mode;
+	private int colors = 0;
 	private int rows = 0;
 	private int cols = 0;
 	private int countOfGames = 0;
 	private int maxPoints = 0;
 	private int averagePoints = 0;
 
-	public StatisticData(String mode, int rows, int cols, int points) {
+	public StatisticData(String mode, int colors, int rows, int cols, int points) {
 		this.mode = mode;
+		this.colors = colors;
 		this.rows = rows;
 		this.cols = cols;
 		countOfGames = 1;
@@ -89,6 +91,13 @@ public class StatisticData implements Serializable {
 		return mode;
 	}
 
+	/**
+	 * @return the colors
+	 */
+	public int getColors() {
+		return colors;
+	}
+	
 	/**
 	 * @return the cols
 	 */

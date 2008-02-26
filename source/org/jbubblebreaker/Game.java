@@ -62,10 +62,10 @@ public abstract class Game extends MouseAdapter {
 	 * @param cols of the matrix
 
 	 */
-	public Game(int rows, int cols) {
+	public Game(int rows, int cols, int bubbleType) {
 		playgroundPanel.setLayout(null);
 		
-		playground = new Playground(playgroundPanel.getWidth(), playgroundPanel.getHeight(), rows, cols, this);
+		playground = new Playground(playgroundPanel.getWidth(), playgroundPanel.getHeight(), rows, cols, this, bubbleType);
 
 		possiblePoints.setSize(50,50);
 		playgroundPanel.add(possiblePoints);
@@ -122,7 +122,7 @@ public abstract class Game extends MouseAdapter {
 	/**
 	 * fills the playground/matrix with Bubbles
 	 */
-	protected void fillPlayground() { }
+	protected abstract void fillPlayground();
 	
 	/**
 	 * Returns the JPanel with the Bubbles inside
@@ -137,14 +137,14 @@ public abstract class Game extends MouseAdapter {
 	 * @param row row-index to start the search
 	 * @param col column-index to start the search
 	 */
-	protected void findsame(int row, int col) {}
+	protected abstract void findsame(int row, int col);
 
 	/**
 	 * This method is called, when game is not solveable any more 
 	 */
 	private void gameOver() {
 		playgroundPanel.setEnabled(false);
-		Statistics.updateStatistics(getMode(), playground.getRows(), playground.getCols(), getPoints());
+		Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints());
 		JOptionPane.showMessageDialog(null, "Game over. Points: "+ getPoints(), "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -152,14 +152,14 @@ public abstract class Game extends MouseAdapter {
 	 * Checks if the current game is solveable
 	 * @return playground solveable?
 	 */
-	protected boolean isSolveable() { return false; }
+	protected abstract boolean isSolveable();
 
 	/**
 	 * Remove all marked Bubbles
 	 * @param row row-index of a marked Bubble, unused atm
 	 * @param col column-index of a marked Bubble, unused atm
 	 */
-	protected void removeMarkedBubbles(int row, int col) {};
+	protected abstract void removeMarkedBubbles(int row, int col);
 
 	/**
 	 * Creates a new Bubble on the playground at position x,y if the position is empty
@@ -203,7 +203,7 @@ public abstract class Game extends MouseAdapter {
 	 * Returns the game-Mode
 	 * @return the gameMode name 
 	 */
-	public String getMode() { return "overwrite me!"; };
+	public abstract String getMode();
 	
 	/**
 	 * Unmarks all Bubbles
@@ -254,7 +254,7 @@ public abstract class Game extends MouseAdapter {
 	 * Calculates the points
 	 * @return calculated points
 	 */
-	protected Integer getCalculatedPoints() { return 0;	}
+	protected abstract Integer getCalculatedPoints();
 
 	/**
 	 * Return the points of the user in the current game

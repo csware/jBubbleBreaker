@@ -20,55 +20,42 @@ package org.jbubblebreaker;
 import java.lang.reflect.Constructor;
 
 /**
- * Datatype for storing game modes
+ * Datatype for storing bubble types
  * @author Sven Strickroth
  */
-public class GameMode {
+public class BubbleType {
 	/**
-	 * Stores the mode name
+	 * Stores the type name
 	 */
-	private String modeName;
+	private String typeName;
 	/**
-	 * Stores the constuctor for this mode
+	 * Stores the constuctor for this type
 	 */
 	private Constructor constructor;
-	/**
-	 * Stores the possible matrix-sizes for this mode
-	 */
-	private GameSize allowedSize;
 
 	/**
-	 * Creates a datastorage for a game mode
-	 * @param modeName Mode name
+	 * Creates a datastorage for a bubble type
+	 * @param typeName bubble type name
 	 * @param constructor Reference of the constructor
 	 */
-	public GameMode(String modeName, GameSize allowedSize, Constructor constructor) {
-		this.modeName = modeName;
+	public BubbleType(String typeName, Constructor constructor) {
+		this.typeName = typeName;
 		this.constructor = constructor;
-		this.allowedSize = allowedSize;
 	}
 
 	/**
-	 * Returns the mode name 
-	 * @return the modeName
+	 * Returns the type name 
+	 * @return the modiName
 	 */
-	public String getModeName() {
-		return modeName;
+	public String getTypeName() {
+		return typeName;
 	}
 
 	/**
-	 * Returns the reference to the constructor with (int, int) parameters
+	 * Returns the reference to the constructor with (int, int, int, int) parameters
 	 * @return the constructor
 	 */
 	public Constructor getConstructor() {
 		return constructor;
-	}
-	
-	/**
-	 * Returns the minimal size for this mode, 0 if there is not limit
-	 * @return allowed sizes array
-	 */
-	public GameSize getAllowedSize() {
-		return allowedSize;
 	}
 }

@@ -38,8 +38,8 @@ public class GameShift extends GameDefault {
 	 * @param rows of the matrix
 	 * @param cols of the matrix
 	 */
-	public GameShift(int rows, int cols) {
-		super(rows, cols);
+	public GameShift(int rows, int cols, int bubbleType) {
+		super(rows, cols, bubbleType);
 	}
 	
 	@Override

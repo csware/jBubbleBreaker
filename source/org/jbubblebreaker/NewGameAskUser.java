@@ -38,7 +38,8 @@ import javax.swing.event.ChangeListener;
 public class NewGameAskUser extends MyModalJFrame implements ActionListener, ChangeListener {
 	private JSlider columnsSlider;
 	private JSlider rowsSlider;
-	private JComboBox comboBox = new JComboBox();
+	private JComboBox gameTypeComboBox = new JComboBox();
+	private JComboBox bubbleTypeComboBox = new JComboBox();;
 	private JLabel rowsLabel = new JLabel();
 	private JLabel columnsLabel = new JLabel();
 	private JButton startButton = new JButton();
@@ -47,7 +48,7 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 	 * Create the frame
 	 */
 	public NewGameAskUser(JFrame parentJFrame) {
-		super("New Game...", null, 215, 175, false, parentJFrame);
+		super("New Game...", null, 215, 188, false, parentJFrame);
 		getContentPane().setLayout(null);
 
 		final JLabel gameModeLabel = new JLabel();
@@ -55,16 +56,20 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 		gameModeLabel.setText("Game mode:");
 		getContentPane().add(gameModeLabel);
 
+		final JLabel bubbleTypeLabel = new JLabel();
+		bubbleTypeLabel.setText("Bubble type:");
+		bubbleTypeLabel.setBounds(10, 104, 91, 14);
+		getContentPane().add(bubbleTypeLabel);
+		
 		rowsLabel.setBounds(10, 42, 91, 14);
 		rowsLabel.setText("Rows:");
 		getContentPane().add(rowsLabel);
-
 
 		columnsLabel.setBounds(10, 75, 91, 14);
 		columnsLabel.setText("Columns:");
 		getContentPane().add(columnsLabel);
 
-		startButton.setBounds(10, 111, 188, 23);
+		startButton.setBounds(10, 128, 188, 23);
 		startButton.setText("Start!");
 		getContentPane().add(startButton);
 		startButton.addActionListener(this);
@@ -81,23 +86,29 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 		columnsSlider.addChangeListener(this);
 		columnsSlider.setValue(12);
 
-		comboBox.setBounds(107, 5, 91, 22);
-		comboBox.addActionListener(this);
-		getContentPane().add(comboBox);
-		Iterator iterator = JBubbleBreaker.getModes().iterator();
-		while(iterator.hasNext()) {
-			comboBox.addItem(((GameMode)iterator.next()).getModiName());
+		gameTypeComboBox.setBounds(107, 5, 91, 22);
+		gameTypeComboBox.addActionListener(this);
+		getContentPane().add(gameTypeComboBox);
+		Iterator<GameMode> gameModesIterator = JBubbleBreaker.getModes().iterator();
+		while(gameModesIterator.hasNext()) {
+			gameTypeComboBox.addItem((gameModesIterator.next()).getModeName());
 		}
 
-		
+		bubbleTypeComboBox.setBounds(107, 100, 91, 22);
+		getContentPane().add(bubbleTypeComboBox);
+		Iterator<BubbleType> bubbleTypesIterator = JBubbleBreaker.getBubbleTypes().iterator();
+		while(bubbleTypesIterator.hasNext()) {
+			bubbleTypeComboBox.addItem((bubbleTypesIterator.next()).getTypeName());
+		}
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == comboBox) {
-			GameSize mySize = JBubbleBreaker.getModes().get(comboBox.getSelectedIndex()).getAllowedSize();
+		if (arg0.getSource() == gameTypeComboBox) {
+			GameSize mySize = JBubbleBreaker.getModes().get(gameTypeComboBox.getSelectedIndex()).getAllowedSize();
 			rowsSlider.setMaximum(mySize.getMaxRows());
 			rowsSlider.setMinimum(mySize.getMinRows());
 			columnsSlider.setMinimum(mySize.getMinColumns());
@@ -105,9 +116,10 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 		} else {
 			Game game = null;
 			try {
-				game = (Game)JBubbleBreaker.getModes().get(comboBox.getSelectedIndex()).getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue()} );
+				game = (Game)JBubbleBreaker.getModes().get(gameTypeComboBox.getSelectedIndex()).getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue(), bubbleTypeComboBox.getSelectedIndex()} );
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "For some reason ("+e+") JBubbleBreaker is not able to start the mode "+comboBox.getSelectedItem()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "For some reason ("+e+") JBubbleBreaker is not able to start the mode "+gameTypeComboBox.getSelectedItem()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 			}
 			if (game != null) {
 				((GUI)parentJFrame).startNewGame(game);

@@ -17,7 +17,7 @@
 			access="private"
 			author="true"
 			destdir="${doc.dir}"
-			doctitle="SiS API"
+			doctitle="JBubbleBreaker API"
 			nodeprecated="false"
 			nodeprecatedlist="false"
 			noindex="false"

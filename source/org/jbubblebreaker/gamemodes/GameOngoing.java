@@ -38,8 +38,8 @@ public class GameOngoing extends GameDefault {
 	 * @param rows of the matrix
 	 * @param cols of the matrix
 	 */
-	public GameOngoing(int rows, int cols) {
-		super(rows, cols);
+	public GameOngoing(int rows, int cols, int bubbleType) {
+		super(rows, cols, bubbleType);
 	}
 
 	@Override

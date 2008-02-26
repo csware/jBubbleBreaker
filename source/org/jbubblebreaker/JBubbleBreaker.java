@@ -29,6 +29,7 @@ public class JBubbleBreaker {
 	 * Stores all available modes for JBubbleBreaker
 	 */
 	static private List<GameMode> gameModes = new LinkedList<GameMode>();
+	static private List<BubbleType> bubbleTypes = new LinkedList<BubbleType>();
 	
 	/**
 	 * Starts JBubbleBreaker
@@ -43,6 +44,10 @@ public class JBubbleBreaker {
 		addMode("org.jbubblebreaker.gamemodes.GameSpeed");
 		addMode("org.jbubblebreaker.gamemodes.GameOngoingSpeed");
 		addMode("org.jbubblebreaker.gamemodes.GameShiftSpeed");
+		addBubbleType("org.jbubblebreaker.bubbles.BubbleDefault");
+		addBubbleType("org.jbubblebreaker.bubbles.BubbleDefaultFour");
+		addBubbleType("org.jbubblebreaker.bubbles.BubbleCaro");
+		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DRect");
 		GUI.startGUI();
 	}
 	
@@ -64,7 +69,7 @@ public class JBubbleBreaker {
 		}
 		if (newMode != null && possibleNewMode.getSuperclass() != null && possibleNewMode.getSuperclass().getName().equals("org.jbubblebreaker.Game")) {
 			try {
-				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),(GameSize) newMode.getDeclaredField("allowedSize").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class})));
+				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),(GameSize) newMode.getDeclaredField("allowedSize").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class, int.class})));
 			} catch (IllegalArgumentException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
 			} catch (ClassCastException e) {
@@ -76,13 +81,58 @@ public class JBubbleBreaker {
 			} catch (SecurityException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a SecurityException was thrown: "+e.getLocalizedMessage()));
 			} catch (NoSuchMethodException e) {
-				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have a constructor for (int, int)."));
+				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have a constructor for (int, int, int)."));
 			}
 		} else {
 			throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it must extend org.jbubblebreaker.Game."));
 		}
 	}
-	
+
+	/**
+	 * Registers a new game mode to JBubbleBreaker
+	 * @param bubbleType
+	 */
+	@SuppressWarnings("unchecked")
+	public static void addBubbleType(String bubbleType) {
+		Class<Bubble> possibleNewType = null;
+		try {
+			possibleNewType = (Class<Bubble>) Class.forName(bubbleType);
+		} catch (ClassNotFoundException e1) {
+			throw(new RuntimeException(bubbleType+" not found!"));
+		}
+		Class<Bubble> newType = possibleNewType;
+		while (possibleNewType.getSuperclass() != null && ! possibleNewType.getSuperclass().getName().equals("org.jbubblebreaker.Bubble")) {
+			possibleNewType = (Class<Bubble>) possibleNewType.getSuperclass();
+		}
+		if (newType != null && possibleNewType.getSuperclass() != null && possibleNewType.getSuperclass().getName().equals("org.jbubblebreaker.Bubble")) {
+			try {
+				bubbleTypes.add(new BubbleType((String) newType.getDeclaredField("name").get(null),newType.getDeclaredConstructor( new Class[] {int.class, int.class, int.class, int.class})));
+			} catch (IllegalArgumentException e) {
+				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
+			} catch (ClassCastException e) {
+				throw(new ClassCastException(bubbleType+" is no JBubbleBreaker bubble type extension, it doesn't have the static name-field with type String."));
+			} catch (NoSuchFieldException e) {
+				throw(new RuntimeException(bubbleType+" is no JBubbleBreaker bubble type extension, it doesn't have the static name-field."));
+			} catch (IllegalAccessException e) {
+				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalAccessException was thrown: "+e.getLocalizedMessage()));
+			} catch (SecurityException e) {
+				throw(new RuntimeException(bubbleType+" could not be loaded, because a SecurityException was thrown: "+e.getLocalizedMessage()));
+			} catch (NoSuchMethodException e) {
+				throw(new RuntimeException(bubbleType+" is no JBubbleBreaker bubble type extension, it doesn't have a constructor for (int, int, int, int)."));
+			}
+		} else {
+			throw(new RuntimeException(bubbleType+" is no JBubbleBreaker bubble type extension, it must extend org.jbubblebreaker.Bubble."));
+		}
+	}
+
+	/**
+	 * Returns the registered JBubbleBreate bubble types
+	 * @return modi list
+	 */
+	static List<BubbleType> getBubbleTypes() {
+		return bubbleTypes;
+	}
+
 	/**
 	 * Returns the registered JBubbleBreate game modi
 	 * @return modi list

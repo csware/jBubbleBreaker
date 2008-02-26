@@ -40,11 +40,18 @@ public class Playground {
 	 * stores the matrix
 	 */
 	private Bubble[][] playground;
-
 	/**
 	 * stores the reference to the MouseListener
 	 */
 	MouseListener mouseListener;
+	/**
+	 * stores the current bubble type
+	 */
+	private int bubbleType = 0;
+	/**
+	 * Stores the differnet colors the current bubble type provides
+	 */
+	private int bubbleColors = 0;
 	
 	/**
 	 * Creates a new empty Playground/Matrix
@@ -52,9 +59,10 @@ public class Playground {
 	 * @param cols col count
 	 * @param ml MouseListener
 	 */
-	public Playground(int windowWidth, int windowHeight, int rows, int cols, MouseListener ml) {
+	public Playground(int windowWidth, int windowHeight, int rows, int cols, MouseListener ml, int bubbleType) {
 		this.cols = cols;
 		this.rows = rows;
+		this.bubbleType = bubbleType;
 		
 		radian = calulateRadian(windowWidth, windowHeight);
 		playground = new Bubble[rows][cols];
@@ -105,12 +113,7 @@ public class Playground {
 	 * @return true if Bubble created, false otherwise
 	 */
 	boolean newBubble(int x, int y) {
-		if (x >= 0 && y >= 0 && x < getRows() && y < getCols()) {
-			playground[x][y] = new Bubble(radian, x, y, mouseListener);
-			return true;
-		} else {
-			return false;
-		}
+		return newBubble(x, y, -1);
 	}
 
 	/**
@@ -122,11 +125,29 @@ public class Playground {
 	 */
 	boolean newBubble(int x, int y, int colorIndex) {
 		if (x >= 0 && y >= 0 && x < getRows() && y < getCols()) {
-			playground[x][y] = new Bubble(radian, x, y, mouseListener, colorIndex);
-			return true;
-		} else {
-			return false;
+			playground[x][y] = null;
+			try {
+				playground[x][y] = (Bubble)JBubbleBreaker.getBubbleTypes().get(bubbleType).getConstructor().newInstance( new Object[] {radian, x, y, colorIndex} );
+				playground[x][y].addMouseListener(mouseListener);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (playground[x][y] != null) {
+				if (bubbleColors == 0) {
+					bubbleColors = playground[x][y].getColorsCount();
+				}
+				return true;				
+			}
 		}
+		return false;
+	}
+
+	/**
+	 * Returns the differnet colors the current bubble type provides
+	 * @return the count of colors
+	 */
+	public int getColors() {
+		return bubbleColors;
 	}
 	
 	/**
@@ -139,7 +160,7 @@ public class Playground {
 		if (isEmpty(x,y) == true) {
 			return -1;
 		} else {
-			return playground[x][y].getColor();
+			return playground[x][y].getColorIndex();
 		}
 	}
 	

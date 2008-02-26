@@ -17,9 +17,7 @@
  */
 package org.jbubblebreaker;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
@@ -27,62 +25,43 @@ import javax.swing.JPanel;
  * Provides the Bubbles
  * @author Sven Strickroth
  */
-@SuppressWarnings("serial")
-public class Bubble extends JPanel {
+public abstract class Bubble extends JPanel {
 	/**
-	 * stores the radian of the Bubble
+	 * stores the radian of this Bubble
 	 */
-	private int radian;
+	protected int radian;
 	/**
-	 * stores the row of the Bubble-position
+	 * stores the row of this Bubble-position
 	 */
 	private int row;
 	/**
-	 * stores the column of the Bubble-position
+	 * stores the column of this Bubble-position
 	 */
 	private int col;
 	/**
-	 * is the Bubble marked
+	 * is this Bubble marked
 	 */
-	private boolean marked = false;
+	protected boolean marked = false;
 	/**
-	 * stores the color of this Bubble
+	 * stores the color-index of this Bubble
 	 */
 	private int color;
-	/**
-	 * stores all Possible Colors
-	 */
-	final private Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA}; 
 
-	/**
-	 * Create a Bubble on a specific position and size with a random color
-	 * @param radian radian of Bubble
-	 * @param row Row of Bubble
-	 * @param col Col of Bubble
-	 * @param ml MouseListener
-	 */
-	public Bubble(int radian, int row, int col, MouseListener ml) {
-		this.radian=radian;
-		this.setSize(radian, radian);
-		this.row = row;
-		this.col = col;
-		this.setLocation(col*radian, row*radian);
-		color = (int)(Math.random()*colors.length);
-		this.addMouseListener(ml);
-	}
-	
 	/**
 	 * Create a Bubble on a specific position, size and color
 	 * @param radian radian of Bubble
 	 * @param row Row of Bubble
 	 * @param col Col of Bubble
-	 * @param ml MouseListener
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public Bubble(int radian, int row, int col, MouseListener ml, int colorIndex) {
-		this(radian,row,col,ml);
-		if (colorIndex >= 0 && colorIndex < colors.length) {
+	public Bubble(int radian, int row, int col, int colorIndex) {
+		this.radian=radian;
+		this.setSize(radian, radian);
+		moveTo(row,col);
+		if (colorIndex >= 0 && colorIndex < getColorsCount()) {
 			color = colorIndex;
+		} else {
+			color = (int)(Math.random()*getColorsCount());
 		}
 	}
 
@@ -90,20 +69,32 @@ public class Bubble extends JPanel {
 	 * Resize and move optical position of a Bubble if the radian changed
 	 * @param radian new radian of the Bubble
 	 */
-	public void resized(int radian) {
+	final public void resized(int radian) {
 		if (this.radian != radian) {
 			this.radian=radian;
 			this.setSize(radian, radian);
-			this.setLocation(col*radian, row*radian);
+			this.setLocation(getCol()*radian, getRow()*radian);
 			repaint();
 		}
 	}
 
 	/**
+	 * Returns the game-Mode
+	 * @return the gameMode name 
+	 */
+	public abstract String getName();
+	
+	/**
+	 * Returns the count of different colors available
+	 * @return color count
+	 */
+	protected abstract int getColorsCount();
+	
+	/**
 	 * Returns the colour-index of this bubble
 	 * @return color-index
 	 */
-	public int getColor() {
+	final public int getColorIndex() {
 		return color;
 	}
 	
@@ -111,7 +102,7 @@ public class Bubble extends JPanel {
 	 * Returns the row of the position of this bubble
 	 * @return Row
 	 */
-	public int getRow() {
+	final public int getRow() {
 		return row;
 	}
 	
@@ -119,7 +110,7 @@ public class Bubble extends JPanel {
 	 * Returns the column of the position of this bubble
 	 * @return Col
 	 */
-	public int getCol() {
+	final public int getCol() {
 		return col;
 	}
 
@@ -127,16 +118,16 @@ public class Bubble extends JPanel {
 	 * Sets or toggles the mark of this Bubble
 	 * @param what mark active
 	 */
-	public void setMark(boolean what) {
+	final public void setMark(boolean what) {
 		marked = what;
 		this.repaint();
 	}
 	
 	/**
-	 * Returns if the bubble is marked
+	 * Returns if this bubble is marked
 	 * @return is bubble marked
 	 */
-	public boolean isMarked() {
+	final public boolean isMarked() {
 		return marked;
 	}
 	
@@ -145,21 +136,12 @@ public class Bubble extends JPanel {
 	 * @param row row-index
 	 * @param col column-index
 	 */
-	public void moveTo(int row, int col) {
+	final public void moveTo(int row, int col) {
 		this.row = row;
 		this.col = col;
 		this.setLocation(col*radian, row*radian);
 	}
-	
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		if (marked == true) {
-			g.setColor(Color.GRAY);
-			g.fillRect(0, 0, radian, radian);
-		}
-		g.setColor(colors[color]);
-		g.fillOval(0, 0, radian, radian);
 
-	}
+	@Override
+	public abstract void paint(Graphics g);
 }

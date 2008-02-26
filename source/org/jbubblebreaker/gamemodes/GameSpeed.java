@@ -42,8 +42,8 @@ public class GameSpeed extends GameDefault {
 	 * @param rows of the matrix
 	 * @param cols of the matrix
 	 */
-	public GameSpeed(int rows, int cols) {
-		super(rows, cols);
+	public GameSpeed(int rows, int cols, int bubbleType) {
+		super(rows, cols, bubbleType);
 	}
 
 	@Override
