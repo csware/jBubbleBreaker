@@ -35,7 +35,7 @@ import javax.swing.KeyStroke;
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class GUI extends MyJFrame implements ActionListener {
+public class GUI extends MyJFrame implements ActionListener, AbstractGUI {
 	private JPanel infoPanel = new JPanel();
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
@@ -60,18 +60,7 @@ public class GUI extends MyJFrame implements ActionListener {
 	private GUI() {
 		super("JBubbleBreaker","jbubblebreaker.png",407,470,true,true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);	
-		setLayout(new BorderLayout());
 
-		getContentPane().add(infoPanel, BorderLayout.SOUTH);
-		infoPanel.setSize(60, 60);
-		newOtherGame();
-
-		infoPanel.setLayout(new BorderLayout());
-
-		infoPanel.add(pointsLabel, BorderLayout.WEST);
-		
-		infoPanel.add(gameModeLabel, BorderLayout.EAST);
-		pointsLabel.setText("Points: 0");
 		// insert Menu
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -106,27 +95,47 @@ public class GUI extends MyJFrame implements ActionListener {
 		menuHelpInfo.addActionListener(this);
 		menuHelpInfo.setMnemonic('a');
 		menuHelp.add(menuHelpInfo);
+
+		newGameDots();
+
+		setVisible(true);
 	}
 
-	/**
-	 * starts a new game and ask the user for details
+	private void newGameDots() {
+		game = null;
+		NewGameAskUserPanel nGAuP = new NewGameAskUserPanel(this);
+		nGAuP.setVisible(false);
+		setContentPane(nGAuP);
+		nGAuP.setVisible(true);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.jbubblebreaker.AbstractGUI#startNewGame(org.jbubblebreaker.Game)
 	 */
-	private void newOtherGame() {
-		setVisible(false);
-		if (game != null) {
-			getContentPane().remove(game.getPanel());
-		}
-		game=null;
-		new NewGameAskUser(this);
-	}
-
 	public void startNewGame(Game game) {
 		this.game = game;
+
+		JPanel newContentPane = new JPanel();
+		newContentPane.setVisible(false);
+		this.setContentPane(newContentPane);
+		newContentPane.setVisible(true);
+		
+		setLayout(new BorderLayout());
+
+		getContentPane().add(infoPanel, BorderLayout.SOUTH);
+		infoPanel.setSize(60, 60);
+
+		infoPanel.setLayout(new BorderLayout());
+
+		infoPanel.add(pointsLabel, BorderLayout.WEST);
+		
+		infoPanel.add(gameModeLabel, BorderLayout.EAST);
+		pointsLabel.setText("Points: 0");
+
+		
 		gameModeLabel.setText(game.getMode());
 		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		game.setPointsLabel(pointsLabel);
-		repaint();
-		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
@@ -139,7 +148,7 @@ public class GUI extends MyJFrame implements ActionListener {
 		} else if (arg0.getSource() == menuFileStatistics) {
 			new Statistics(this);
 		} else if (arg0.getSource() == menuFileNewDots) {
-			newOtherGame();
+			newGameDots();
 		} else if (arg0.getSource() == menuFileGuestMode) {
 			Statistics.setGuestMode(!Statistics.isGuestMode());
 			menuFileGuestMode.setSelected(Statistics.isGuestMode());

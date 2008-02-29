@@ -36,6 +36,11 @@ public class JBubbleBreaker {
 	 * @param args no parameter evaluation
 	 */
 	public static void main(String[] args)  {
+		registerDefault();
+		GUI.startGUI();
+	}
+
+	public static void registerDefault() {
 		addMode("org.jbubblebreaker.gamemodes.GameDefault");
 		addMode("org.jbubblebreaker.gamemodes.GameOngoing");
 		addMode("org.jbubblebreaker.gamemodes.GameShift");
@@ -48,7 +53,6 @@ public class JBubbleBreaker {
 		addBubbleType("org.jbubblebreaker.bubbles.BubbleDefaultFour");
 		addBubbleType("org.jbubblebreaker.bubbles.BubbleCaro");
 		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DRect");
-		GUI.startGUI();
 	}
 	
 	/**

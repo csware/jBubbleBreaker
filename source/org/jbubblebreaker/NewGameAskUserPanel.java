@@ -17,25 +17,25 @@
  */
 package org.jbubblebreaker;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * Ask the user to start a new game 
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class NewGameAskUser extends MyModalJFrame implements ActionListener, ChangeListener {
+public class NewGameAskUserPanel extends JPanel implements ActionListener, ChangeListener, AbstractGUI {
 	private JSlider columnsSlider;
 	private JSlider rowsSlider;
 	private JComboBox gameTypeComboBox = new JComboBox();
@@ -43,69 +43,69 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 	private JLabel rowsLabel = new JLabel();
 	private JLabel columnsLabel = new JLabel();
 	private JButton startButton = new JButton();
+	private Component component = null;
 	
-	/**
-	 * Create the frame
-	 */
-	public NewGameAskUser(JFrame parentJFrame) {
-		super("New Game...", null, 215, 188, false, parentJFrame);
-		getContentPane().setLayout(null);
+	public NewGameAskUserPanel(Component component) {
+		super();
+		this.component=component;
+		setLayout(null);
 
 		final JLabel gameModeLabel = new JLabel();
 		gameModeLabel.setBounds(10, 9, 91, 14);
 		gameModeLabel.setText("Game mode:");
-		getContentPane().add(gameModeLabel);
+		add(gameModeLabel);
 
 		final JLabel bubbleTypeLabel = new JLabel();
 		bubbleTypeLabel.setText("Bubble type:");
 		bubbleTypeLabel.setBounds(10, 104, 91, 14);
-		getContentPane().add(bubbleTypeLabel);
+		add(bubbleTypeLabel);
 		
 		rowsLabel.setBounds(10, 42, 91, 14);
 		rowsLabel.setText("Rows:");
-		getContentPane().add(rowsLabel);
+		add(rowsLabel);
 
 		columnsLabel.setBounds(10, 75, 91, 14);
 		columnsLabel.setText("Columns:");
-		getContentPane().add(columnsLabel);
+		add(columnsLabel);
 
 		startButton.setBounds(10, 128, 188, 23);
 		startButton.setText("Start!");
-		getContentPane().add(startButton);
+		add(startButton);
 		startButton.addActionListener(this);
 
 		rowsSlider = new JSlider();
 		rowsSlider.setBounds(107, 33, 91, 23);
-		getContentPane().add(rowsSlider);
+		add(rowsSlider);
 		rowsSlider.addChangeListener(this);
 		rowsSlider.setValue(12);
 		
 		columnsSlider = new JSlider();
 		columnsSlider.setBounds(107, 71, 91, 23);
-		getContentPane().add(columnsSlider);
+		add(columnsSlider);
 		columnsSlider.addChangeListener(this);
 		columnsSlider.setValue(12);
 
 		gameTypeComboBox.setBounds(107, 5, 91, 22);
 		gameTypeComboBox.addActionListener(this);
-		getContentPane().add(gameTypeComboBox);
+		add(gameTypeComboBox);
 		Iterator<GameMode> gameModesIterator = JBubbleBreaker.getModes().iterator();
 		while(gameModesIterator.hasNext()) {
 			gameTypeComboBox.addItem((gameModesIterator.next()).getModeName());
 		}
 
 		bubbleTypeComboBox.setBounds(107, 100, 91, 22);
-		getContentPane().add(bubbleTypeComboBox);
+		add(bubbleTypeComboBox);
 		Iterator<BubbleType> bubbleTypesIterator = JBubbleBreaker.getBubbleTypes().iterator();
 		while(bubbleTypesIterator.hasNext()) {
 			bubbleTypeComboBox.addItem((bubbleTypesIterator.next()).getTypeName());
 		}
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		setVisible(true);
+		if (bubbleTypeComboBox.getItemCount() == 0 || gameTypeComboBox.getItemCount() == 0) {
+			startButton.setEnabled(false);
+		}
+		setAutoscrolls(true);
 	}
-	
+
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == gameTypeComboBox) {
 			GameSize mySize = JBubbleBreaker.getModes().get(gameTypeComboBox.getSelectedIndex()).getAllowedSize();
@@ -122,9 +122,7 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 				JOptionPane.showMessageDialog(null, "For some reason ("+e+") JBubbleBreaker is not able to start the mode "+gameTypeComboBox.getSelectedItem()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 			}
 			if (game != null) {
-				((GUI)parentJFrame).startNewGame(game);
-				setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				dispose();
+				((AbstractGUI)component).startNewGame(game);
 			}
 		}
 	}
@@ -135,5 +133,10 @@ public class NewGameAskUser extends MyModalJFrame implements ActionListener, Cha
 		} else if (arg0.getSource() == columnsSlider){
 			columnsLabel.setText("Columns: "+String.valueOf(columnsSlider.getValue()));
 		}
+	}
+
+	public void startNewGame(Game game) {
+		// TODO Auto-generated method stub
+		
 	}
 }
