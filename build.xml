@@ -5,10 +5,19 @@
 	<target name="generateAll" description="Generates all Stubs and Skeletons for our interfaces">
 		<antcall target="generateJavaDoc" />
 		<antcall target="createJar" />
+		<antcall target="generateWindowsInstaller" />
 	</target>
 	<target name="run" description="Runs JBubbleBreaker" depends="createJar">
 		<antcall target="createJar" />
 		<java jar="${basedir}/jbubblebreaker.jar" fork="true" />
+	</target>
+	<target name="generateWindowsInstaller" description="Windows installer" depends="generateSourcesZip,createJar">
+		<condition property="onlyOnWindows">
+			<os family="windows"/>
+		</condition>
+		<exec executable="${basedir}/innosetup/compile.bat" dir="${basedir}" failonerror="true">
+			<arg value="${basedir}/innosetup/install.iss"/>
+		</exec>
 	</target>
 	<target name="generateJavaDoc" description="Generate JavaDoc">
 		<delete dir="${basedir}/${doc.dir}" />
@@ -56,5 +65,6 @@
 		<delete dir="${basedir}/${bin.dir}" />
 		<delete dir="${basedir}/${doc.dir}" />
 		<delete file="${basedir}/jbubblebreaker.jar" />
+		<delete file="${basedir}/JBubbleBreaker-install.exe" />
 	</target>
 </project>
