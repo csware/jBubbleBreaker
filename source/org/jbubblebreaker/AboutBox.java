@@ -40,9 +40,14 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 	public AboutBox(JFrame parentJFrame) {
 		super("About jBubbleBreaker",icon, 332, 210, false, parentJFrame);
 
+		// we're in an applet
+		if (parentJFrame == null) {
+			setSize(332,227);
+		}
+		
 		setLayout(null);
 
-		final PicturePanel titlePanel = new PicturePanel("jbubblebreaker-text.png",219,43);
+		final PicturePanel titlePanel = new PicturePanel("jBubbleBreaker-text.png",219,43);
 		titlePanel.setLocation(64,10);
 		titlePanel.setToolTipText("jBubbleBreaker");
 		getContentPane().add(titlePanel);

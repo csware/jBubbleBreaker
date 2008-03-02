@@ -46,10 +46,10 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	
 	@Override
 	public void init() {
+		JBubbleBreaker.registerDefault();
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				public void run() {
-					JBubbleBreaker.registerDefault();
 					createGUI();
 				}
 			});
@@ -97,7 +97,6 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		nGAuP.setVisible(false);
 		setContentPane(nGAuP);
 		nGAuP.setVisible(true);
-		repaint();
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 			newGameDots();
 		}
 	}
-	
+
 	@Override
 	public void startNewGame(Game game) {
 		this.game = game;

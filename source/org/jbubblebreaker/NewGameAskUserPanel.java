@@ -46,62 +46,67 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 	private JLabel columnsLabel = new JLabel();
 	private JButton startButton = new JButton();
 	private Component component = null;
+	private JPanel backgroundPanel = new JPanel();
 	
 	public NewGameAskUserPanel(Component component) {
 		super();
 		this.component=component;
 		setLayout(null);
 
-		final PicturePanel titlePanel = new PicturePanel("jbubblebreaker-text.png",219,43);
+		add(backgroundPanel);
+		backgroundPanel.setSize(238,213);
+		backgroundPanel.setLayout(null);
+
+		final PicturePanel titlePanel = new PicturePanel("jBubbleBreaker-text.png",219,43);
 		titlePanel.setToolTipText("jBubbleBreaker " + JBubbleBreaker.getVersion());
 		titlePanel.setLocation(10,9);
-		add(titlePanel);
+		backgroundPanel.add(titlePanel);
 		
 		final JLabel gameModeLabel = new JLabel();
 		gameModeLabel.setBounds(10+15, 9+55, 91, 14);
 		gameModeLabel.setText("Game mode:");
-		add(gameModeLabel);
+		backgroundPanel.add(gameModeLabel);
 
 		final JLabel bubbleTypeLabel = new JLabel();
 		bubbleTypeLabel.setText("Bubble type:");
 		bubbleTypeLabel.setBounds(10+15, 104+55, 91, 14);
-		add(bubbleTypeLabel);
+		backgroundPanel.add(bubbleTypeLabel);
 		
 		rowsLabel.setBounds(10+15, 42+55, 91, 14);
 		rowsLabel.setText("Rows:");
-		add(rowsLabel);
+		backgroundPanel.add(rowsLabel);
 
 		columnsLabel.setBounds(10+15, 75+55, 91, 14);
 		columnsLabel.setText("Columns:");
-		add(columnsLabel);
+		backgroundPanel.add(columnsLabel);
 
 		startButton.setBounds(10+15, 128+55, 188, 23);
 		startButton.setText("Start!");
-		add(startButton);
+		backgroundPanel.add(startButton);
 		startButton.addActionListener(this);
 
 		rowsSlider = new JSlider();
 		rowsSlider.setBounds(107+15, 33+55, 91, 23);
-		add(rowsSlider);
+		backgroundPanel.add(rowsSlider);
 		rowsSlider.addChangeListener(this);
 		rowsSlider.setValue(12);
 		
 		columnsSlider = new JSlider();
 		columnsSlider.setBounds(107+15, 71+55, 91, 23);
-		add(columnsSlider);
+		backgroundPanel.add(columnsSlider);
 		columnsSlider.addChangeListener(this);
 		columnsSlider.setValue(12);
 
 		gameTypeComboBox.setBounds(107+15, 5+55, 91, 22);
 		gameTypeComboBox.addActionListener(this);
-		add(gameTypeComboBox);
+		backgroundPanel.add(gameTypeComboBox);
 		Iterator<GameMode> gameModesIterator = JBubbleBreaker.getModes().iterator();
 		while(gameModesIterator.hasNext()) {
 			gameTypeComboBox.addItem((gameModesIterator.next()).getModeName());
 		}
 
 		bubbleTypeComboBox.setBounds(107+15, 100+55, 91, 22);
-		add(bubbleTypeComboBox);
+		backgroundPanel.add(bubbleTypeComboBox);
 		Iterator<BubbleType> bubbleTypesIterator = JBubbleBreaker.getBubbleTypes().iterator();
 		while(bubbleTypesIterator.hasNext()) {
 			bubbleTypeComboBox.addItem((bubbleTypesIterator.next()).getTypeName());
@@ -110,7 +115,6 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		if (bubbleTypeComboBox.getItemCount() == 0 || gameTypeComboBox.getItemCount() == 0) {
 			startButton.setEnabled(false);
 		}
-		setAutoscrolls(true);
 	}
 
 	/**
@@ -118,13 +122,14 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 	 */
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
+		super.setBounds(x,y,width,height);
 		if (width < 238+2*x) {
 			width=238+2*x;
 		}
 		if (height < 213+2*y) {
 			height=213+2*y;
 		}
-		super.setBounds((width-238)/2,(height-213)/2,238,213);
+		backgroundPanel.setLocation((width-238)/2,(height-213)/2);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
