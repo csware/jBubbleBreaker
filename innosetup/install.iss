@@ -79,6 +79,16 @@ de.InstallSource=Quelltexte installieren
 en.InstallSource=install source code
 de.MainProgram=jBubbleBreaker Hauptprogramm
 en.MainProgram=jBubbleBreaker main programm
+de.NoJavaFound=Das Setup konnte keine Java Runtime Environment finden.
+en.NoJavaFound=Setup was not able to detect an installed Java Runtime Enviroment.
+de.YouNeedAtLeast=Sie benötigen mindestens die Version 1.6 oder höher um jBubbleBreaker ausführen zu können.
+en.YouNeedAtLeast=You must have installed at least Java Runtime 1.6 or higher to run jBubbleBreaker.
+de.GetJava=Sie können die aktuelle Version der Java Runtime Environment (Java SE) unter http://java.sun.com/getjava erhalten.
+en.GetJava=You can obtain the latest Java Runtime (Java SE) from http://java.sun.com/getjava.
+de.JavaTooOld=Das Setup konnte keine Java Runtime Environment mit mindestens Version 1.6 finden.
+en.JavaTooOld=Setup was not able to detect at least Java Runtime 1.6.
+de.InstallAnyway=Installation ohne die Java Runtime Environment fortsetzen?
+en.InstallAnyway=Install without the Java Runtime Environment?
 
 [Code]
 //* Getting Java version from registry *//
@@ -90,8 +100,8 @@ begin
      RegQueryStringValue(HKLM, 'SOFTWARE\JavaSoft\Java Runtime Environment', 'CurrentVersion', javaVersion);
      GetVersionNumbersString(javaVersion, javaVersion);
      if Length( javaVersion ) = 0 then begin
-     RegQueryStringValue(HKLM, 'SOFTWARE\JavaSoft\Java Development Kit', 'CurrentVersion', javaVersion);
-     GetVersionNumbersString(javaVersion, javaVersion);
+         RegQueryStringValue(HKLM, 'SOFTWARE\JavaSoft\Java Development Kit', 'CurrentVersion', javaVersion);
+         GetVersionNumbersString(javaVersion, javaVersion);
      end
      Result := javaVersion;
 end;
@@ -101,16 +111,16 @@ function InitializeSetup(): Boolean;
 begin
      Result := true;
      if Length( getJavaVersion() ) = 0 then begin
-          //* No Java detected *//
-          MsgBox('Setup was not able to detect an installed Java Runtime Enviroment.' + #13 +
-                         'You must have installed at least Java Runtime 1.6 or higher (1.6.4 recommended) to run jBubbleBreaker.' + #13 +
-                         'You can obtain the latest Java Runtime from http://java.sun.com/getjava.', mbInformation, MB_OK);
-          end
+         //* No Java detected *//
+         if MsgBox(CustomMessage('NoJavaFound')+#13+CustomMessage('YouNeedAtLeast')+#13+CustomMessage('GetJava')+#13+CustomMessage('InstallAnyway'), mbError, MB_YESNO or MB_DEFBUTTON2) = IDNO then
+             result := false;
+         end
      else begin
-          //* Java version lower than 1.6 detected *//
-          if (getJavaVersion()) < '1.6' then begin
-               MsgBox('Setup was not able to detect at least Java Runtime 1.6.' + #13 +
-                         'You can obtain the latest Java Runtime from http://java.sun.com/getjava.', mbInformation, MB_OK);
-          end
+         //* Java version lower than 1.6 detected *//
+         if (getJavaVersion()) < '1.6' then begin
+             if MsgBox(CustomMessage('JavaTooOld')+#13+CustomMessage('YouNeedAtLeast')+#13+CustomMessage('GetJava')+#13+CustomMessage('InstallAnyway'), mbError, MB_YESNO or MB_DEFBUTTON2) = IDNO then
+                 result := false;
+             end;
+         end;
      end;
-end;
+end.
