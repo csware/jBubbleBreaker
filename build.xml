@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
-<project name="JBubbleBreaker" default="generateAll" basedir=".">
+<project name="jBubbleBreaker" default="generateAll" basedir=".">
 	<property file="application.properties" />
 	<property environment="env"/>
 	<target name="generateAll" description="Generates all Stubs and Skeletons for our interfaces">
 		<antcall target="generateJavaDoc" />
+		<antcall target="generateSourcesZip" />
 		<antcall target="createJar" />
 		<antcall target="generateWindowsInstaller" />
 	</target>
-	<target name="run" description="Runs JBubbleBreaker" depends="createJar">
+	<target name="run" description="Runs jBubbleBreaker" depends="createJar">
 		<antcall target="createJar" />
 		<java jar="${basedir}/jbubblebreaker.jar" fork="true" />
 	</target>
@@ -18,6 +19,19 @@
 		<exec executable="${basedir}/innosetup/compile.bat" dir="${basedir}" failonerror="true">
 			<arg value="${basedir}/innosetup/install.iss"/>
 		</exec>
+	</target>
+	<target name="generateSourcesZip" description="Generates the sources zip-file" depends="generateJavaDoc">
+		<zip destfile="${basedir}/jbubblebreaker-src.zip">
+			<zipfileset dir="." includes="COPYING" prefix="jbubblebreaker"/>
+			<zipfileset dir="." includes=".classpath" prefix="jbubblebreaker"/>
+			<zipfileset dir="." includes=".project" prefix="jbubblebreaker"/>
+			<zipfileset dir="." includes="application.properties" prefix="jbubblebreaker"/>
+			<zipfileset dir="." includes="build.xml" prefix="jbubblebreaker"/>
+			<zipfileset dir="source" prefix="jbubblebreaker/source"/>
+			<zipfileset dir="images" prefix="jbubblebreaker/images"/>
+			<zipfileset dir="javadoc" prefix="jbubblebreaker/javadoc"/>
+			<zipfileset dir="innosetup" prefix="jbubblebreaker/innosetup"/>
+		</zip>
 	</target>
 	<target name="generateJavaDoc" description="Generate JavaDoc">
 		<delete dir="${basedir}/${doc.dir}" />
@@ -65,6 +79,7 @@
 		<delete dir="${basedir}/${bin.dir}" />
 		<delete dir="${basedir}/${doc.dir}" />
 		<delete file="${basedir}/jbubblebreaker.jar" />
-		<delete file="${basedir}/JBubbleBreaker-install.exe" />
+		<delete file="${basedir}/jbubblebreaker-src.zip" />
+		<delete file="${basedir}/jBubbleBreaker-install.exe" />
 	</target>
 </project>
