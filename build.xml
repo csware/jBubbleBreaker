@@ -29,7 +29,7 @@
 			<zipfileset dir="." includes="build.xml" prefix="jbubblebreaker"/>
 			<zipfileset dir="source" prefix="jbubblebreaker/source"/>
 			<zipfileset dir="images" prefix="jbubblebreaker/images"/>
-			<zipfileset dir="javadoc" prefix="jbubblebreaker/javadoc"/>
+			<zipfileset dir="doc" prefix="doc"/>
 			<zipfileset dir="innosetup" prefix="jbubblebreaker/innosetup"/>
 		</zip>
 	</target>
