@@ -4,15 +4,15 @@
  * This file is part of JBubbleBreaker.
  * 
  * JBubbleBreaker is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as     
- * published by the Free Software Foundation.                            
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
  * 
- * JBubbleBreaker is distributed in the hope that it will be useful,     
- * but WITHOUT ANY WARRANTY; without even the implied warranty of        
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         
- * GNU General Public License for more details.                          
+ * JBubbleBreaker is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License     
+ * You should have received a copy of the GNU General Public License
  * along with JBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.jbubblebreaker;
@@ -35,7 +35,7 @@ import javax.swing.KeyStroke;
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class GUI extends MyJFrame implements ActionListener, AbstractGUI {
+public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	private JPanel infoPanel = new JPanel();
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
@@ -55,7 +55,7 @@ public class GUI extends MyJFrame implements ActionListener, AbstractGUI {
 	}
 
 	/**
-	 * Create the JFrame
+	 * Create the JFrame and prepare everything for the game
 	 */
 	private GUI() {
 		super("JBubbleBreaker","jbubblebreaker.png",407,470,true,true);
@@ -101,17 +101,21 @@ public class GUI extends MyJFrame implements ActionListener, AbstractGUI {
 		setVisible(true);
 	}
 
+	/**
+	 * Ask the user for game details for a new game
+	 */
 	private void newGameDots() {
 		game = null;
+		menuFileNew.setEnabled(false);
+		menuFileNewDots.setEnabled(false);
 		NewGameAskUserPanel nGAuP = new NewGameAskUserPanel(this);
 		nGAuP.setVisible(false);
 		setContentPane(nGAuP);
 		nGAuP.setVisible(true);
+		repaint();
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.jbubblebreaker.AbstractGUI#startNewGame(org.jbubblebreaker.Game)
-	 */
+	@Override
 	public void startNewGame(Game game) {
 		this.game = game;
 
@@ -136,8 +140,11 @@ public class GUI extends MyJFrame implements ActionListener, AbstractGUI {
 		gameModeLabel.setText(game.getMode());
 		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		game.setPointsLabel(pointsLabel);
+		menuFileNew.setEnabled(true);
+		menuFileNewDots.setEnabled(true);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == menuFileClose) {
 			dispose();
