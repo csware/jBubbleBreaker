@@ -1,4 +1,4 @@
-#define version="0.4"
+#define version="0.5"
 #define copyright="Coded by Sven Strickroth 2007-2008"
 
 [Setup]

@@ -29,6 +29,9 @@ public class JBubbleBreaker {
 	 * Stores all available modes for JBubbleBreaker
 	 */
 	static private List<GameMode> gameModes = new LinkedList<GameMode>();
+	/**
+	 * Stores all available bubble styles for JBubbleBreaker
+	 */
 	static private List<BubbleType> bubbleTypes = new LinkedList<BubbleType>();
 	
 	/**
@@ -45,7 +48,7 @@ public class JBubbleBreaker {
 	 * @return version numer 
 	 */
 	static public String getVersion() {
-		return "0.4";
+		return "0.5";
 	}
 	
 	/**
