@@ -56,7 +56,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		JButton startButton = new JButton("Close");
+		JButton startButton = new JButton(Localization.getString("Close"));
 		getContentPane().add(startButton, BorderLayout.SOUTH);
 		startButton.addActionListener(this);
 
@@ -72,7 +72,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 	}
 
 		private class TableTableModel extends AbstractTableModel {
-			private final String[] COLUMN_NAMES = new String[] {"Mode", "Colors", "Rows","Columns","Games played","Max. Points","Avg. Points"};
+			private final String[] COLUMN_NAMES = new String[] {Localization.getString("Mode"), Localization.getString("Colors"), Localization.getString("Rows"),Localization.getString("Columns"),Localization.getString("GamesPlayed"),Localization.getString("MaxPoints"),Localization.getString("AvgPoints")};
 			private List<StatisticData> myData = getStatistics();
 
 			public int getRowCount() {
@@ -135,14 +135,14 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 					StatisticData myItem = myIterator.next(); 
 					if (myItem.getMode().equals(mode) && myItem.getColors() == colors && myItem.getRows() == rows && myItem.getCols() == cols) {
 						myItem.newGame(points);
-						returnString = "\nPlayed games: " + myItem.getCountOfGames()+"\nAverage points: "+myItem.getAveragePoints()+"\nMax points: "+myItem.getMaxPoints();
+						returnString = "\n"+Localization.getString("GamesPlayed")+": " + myItem.getCountOfGames()+"\n"+Localization.getString("AvgPoints")+": "+myItem.getAveragePoints()+"\n"+Localization.getString("MaxPoints")+": "+myItem.getMaxPoints();
 						found = true;
 					}
 					out.writeObject(myItem);
 				}
 				if (found == false) {
 					out.writeObject(new StatisticData(mode, colors, rows, cols, points));
-					returnString = "\nFirst time you played this mode-, size-combination.";
+					returnString = "\n"+Localization.getString("FirstTime");
 				}
 				out.close();
 			} catch (FileNotFoundException e) {

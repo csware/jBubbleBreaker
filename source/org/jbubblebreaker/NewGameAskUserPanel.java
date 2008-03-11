@@ -64,24 +64,24 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		
 		final JLabel gameModeLabel = new JLabel();
 		gameModeLabel.setBounds(10+15, 9+55, 91, 14);
-		gameModeLabel.setText("Game mode:");
+		gameModeLabel.setText(Localization.getString("GameMode"));
 		backgroundPanel.add(gameModeLabel);
 
 		final JLabel bubbleTypeLabel = new JLabel();
-		bubbleTypeLabel.setText("Bubble type:");
+		bubbleTypeLabel.setText(Localization.getString("BubbleType"));
 		bubbleTypeLabel.setBounds(10+15, 104+55, 91, 14);
 		backgroundPanel.add(bubbleTypeLabel);
 		
 		rowsLabel.setBounds(10+15, 42+55, 91, 14);
-		rowsLabel.setText("Rows:");
+		rowsLabel.setText(Localization.getString("Rows"));
 		backgroundPanel.add(rowsLabel);
 
 		columnsLabel.setBounds(10+15, 75+55, 91, 14);
-		columnsLabel.setText("Columns:");
+		columnsLabel.setText(Localization.getString("Columns"));
 		backgroundPanel.add(columnsLabel);
 
 		startButton.setBounds(10+15, 128+55, 188, 23);
-		startButton.setText("Start!");
+		startButton.setText(Localization.getString("Start"));
 		backgroundPanel.add(startButton);
 		startButton.addActionListener(this);
 
@@ -155,9 +155,9 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 
 	public void stateChanged(ChangeEvent arg0) {
 		if (arg0.getSource() == rowsSlider) {
-			rowsLabel.setText("Rows: "+String.valueOf(rowsSlider.getValue()));
+			rowsLabel.setText(Localization.getString("Rows")+": "+String.valueOf(rowsSlider.getValue()));
 		} else if (arg0.getSource() == columnsSlider){
-			columnsLabel.setText("Columns: "+String.valueOf(columnsSlider.getValue()));
+			columnsLabel.setText(Localization.getString("Columns")+": "+String.valueOf(columnsSlider.getValue()));
 		}
 	}
 }

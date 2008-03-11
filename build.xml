@@ -74,6 +74,9 @@
 			<fileset dir="${basedir}/images" />
 		</copy>
 		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" />
+		<copy todir="${basedir}/${bin.dir}/org/jbubblebreaker/i18n">
+			<fileset dir="${basedir}/${source.dir}/org/jbubblebreaker/i18n" />
+		</copy>
 	</target>
 	<target name="clean" description="Remove all generated files">
 		<delete dir="${basedir}/${bin.dir}" />

@@ -39,7 +39,6 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
 
-	private JMenuBar menuBar;
 	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots;
 	
 	@Override
@@ -61,26 +60,27 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	 */
 	private void createGUI() {
 		// insert Menu
-		menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		JMenu menuGame = new JMenu("Game");
-		menuGame.setMnemonic('G');
+		JMenu menuGame = new JMenu(Localization.getString("MenuGame"));
+		menuGame.setMnemonic(Localization.getChar("MenuGameMnemonic"));
 		menuBar.add(menuGame);
-		JMenu menuHelp = new JMenu("?");
-		menuHelp.setMnemonic('?');
+		JMenu menuHelp = new JMenu(Localization.getString("MenuHelp"));
+		menuHelp.setMnemonic(Localization.getChar("MenuHelpMnemonic"));
 		menuBar.add(menuHelp);
-		menuGameNew = new JMenuItem("New");
+		menuGameNew = new JMenuItem(Localization.getString("MenuNew"));
 		menuGameNew.addActionListener(this);
-		menuGameNew.setMnemonic('n');
+		menuGameNew.setMnemonic(Localization.getChar("MenuNewMnemonic"));
 		menuGame.add(menuGameNew);
-		menuGameNewDots = new JMenuItem("New...");
+		menuGameNewDots = new JMenuItem(Localization.getString("MenuNewDots"));
 		menuGameNewDots.addActionListener(this);
-		menuGameNewDots.setMnemonic('e');
+		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
 		menuGame.add(menuGameNewDots);
-		menuHelpInfo = new JMenuItem("About");
+		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
 		menuHelpInfo.addActionListener(this);
-		menuHelpInfo.setMnemonic('a');
+		menuHelpInfo.setMnemonic(Localization.getChar("MenuAboutMnemonic"));
 		menuHelp.add(menuHelpInfo);
+
 		newGameDots();
 	}
 
@@ -103,6 +103,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 			new AboutBox(null);
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
+			pointsLabel.setText(Localization.getString("PointsZero"));
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
 		}
@@ -130,7 +131,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
 		
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
-		pointsLabel.setText("Points: 0");
+		pointsLabel.setText(Localization.getString("PointsZero"));
 
 		menuGameNew.setEnabled(true);
 		menuGameNewDots.setEnabled(true);

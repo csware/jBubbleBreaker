@@ -64,38 +64,38 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		// insert Menu
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		JMenu menuGame = new JMenu("Game");
-		menuGame.setMnemonic('G');
+		JMenu menuGame = new JMenu(Localization.getString("MenuGame"));
+		menuGame.setMnemonic(Localization.getChar("MenuGameMnemonic"));
 		menuBar.add(menuGame);
-		JMenu menuHelp = new JMenu("?");
-		menuHelp.setMnemonic('?');
+		JMenu menuHelp = new JMenu(Localization.getString("MenuHelp"));
+		menuHelp.setMnemonic(Localization.getChar("MenuHelpMnemonic"));
 		menuBar.add(menuHelp);
-		menuGameNew = new JMenuItem("New");
+		menuGameNew = new JMenuItem(Localization.getString("MenuNew"));
 		menuGameNew.addActionListener(this);
-		menuGameNew.setMnemonic('n');
+		menuGameNew.setMnemonic(Localization.getChar("MenuNewMnemonic"));
 		menuGameNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
 		menuGame.add(menuGameNew);
-		menuGameNewDots = new JMenuItem("New...");
+		menuGameNewDots = new JMenuItem(Localization.getString("MenuNewDots"));
 		menuGameNewDots.addActionListener(this);
-		menuGameNewDots.setMnemonic('e');
+		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
 		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3,0));
 		menuGame.add(menuGameNewDots);
-		menuGameStatistics = new JMenuItem("Statistics");
+		menuGameStatistics = new JMenuItem(Localization.getString("MenuStatistics"));
 		menuGameStatistics.addActionListener(this);
-		menuGameStatistics.setMnemonic('s');
+		menuGameStatistics.setMnemonic(Localization.getChar("MenuGameStatisticsMnemonic"));
 		menuGame.add(menuGameStatistics);
-		menuGameGuestMode = new JCheckBoxMenuItem("Guest Mode");
+		menuGameGuestMode = new JCheckBoxMenuItem(Localization.getString("MenuGuestMode"));
 		menuGameGuestMode.addActionListener(this);
-		menuGameGuestMode.setMnemonic('g');
+		menuGameGuestMode.setMnemonic(Localization.getChar("MenuGuestModeMnemonic"));
 		menuGame.add(menuGameGuestMode);
-		menuGameClose = new JMenuItem("Quit");
+		menuGameClose = new JMenuItem(Localization.getString("MenuQuit"));
 		menuGameClose.addActionListener(this);
-		menuGameClose.setMnemonic('q');
+		menuGameClose.setMnemonic(Localization.getChar("MenuQuitMnemonic"));
 		menuGameClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,ActionEvent.ALT_MASK));
 		menuGame.add(menuGameClose);
-		menuHelpInfo = new JMenuItem("About");
+		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
 		menuHelpInfo.addActionListener(this);
-		menuHelpInfo.setMnemonic('a');
+		menuHelpInfo.setMnemonic(Localization.getChar("MenuAboutMnemonic"));
 		menuHelp.add(menuHelpInfo);
 
 		newGameDots();
@@ -137,7 +137,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
 		
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
-		pointsLabel.setText("Points: 0");
+		pointsLabel.setText(Localization.getString("PointsZero"));
 
 		
 		gameModeLabel.setText(game.getMode());
@@ -155,6 +155,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 			new AboutBox(this);
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
+			pointsLabel.setText(Localization.getString("PointsZero"));
 		} else if (arg0.getSource() == menuGameStatistics) {
 			new Statistics(this);
 		} else if (arg0.getSource() == menuGameNewDots) {
