@@ -36,11 +36,11 @@ public class Bubble3DCircle extends BubbleDefault {
 	/**
 	 * Buffer the image 
 	 */
-	private Image image = null;
+	static private Image[] image = {null, null, null, null, null};
 	/**
 	 * store the last radian
 	 */
-	private int oldradian = 0;
+	static private int oldradian = 0;
 	
 	/**
 	 * Create a Bubble on a specific position and size with a random color
@@ -74,22 +74,18 @@ public class Bubble3DCircle extends BubbleDefault {
 			g.setColor(Color.GRAY);
 			g.fillRect(0, 0, radian, radian);
 		}
-		if (image == null || radian != oldradian) {
-			String filename = "";
-			switch (getColorIndex()) {
-				case 0: filename = "bubble-red"; break;
-				case 1: filename = "bubble-blue"; break;
-				case 2: filename = "bubble-yellow"; break;
-				case 3: filename = "bubble-magenta"; break;
-				case 4: filename = "bubble-green"; break;
-			}
-			try {
-				image = ImageIO.read(getClass().getResource("/images/"+filename+".png")).getScaledInstance(radian, radian, Image.SCALE_SMOOTH);
-			} catch (IOException e) {
-				// should not occour
+		if (image[0] == null || radian != oldradian) {
+			String[] filenames = {"bubble-red","bubble-blue","bubble-yellow"
+				,"bubble-magenta","bubble-green"};
+			for(int i = 0; i < 5; i++) {
+				try {
+					image[i] = ImageIO.read(getClass().getResource("/images/"+filenames[i]+".png")).getScaledInstance(radian, radian, Image.SCALE_SMOOTH);
+				} catch (IOException e) {
+					// should not occour
+				}
 			}
 			oldradian = radian;
 		}
-		g.drawImage(image, 0, 0, this);
+		g.drawImage(image[getColorIndex()], 0, 0, this);
 	}
 }
