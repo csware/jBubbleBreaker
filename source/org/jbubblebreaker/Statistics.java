@@ -123,8 +123,11 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		dispose();
 	}
 
-	static void updateStatistics(String mode, int colors, int rows, int cols, int points) {
+	static String updateStatistics(String mode, int colors, int rows, int cols, int points) {
+		String returnString = "";
+		System.out.println("1");
 		if (isGuestMode() == false) {
+			System.out.println("1a");
 			ObjectOutputStream out = null;
 			try {
 				Iterator<StatisticData> myIterator = getStatistics().iterator();
@@ -134,18 +137,21 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 					StatisticData myItem = myIterator.next(); 
 					if (myItem.getMode().equals(mode) && myItem.getColors() == colors && myItem.getRows() == rows && myItem.getCols() == cols) {
 						myItem.newGame(points);
+						returnString = "\nPlayed games: " + myItem.getCountOfGames()+"\nAverage points: "+myItem.getAveragePoints()+"\nMax points: "+myItem.getMaxPoints();
 						found = true;
 					}
 					out.writeObject(myItem);
 				}
 				if (found == false) {
 					out.writeObject(new StatisticData(mode, colors, rows, cols, points));
+					returnString = "\nFirst time you played this mode-, size-combination.";
 				}
 				out.close();
 			} catch (FileNotFoundException e) {
 			} catch (IOException e) {
 			}
 		}
+		return returnString;
 	}
 
 	public static List<StatisticData> getStatistics() {
