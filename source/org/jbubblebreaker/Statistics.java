@@ -125,9 +125,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 
 	static String updateStatistics(String mode, int colors, int rows, int cols, int points) {
 		String returnString = "";
-		System.out.println("1");
 		if (isGuestMode() == false) {
-			System.out.println("1a");
 			ObjectOutputStream out = null;
 			try {
 				Iterator<StatisticData> myIterator = getStatistics().iterator();
