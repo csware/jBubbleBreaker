@@ -46,7 +46,7 @@ import javax.swing.table.AbstractTableModel;
  */
 @SuppressWarnings("serial")
 public class Statistics extends MyModalJFrame implements ActionListener {
-	private static boolean guestMode = false;
+	private static boolean guestMode = true;
 
 	/**
 	 * Create the frame

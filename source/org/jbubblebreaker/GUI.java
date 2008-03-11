@@ -99,6 +99,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuHelp.add(menuHelpInfo);
 
 		newGameDots();
+		Statistics.setGuestMode(false);
 
 		setVisible(true);
 	}
