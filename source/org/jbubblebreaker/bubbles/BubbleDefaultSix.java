@@ -20,15 +20,15 @@ package org.jbubblebreaker.bubbles;
 import java.awt.Color;
 
 /**
- * Provides the Default Bubbles with 4 Colors
+ * Provides the default Bubbles with 6 different colors
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class BubbleDefaultFour extends BubbleDefault {
+public class BubbleDefaultSix extends BubbleDefault {
 	/**
 	 * Stores the name of this bubble set
 	 */
-	static public String name = "Default 4 colors"; 
+	static public String name = "Default 6 colors"; 
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
@@ -36,7 +36,7 @@ public class BubbleDefaultFour extends BubbleDefault {
 	 * @param row Row of Bubble
 	 * @param col Col of Bubble
 	 */
-	public BubbleDefaultFour(int radian, int row, int col) {
+	public BubbleDefaultSix(int radian, int row, int col) {
 		super(radian, row, col);
 	}
 	
@@ -47,7 +47,7 @@ public class BubbleDefaultFour extends BubbleDefault {
 	 * @param col Col of Bubble
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public BubbleDefaultFour(int radian, int row, int col, int colorIndex) {
+	public BubbleDefaultSix(int radian, int row, int col, int colorIndex) {
 		super(radian, row, col, colorIndex);
 	}
 
