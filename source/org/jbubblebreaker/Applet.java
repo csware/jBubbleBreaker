@@ -40,7 +40,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	private JLabel gameModeLabel = new JLabel();
 
 	private JMenuBar menuBar;
-	private JMenuItem menuHelpInfo,menuFileNew,menuFileNewDots;
+	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots;
 	
 	@Override
 	public void init() {
@@ -63,18 +63,20 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		// insert Menu
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		JMenu menuFile = new JMenu("File");
-		menuBar.add(menuFile);
+		JMenu menuGame = new JMenu("Game");
+		menuGame.setMnemonic('G');
+		menuBar.add(menuGame);
 		JMenu menuHelp = new JMenu("?");
+		menuHelp.setMnemonic('?');
 		menuBar.add(menuHelp);
-		menuFileNew = new JMenuItem("New");
-		menuFileNew.addActionListener(this);
-		menuFileNew.setMnemonic('n');
-		menuFile.add(menuFileNew);
-		menuFileNewDots = new JMenuItem("New...");
-		menuFileNewDots.addActionListener(this);
-		menuFileNewDots.setMnemonic('e');
-		menuFile.add(menuFileNewDots);
+		menuGameNew = new JMenuItem("New");
+		menuGameNew.addActionListener(this);
+		menuGameNew.setMnemonic('n');
+		menuGame.add(menuGameNew);
+		menuGameNewDots = new JMenuItem("New...");
+		menuGameNewDots.addActionListener(this);
+		menuGameNewDots.setMnemonic('e');
+		menuGame.add(menuGameNewDots);
 		menuHelpInfo = new JMenuItem("About");
 		menuHelpInfo.addActionListener(this);
 		menuHelpInfo.setMnemonic('a');
@@ -87,8 +89,8 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	 */
 	private void newGameDots() {
 		game=null;
-		menuFileNew.setEnabled(false);
-		menuFileNewDots.setEnabled(false);
+		menuGameNew.setEnabled(false);
+		menuGameNewDots.setEnabled(false);
 		NewGameAskUserPanel nGAuP = new NewGameAskUserPanel(this);
 		nGAuP.setVisible(false);
 		setContentPane(nGAuP);
@@ -99,9 +101,9 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == menuHelpInfo) {
 			new AboutBox(null);
-		} else if (arg0.getSource() == menuFileNew) {
+		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
-		} else if (arg0.getSource() == menuFileNewDots) {
+		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
 		}
 	}
@@ -130,7 +132,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
 		pointsLabel.setText("Points: 0");
 
-		menuFileNew.setEnabled(true);
-		menuFileNewDots.setEnabled(true);
+		menuGameNew.setEnabled(true);
+		menuGameNewDots.setEnabled(true);
 	}
 }

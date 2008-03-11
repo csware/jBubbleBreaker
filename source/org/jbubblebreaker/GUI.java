@@ -42,7 +42,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
 	
-	private JMenuItem menuHelpInfo,menuFileNew,menuFileNewDots,menuFileStatistics,menuFileGuestMode,menuFileClose;
+	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots,menuGameStatistics,menuGameGuestMode,menuGameClose;
 
 	/**
 	 * Start GUI, but only once 
@@ -64,33 +64,35 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		// insert Menu
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		JMenu menuFile = new JMenu("File");
-		menuBar.add(menuFile);
+		JMenu menuGame = new JMenu("Game");
+		menuGame.setMnemonic('G');
+		menuBar.add(menuGame);
 		JMenu menuHelp = new JMenu("?");
+		menuHelp.setMnemonic('?');
 		menuBar.add(menuHelp);
-		menuFileNew = new JMenuItem("New");
-		menuFileNew.addActionListener(this);
-		menuFileNew.setMnemonic('n');
-		menuFileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
-		menuFile.add(menuFileNew);
-		menuFileNewDots = new JMenuItem("New...");
-		menuFileNewDots.addActionListener(this);
-		menuFileNewDots.setMnemonic('e');
-		menuFileNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3,0));
-		menuFile.add(menuFileNewDots);
-		menuFileStatistics = new JMenuItem("Statistics");
-		menuFileStatistics.addActionListener(this);
-		menuFileStatistics.setMnemonic('s');
-		menuFile.add(menuFileStatistics);
-		menuFileGuestMode = new JCheckBoxMenuItem("Guest Mode");
-		menuFileGuestMode.addActionListener(this);
-		menuFileGuestMode.setMnemonic('g');
-		menuFile.add(menuFileGuestMode);
-		menuFileClose = new JMenuItem("Quit");
-		menuFileClose.addActionListener(this);
-		menuFileClose.setMnemonic('q');
-		menuFileClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,ActionEvent.ALT_MASK));
-		menuFile.add(menuFileClose);
+		menuGameNew = new JMenuItem("New");
+		menuGameNew.addActionListener(this);
+		menuGameNew.setMnemonic('n');
+		menuGameNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
+		menuGame.add(menuGameNew);
+		menuGameNewDots = new JMenuItem("New...");
+		menuGameNewDots.addActionListener(this);
+		menuGameNewDots.setMnemonic('e');
+		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3,0));
+		menuGame.add(menuGameNewDots);
+		menuGameStatistics = new JMenuItem("Statistics");
+		menuGameStatistics.addActionListener(this);
+		menuGameStatistics.setMnemonic('s');
+		menuGame.add(menuGameStatistics);
+		menuGameGuestMode = new JCheckBoxMenuItem("Guest Mode");
+		menuGameGuestMode.addActionListener(this);
+		menuGameGuestMode.setMnemonic('g');
+		menuGame.add(menuGameGuestMode);
+		menuGameClose = new JMenuItem("Quit");
+		menuGameClose.addActionListener(this);
+		menuGameClose.setMnemonic('q');
+		menuGameClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,ActionEvent.ALT_MASK));
+		menuGame.add(menuGameClose);
 		menuHelpInfo = new JMenuItem("About");
 		menuHelpInfo.addActionListener(this);
 		menuHelpInfo.setMnemonic('a');
@@ -106,8 +108,8 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	 */
 	private void newGameDots() {
 		game = null;
-		menuFileNew.setEnabled(false);
-		menuFileNewDots.setEnabled(false);
+		menuGameNew.setEnabled(false);
+		menuGameNewDots.setEnabled(false);
 		NewGameAskUserPanel nGAuP = new NewGameAskUserPanel(this);
 		nGAuP.setVisible(false);
 		setContentPane(nGAuP);
@@ -140,25 +142,25 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		gameModeLabel.setText(game.getMode());
 		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		game.setPointsLabel(pointsLabel);
-		menuFileNew.setEnabled(true);
-		menuFileNewDots.setEnabled(true);
+		menuGameNew.setEnabled(true);
+		menuGameNewDots.setEnabled(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == menuFileClose) {
+		if (arg0.getSource() == menuGameClose) {
 			dispose();
 		} else if (arg0.getSource() == menuHelpInfo) {
 			new AboutBox(this);
-		} else if (arg0.getSource() == menuFileNew) {
+		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
-		} else if (arg0.getSource() == menuFileStatistics) {
+		} else if (arg0.getSource() == menuGameStatistics) {
 			new Statistics(this);
-		} else if (arg0.getSource() == menuFileNewDots) {
+		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
-		} else if (arg0.getSource() == menuFileGuestMode) {
+		} else if (arg0.getSource() == menuGameGuestMode) {
 			Statistics.setGuestMode(!Statistics.isGuestMode());
-			menuFileGuestMode.setSelected(Statistics.isGuestMode());
+			menuGameGuestMode.setSelected(Statistics.isGuestMode());
 		}
 	}
 }
