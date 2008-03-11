@@ -28,7 +28,6 @@
 			<zipfileset dir="." includes="application.properties" prefix="jbubblebreaker"/>
 			<zipfileset dir="." includes="build.xml" prefix="jbubblebreaker"/>
 			<zipfileset dir="source" prefix="jbubblebreaker/source"/>
-			<zipfileset dir="images" prefix="jbubblebreaker/images"/>
 			<zipfileset dir="doc" prefix="jbubblebreaker/doc"/>
 			<zipfileset dir="innosetup" prefix="jbubblebreaker/innosetup"/>
 		</zip>
@@ -70,10 +69,10 @@
 	<target name="compile" description="Compiles the source">
 		<delete dir="${basedir}/${bin.dir}" />
 		<mkdir dir="${basedir}/${bin.dir}" />
-		<copy todir="${basedir}/${bin.dir}/images">
-			<fileset dir="${basedir}/images" />
-		</copy>
 		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" />
+		<copy todir="${basedir}/${bin.dir}/images">
+			<fileset dir="${basedir}/${source.dir}/images" />
+		</copy>
 		<copy todir="${basedir}/${bin.dir}/org/jbubblebreaker/i18n">
 			<fileset dir="${basedir}/${source.dir}/org/jbubblebreaker/i18n" />
 		</copy>

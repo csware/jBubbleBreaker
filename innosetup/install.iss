@@ -32,7 +32,7 @@ LicenseFile=..\COPYING
 
 [Files]
 Source: ..\jbubblebreaker.jar; DestDir: {app}
-Source: ..\images\jbubblebreaker.ico; DestDir: {app}
+Source: ..\source\images\jbubblebreaker.ico; DestDir: {app}
 Source: ..\jbubblebreaker-src.zip; DestDir: {app}; Components: source; Tasks: 
 
 [Icons]
