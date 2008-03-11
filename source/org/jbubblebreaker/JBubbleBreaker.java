@@ -60,9 +60,9 @@ public class JBubbleBreaker {
 		addMode("org.jbubblebreaker.gamemodes.GameSpeed");
 		addMode("org.jbubblebreaker.gamemodes.GameOngoingSpeed");
 		addMode("org.jbubblebreaker.gamemodes.GameShiftSpeed");
+		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DCircle");
 		addBubbleType("org.jbubblebreaker.bubbles.BubbleDefault");
 		addBubbleType("org.jbubblebreaker.bubbles.BubbleDefaultSix");
-		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DCircle");
 		addBubbleType("org.jbubblebreaker.bubbles.BubbleCaro");
 		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DRect");
 	}
