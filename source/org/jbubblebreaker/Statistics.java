@@ -52,11 +52,12 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 	 * Create the frame
 	 */
 	public Statistics(JFrame parentJFrame) {
-		super("Statistics", "jbubblebreaker.png", 677, 175, true, parentJFrame);
+		super(Localization.getString("Statistics"), "jbubblebreaker.png", 677, 175, true, parentJFrame);
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		JButton startButton = new JButton(Localization.getString("Close"));
+		startButton.setMnemonic(Localization.getChar("CloseMnemonic"));
 		getContentPane().add(startButton, BorderLayout.SOUTH);
 		startButton.addActionListener(this);
 
