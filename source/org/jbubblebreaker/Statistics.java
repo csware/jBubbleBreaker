@@ -82,7 +82,10 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
 		table.setModel(new TableTableModel());
-		table.setAutoCreateRowSorter(true);
+		if (! System.getProperty("java.version").substring(0, 3).equals("1.5")) {
+			// setAutoCreateRowSorter is Java 1.6 specific and doesn't work with 1.5
+			table.setAutoCreateRowSorter(true);
+		}
 		
 		setVisible(true);
 	}
