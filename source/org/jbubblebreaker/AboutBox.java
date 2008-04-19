@@ -40,11 +40,10 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 	public AboutBox(JFrame parentJFrame) {
 		super("About jBubbleBreaker",icon, 332, 210, false, parentJFrame);
 
-		// we're in an applet
-		/* this is only needed if applet is not digitally signed
 		if (parentJFrame == null) {
+			// we're in an applet, so we need some more height
 			setSize(332,227);
-		}*/
+		}
 		
 		setLayout(null);
 
