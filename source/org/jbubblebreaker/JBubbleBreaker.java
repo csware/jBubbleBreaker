@@ -50,6 +50,14 @@ public class JBubbleBreaker {
 	static public String getVersion() {
 		return "0.5";
 	}
+
+	/**
+	 * Returns the URL to the project homepage
+	 * @return url
+	 */
+	static public String getProjectHomepage() {
+		return "http://jbubblebreaker.sf.net";
+	}
 	
 	/**
 	 * register all default modes and bubble styles
