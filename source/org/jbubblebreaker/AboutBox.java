@@ -74,11 +74,10 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 		lblComment.setVerticalAlignment(SwingConstants.TOP);
 		lblComment.setBounds(64, 99, 250, 50);
 		getContentPane().add(lblComment);
-	
+
 		setVisible(true);
 	}
-	
-	@Override
+
 	public void actionPerformed(ActionEvent arg0) {
 		dispose();
 	}

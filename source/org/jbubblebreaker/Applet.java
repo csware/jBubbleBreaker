@@ -38,9 +38,8 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
-
 	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots;
-	
+
 	@Override
 	public void init() {
 		JBubbleBreaker.registerDefault();
@@ -97,7 +96,6 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		nGAuP.setVisible(true);
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == menuHelpInfo) {
 			new AboutBox(null);
@@ -109,7 +107,6 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		}
 	}
 
-	@Override
 	public void startNewGame(Game game) {
 		this.game = game;
 		JPanel newContentPane = new JPanel();

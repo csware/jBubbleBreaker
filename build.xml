@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <project name="jBubbleBreaker" default="generateAll" basedir=".">
 	<property file="application.properties" />
+	<property name="target.java.version" value="1.5" />
 	<property name="config.build.debug" value="true" />
 	<property name="config.build.debuglevel" value="lines,vars,source" />
 	<property environment="env"/>
@@ -71,7 +72,7 @@
 	<target name="compile" description="Compiles the source">
 		<delete dir="${basedir}/${bin.dir}" />
 		<mkdir dir="${basedir}/${bin.dir}" />
-		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" debug="${config.build.debug}" debuglevel="${config.build.debuglevel}" />
+		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" debug="${config.build.debug}" debuglevel="${config.build.debuglevel}" source="${target.java.version}" target="${target.java.version}" />
 		<copy todir="${basedir}/${bin.dir}/images">
 			<fileset dir="${basedir}/${source.dir}/images" />
 		</copy>

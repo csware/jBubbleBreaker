@@ -118,7 +118,6 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		repaint();
 	}
 	
-	@Override
 	public void startNewGame(Game game) {
 		this.game = game;
 
@@ -147,7 +146,6 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuGameNewDots.setEnabled(true);
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == menuGameClose) {
 			dispose();
