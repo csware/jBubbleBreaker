@@ -48,7 +48,7 @@ public class JBubbleBreaker {
 	 * @return version numer 
 	 */
 	static public String getVersion() {
-		return "0.5";
+		return "0.6";
 	}
 
 	/**

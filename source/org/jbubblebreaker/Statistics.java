@@ -19,6 +19,7 @@ package org.jbubblebreaker;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,11 +32,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -47,6 +51,8 @@ import javax.swing.table.AbstractTableModel;
 @SuppressWarnings("serial")
 public class Statistics extends MyModalJFrame implements ActionListener {
 	private static boolean guestMode = true;
+	final JTable table;
+	private List<StatisticData> myData;
 
 	/**
 	 * Create the frame
@@ -56,15 +62,24 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		JButton startButton = new JButton(Localization.getString("Close"));
-		startButton.setMnemonic(Localization.getChar("CloseMnemonic"));
-		getContentPane().add(startButton, BorderLayout.SOUTH);
-		startButton.addActionListener(this);
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new FlowLayout());
+		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
+
+		JButton resetStatisticsButton = new JButton(Localization.getString("ResetStatistics"));
+		resetStatisticsButton.setMnemonic(Localization.getChar("ResetStatisticsMnemonic"));
+		buttonsPanel.add(resetStatisticsButton);
+		resetStatisticsButton.addActionListener(this);
+
+		JButton closeButton = new JButton(Localization.getString("Close"));
+		closeButton.setMnemonic(Localization.getChar("CloseMnemonic"));
+		buttonsPanel.add(closeButton);
+		closeButton.addActionListener(this);
 
 		final JScrollPane scrollPane_1 = new JScrollPane();
 		getContentPane().add(scrollPane_1, BorderLayout.CENTER);
 
-		final JTable table = new JTable();
+		table = new JTable();
 		scrollPane_1.setViewportView(table);
 		table.setModel(new TableTableModel());
 		table.setAutoCreateRowSorter(true);
@@ -74,7 +89,11 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 
 		private class TableTableModel extends AbstractTableModel {
 			private final String[] COLUMN_NAMES = new String[] {Localization.getString("Mode"), Localization.getString("Colors"), Localization.getString("Rows"),Localization.getString("Columns"),Localization.getString("GamesPlayed"),Localization.getString("MaxPoints"),Localization.getString("AvgPoints")};
-			private List<StatisticData> myData = getStatistics();
+
+			public TableTableModel() {
+				super();
+				myData = getStatistics();
+			}
 
 			public int getRowCount() {
 				return myData.size();
@@ -121,7 +140,18 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		}
 
 	public void actionPerformed(ActionEvent arg0) {
-		dispose();
+		if (((JButton) arg0.getSource()).getText().equals(Localization.getString("ResetStatistics"))) {
+			if (JOptionPane.showConfirmDialog(null, Localization.getString("ResetStatisticsAreYouSure"),Localization.getString("ResetStatistics"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+				if (new File(System.getProperty("user.home")+"/.jbubblebreaker-statistics").delete() == false) {
+					JOptionPane.showMessageDialog(null, Localization.getString("ResetStatisticsError"), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					myData = new LinkedList<StatisticData>();
+					table.repaint();
+				}
+			}
+		} else {
+			dispose();
+		}
 	}
 
 	static String updateStatistics(String mode, int colors, int rows, int cols, int points) {
@@ -168,10 +198,11 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 			while ((statisticData = (StatisticData)in.readObject()) != null) {
 				myList.add(statisticData);
 			}
-			in.close();
 		} catch (IOException e) {
-		} catch (ClassNotFoundException e) {
-		}
+		} catch (ClassNotFoundException e) {}
+		try {
+			in.close();
+		} catch (IOException e) {}
 		return myList;
 	}
 
