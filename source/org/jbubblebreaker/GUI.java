@@ -58,7 +58,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	 * Create the JFrame and prepare everything for the game
 	 */
 	private GUI() {
-		super("JBubbleBreaker","jbubblebreaker.png",407,470,true,true);
+		super("jBubbleBreaker","jbubblebreaker.png",407,470,true,true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);	
 
 		// insert Menu
