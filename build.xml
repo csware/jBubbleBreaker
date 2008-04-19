@@ -42,7 +42,7 @@
 			access="private"
 			author="true"
 			destdir="${doc.dir}"
-			doctitle="JBubbleBreaker API"
+			doctitle="jBubbleBreaker API"
 			nodeprecated="false"
 			nodeprecatedlist="false"
 			noindex="false"
