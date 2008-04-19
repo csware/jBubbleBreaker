@@ -46,10 +46,10 @@ public class GameSize {
 	public GameSize(int minRows, int maxRows, int minColumns, int maxColumns) {
 		super();
 		if (minRows >= minSize) {
-			this.minRows = minRows;			
+			this.minRows = minRows;
 		}
 		if (minColumns >= minSize) {
-			this.minColumns = minColumns;			
+			this.minColumns = minColumns;
 		}
 		if (maxRows <= maxSize && maxRows >= this.minColumns) {
 			this.maxRows = maxRows;
