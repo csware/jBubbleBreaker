@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <project name="jBubbleBreaker" default="generateAll" basedir=".">
 	<property file="application.properties" />
+	<property name="config.build.debug" value="true" />
+	<property name="config.build.debuglevel" value="lines,vars,source" />
 	<property environment="env"/>
 	<target name="generateAll" description="Generates all Stubs and Skeletons for our interfaces">
 		<antcall target="generateJavaDoc" />
@@ -69,7 +71,7 @@
 	<target name="compile" description="Compiles the source">
 		<delete dir="${basedir}/${bin.dir}" />
 		<mkdir dir="${basedir}/${bin.dir}" />
-		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" />
+		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" debug="${config.build.debug}" debuglevel="${config.build.debuglevel}" />
 		<copy todir="${basedir}/${bin.dir}/images">
 			<fileset dir="${basedir}/${source.dir}/images" />
 		</copy>
