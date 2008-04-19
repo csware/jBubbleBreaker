@@ -31,14 +31,14 @@ public class BubbleType {
 	/**
 	 * Stores the constuctor for this type
 	 */
-	private Constructor constructor;
+	private Constructor<Bubble> constructor;
 
 	/**
 	 * Creates a datastorage for a bubble type
 	 * @param typeName bubble type name
 	 * @param constructor Reference of the constructor
 	 */
-	public BubbleType(String typeName, Constructor constructor) {
+	public BubbleType(String typeName, Constructor<Bubble> constructor) {
 		this.typeName = typeName;
 		this.constructor = constructor;
 	}
@@ -55,7 +55,7 @@ public class BubbleType {
 	 * Returns the reference to the constructor with (int, int, int, int) parameters
 	 * @return the constructor
 	 */
-	public Constructor getConstructor() {
+	public Constructor<Bubble> getConstructor() {
 		return constructor;
 	}
 }

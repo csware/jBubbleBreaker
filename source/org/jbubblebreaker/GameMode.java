@@ -31,7 +31,7 @@ public class GameMode {
 	/**
 	 * Stores the constuctor for this mode
 	 */
-	private Constructor constructor;
+	private Constructor<Game> constructor;
 	/**
 	 * Stores the possible matrix-sizes for this mode
 	 */
@@ -42,7 +42,7 @@ public class GameMode {
 	 * @param modeName Mode name
 	 * @param constructor Reference of the constructor
 	 */
-	public GameMode(String modeName, GameSize allowedSize, Constructor constructor) {
+	public GameMode(String modeName, GameSize allowedSize, Constructor<Game> constructor) {
 		this.modeName = modeName;
 		this.constructor = constructor;
 		this.allowedSize = allowedSize;
@@ -60,7 +60,7 @@ public class GameMode {
 	 * Returns the reference to the constructor with (int, int) parameters
 	 * @return the constructor
 	 */
-	public Constructor getConstructor() {
+	public Constructor<Game> getConstructor() {
 		return constructor;
 	}
 	
