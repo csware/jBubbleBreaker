@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
+ * GUI for jBubbleBreaker (in applet mode)
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")

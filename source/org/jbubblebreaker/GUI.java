@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 /**
- * JBubbleBreaker GUI
+ * jBubbleBreaker GUI (in application mode)
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
@@ -117,7 +117,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		nGAuP.setVisible(true);
 		repaint();
 	}
-	
+
 	public void startNewGame(Game game) {
 		this.game = game;
 
