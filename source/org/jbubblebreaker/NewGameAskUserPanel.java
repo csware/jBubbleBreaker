@@ -1,19 +1,19 @@
 /*
  * Copyright 2008 Sven Strickroth <email@cs-ware.de>
  * 
- * This file is part of JBubbleBreaker.
+ * This file is part of jBubbleBreaker.
  * 
- * JBubbleBreaker is free software: you can redistribute it and/or modify
+ * jBubbleBreaker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
  * published by the Free Software Foundation.
  * 
- * JBubbleBreaker is distributed in the hope that it will be useful,
+ * jBubbleBreaker is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with JBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
+ * along with jBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.jbubblebreaker;
 
@@ -145,7 +145,7 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 				game = (Game)JBubbleBreaker.getModes().get(gameTypeComboBox.getSelectedIndex()).getConstructor().newInstance( new Object[] {rowsSlider.getValue(),columnsSlider.getValue(), bubbleTypeComboBox.getSelectedIndex()} );
 			} catch (Exception e) {
 				e.printStackTrace();
-				JOptionPane.showMessageDialog(null, "For some reason ("+e+") JBubbleBreaker is not able to start the mode "+gameTypeComboBox.getSelectedItem()+".", "JBubbleBreaker", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "For some reason ("+e+") jBubbleBreaker is not able to start the mode "+gameTypeComboBox.getSelectedItem()+".", "jBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 			}
 			if (game != null) {
 				((GUIIf)component).startNewGame(game);

@@ -1,19 +1,19 @@
 /*
  * Copyright 2008 Sven Strickroth <email@cs-ware.de>
  * 
- * This file is part of JBubbleBreaker.
+ * This file is part of jBubbleBreaker.
  * 
- * JBubbleBreaker is free software: you can redistribute it and/or modify
+ * jBubbleBreaker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
  * published by the Free Software Foundation.
  * 
- * JBubbleBreaker is distributed in the hope that it will be useful,
+ * jBubbleBreaker is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with JBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
+ * along with jBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.jbubblebreaker;
 
@@ -21,21 +21,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Main class for JBubbleBreaker
+ * Main class for jBubbleBreaker
  * @author Sven Strickroth
  */
 public class JBubbleBreaker {
 	/**
-	 * Stores all available modes for JBubbleBreaker
+	 * Stores all available modes for jBubbleBreaker
 	 */
 	static private List<GameMode> gameModes = new LinkedList<GameMode>();
 	/**
-	 * Stores all available bubble styles for JBubbleBreaker
+	 * Stores all available bubble styles for jBubbleBreaker
 	 */
 	static private List<BubbleType> bubbleTypes = new LinkedList<BubbleType>();
 	
 	/**
-	 * Starts JBubbleBreaker
+	 * Starts jBubbleBreaker
 	 * @param args no parameter evaluation
 	 */
 	public static void main(String[] args)  {
@@ -79,7 +79,7 @@ public class JBubbleBreaker {
 	}
 	
 	/**
-	 * Registers a new game mode to JBubbleBreaker
+	 * Registers a new game mode to jBubbleBreaker
 	 * @param mode
 	 */
 	@SuppressWarnings("unchecked")
@@ -100,23 +100,23 @@ public class JBubbleBreaker {
 			} catch (IllegalArgumentException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
 			} catch (ClassCastException e) {
-				throw(new ClassCastException(mode+" is no JBubbleBreaker extension, it doesn't have the static name-field with type String or the static allowedSize-field with type GameSize."));
+				throw(new ClassCastException(mode+" is no jBubbleBreaker extension, it doesn't have the static name-field with type String or the static allowedSize-field with type GameSize."));
 			} catch (NoSuchFieldException e) {
-				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have the static name- or allowedSize-field."));
+				throw(new RuntimeException(mode+" is no jBubbleBreaker extension, it doesn't have the static name- or allowedSize-field."));
 			} catch (IllegalAccessException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a IllegalAccessException was thrown: "+e.getLocalizedMessage()));
 			} catch (SecurityException e) {
 				throw(new RuntimeException(mode+" could not be loaded, because a SecurityException was thrown: "+e.getLocalizedMessage()));
 			} catch (NoSuchMethodException e) {
-				throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it doesn't have a constructor for (int, int, int)."));
+				throw(new RuntimeException(mode+" is no jBubbleBreaker extension, it doesn't have a constructor for (int, int, int)."));
 			}
 		} else {
-			throw(new RuntimeException(mode+" is no JBubbleBreaker extension, it must extend org.jbubblebreaker.Game."));
+			throw(new RuntimeException(mode+" is no jBubbleBreaker extension, it must extend org.jbubblebreaker.Game."));
 		}
 	}
 
 	/**
-	 * Registers a new game mode to JBubbleBreaker
+	 * Registers a new game mode to jBubbleBreaker
 	 * @param bubbleType
 	 */
 	@SuppressWarnings("unchecked")
@@ -137,23 +137,23 @@ public class JBubbleBreaker {
 			} catch (IllegalArgumentException e) {
 				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
 			} catch (ClassCastException e) {
-				throw(new ClassCastException(bubbleType+" is no JBubbleBreaker bubble type extension, it doesn't have the static name-field with type String."));
+				throw(new ClassCastException(bubbleType+" is no jBubbleBreaker bubble type extension, it doesn't have the static name-field with type String."));
 			} catch (NoSuchFieldException e) {
-				throw(new RuntimeException(bubbleType+" is no JBubbleBreaker bubble type extension, it doesn't have the static name-field."));
+				throw(new RuntimeException(bubbleType+" is no jBubbleBreaker bubble type extension, it doesn't have the static name-field."));
 			} catch (IllegalAccessException e) {
 				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalAccessException was thrown: "+e.getLocalizedMessage()));
 			} catch (SecurityException e) {
 				throw(new RuntimeException(bubbleType+" could not be loaded, because a SecurityException was thrown: "+e.getLocalizedMessage()));
 			} catch (NoSuchMethodException e) {
-				throw(new RuntimeException(bubbleType+" is no JBubbleBreaker bubble type extension, it doesn't have a constructor for (int, int, int, int)."));
+				throw(new RuntimeException(bubbleType+" is no jBubbleBreaker bubble type extension, it doesn't have a constructor for (int, int, int, int)."));
 			}
 		} else {
-			throw(new RuntimeException(bubbleType+" is no JBubbleBreaker bubble type extension, it must extend org.jbubblebreaker.Bubble."));
+			throw(new RuntimeException(bubbleType+" is no jBubbleBreaker bubble type extension, it must extend org.jbubblebreaker.Bubble."));
 		}
 	}
 
 	/**
-	 * Returns the registered JBubbleBreate bubble types
+	 * Returns the registered jBubbleBreate bubble types
 	 * @return modi list
 	 */
 	static List<BubbleType> getBubbleTypes() {
@@ -161,7 +161,7 @@ public class JBubbleBreaker {
 	}
 
 	/**
-	 * Returns the registered JBubbleBreate game modi
+	 * Returns the registered jBubbleBreate game modi
 	 * @return modi list
 	 */
 	static List<GameMode> getModes() {

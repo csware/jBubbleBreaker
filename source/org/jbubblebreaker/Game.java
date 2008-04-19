@@ -1,19 +1,19 @@
 /*
  * Copyright 2008 Sven Strickroth <email@cs-ware.de>
  * 
- * This file is part of JBubbleBreaker.
+ * This file is part of jBubbleBreaker.
  * 
- * JBubbleBreaker is free software: you can redistribute it and/or modify
+ * jBubbleBreaker is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
  * published by the Free Software Foundation.
  * 
- * JBubbleBreaker is distributed in the hope that it will be useful,
+ * jBubbleBreaker is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with JBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
+ * along with jBubbleBreaker. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.jbubblebreaker;
 
@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * Provides the JBubbleBreaker core 
+ * Provides the jBubbleBreaker core (main game logic)
  * @author Sven Strickroth
  */
 public abstract class Game extends MouseAdapter {
@@ -144,7 +144,7 @@ public abstract class Game extends MouseAdapter {
 	 */
 	private void gameOver() {
 		playgroundPanel.setEnabled(false);
-		JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()), "JBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/**
