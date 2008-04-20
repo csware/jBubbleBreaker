@@ -49,7 +49,7 @@ public class JBubbleBreaker {
 	 */
 	static public String getVersion() {
 		// check application.properties for all locations where version needs to kept up to date
-		return "0.6";
+		return "0.7";
 	}
 
 	/**

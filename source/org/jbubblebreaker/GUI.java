@@ -42,7 +42,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
 	
-	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots,menuGameStatistics,menuGameGuestMode,menuGameClose;
+	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots,menuGameStatistics,menuGameGuestMode,menuGameClose,menuGameSounds;
 
 	/**
 	 * Start GUI, but only once 
@@ -88,6 +88,10 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuGameGuestMode.addActionListener(this);
 		menuGameGuestMode.setMnemonic(Localization.getChar("MenuGuestModeMnemonic"));
 		menuGame.add(menuGameGuestMode);
+		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
+		menuGameSounds.addActionListener(this);
+		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
+		menuGame.add(menuGameSounds);
 		menuGameClose = new JMenuItem(Localization.getString("MenuQuit"));
 		menuGameClose.addActionListener(this);
 		menuGameClose.setMnemonic(Localization.getChar("MenuQuitMnemonic"));
@@ -161,6 +165,8 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		} else if (arg0.getSource() == menuGameGuestMode) {
 			Statistics.setGuestMode(!Statistics.isGuestMode());
 			menuGameGuestMode.setSelected(Statistics.isGuestMode());
+		} else if (arg0.getSource() == menuGameSounds) {
+			PlaySound.setSoundEnabled(!PlaySound.isSoundEnabled());
 		}
 	}
 }

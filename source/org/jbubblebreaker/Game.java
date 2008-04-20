@@ -227,6 +227,9 @@ public abstract class Game extends MouseAdapter {
 			if (my.isMarked() == false) {
 				unMarkAll();
 			} else {
+				if (PlaySound.isSoundEnabled()) {
+					new PlaySound(Sounds.REMOVE_BUBBLES);
+				}
 				points += getCalculatedPoints();
 				removeMarkedBubbles(my.getRow(),my.getCol());
 				pointsLabel.setText(Localization.getString("Points")+ points);

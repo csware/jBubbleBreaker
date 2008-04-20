@@ -74,6 +74,9 @@
 		<copy todir="${basedir}/${bin.dir}/images">
 			<fileset dir="${basedir}/${source.dir}/images" />
 		</copy>
+		<copy todir="${basedir}/${bin.dir}/sounds">
+			<fileset dir="${basedir}/${source.dir}/sounds" />
+		</copy>
 		<copy todir="${basedir}/${bin.dir}/org/jbubblebreaker/i18n">
 			<fileset dir="${basedir}/${source.dir}/org/jbubblebreaker/i18n" />
 		</copy>

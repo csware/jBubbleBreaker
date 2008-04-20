@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JApplet;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -39,7 +40,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
-	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots;
+	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots,menuGameSounds;
 
 	@Override
 	public void init() {
@@ -76,6 +77,11 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		menuGameNewDots.addActionListener(this);
 		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
 		menuGame.add(menuGameNewDots);
+		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
+		menuGameSounds.addActionListener(this);
+		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
+		menuGameSounds.setSelected(PlaySound.isSoundEnabled());
+		menuGame.add(menuGameSounds);
 		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
 		menuHelpInfo.addActionListener(this);
 		menuHelpInfo.setMnemonic(Localization.getChar("MenuAboutMnemonic"));
@@ -105,6 +111,8 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 			pointsLabel.setText(Localization.getString("PointsZero"));
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
+		} else if (arg0.getSource() == menuGameSounds) {
+			PlaySound.setSoundEnabled(!PlaySound.isSoundEnabled());
 		}
 	}
 
