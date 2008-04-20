@@ -55,24 +55,23 @@ public abstract class Game extends MouseAdapter {
 	 * Stores the points the user gained
 	 */
 	private int points = 0;
-	
+
 	/**
 	 * Prepares a new playground
 	 * @param rows of the matrix
 	 * @param cols of the matrix
-
 	 */
 	public Game(int rows, int cols, int bubbleType) {
 		playgroundPanel.setLayout(null);
-		
+
 		playground = new Playground(playgroundPanel.getWidth(), playgroundPanel.getHeight(), rows, cols, this, bubbleType);
 
 		possiblePoints.setSize(50,50);
 		playgroundPanel.add(possiblePoints);
 		possiblePoints.setVisible(false);
-		
+
 		newGame();
-		
+
 		playgroundPanel.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent arg0) {
 				playground.resized(playgroundPanel.getWidth(), playgroundPanel.getHeight());
@@ -81,7 +80,7 @@ public abstract class Game extends MouseAdapter {
 		});
 		playgroundPanel.addMouseListener(this);
 	}
-	
+
 	/**
 	 * sets the label where to show the points
 	 * @param pointsLabel reference to the points Label in the GUI
@@ -90,7 +89,7 @@ public abstract class Game extends MouseAdapter {
 		this.pointsLabel = pointsLabel;
 		pointsLabel.setText(Localization.getString("Points")+ points);
 	}
-	
+
 	/**
 	 * Creates a new game.
 	 * Resets all values and creates a new Bubble matrix.
@@ -133,7 +132,7 @@ public abstract class Game extends MouseAdapter {
 	}
 
 	/**
-	 * Find (reculsively) all Bubbles with the same color-index which are next to each other 
+	 * Find (recursively) all Bubbles with the same color-index which are next to each other 
 	 * @param row row-index to start the search
 	 * @param col column-index to start the search
 	 */
@@ -146,10 +145,10 @@ public abstract class Game extends MouseAdapter {
 		playgroundPanel.setEnabled(false);
 		JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	/**
-	 * Checks if the current game is solveable
-	 * @return playground solveable?
+	 * Checks if the current game is solvable
+	 * @return playground solvable?
 	 */
 	protected abstract boolean isSolveable();
 
@@ -185,7 +184,7 @@ public abstract class Game extends MouseAdapter {
 			playgroundPanel.add(playground.getBubble(row, col));
 		}
 	}
-	
+
 	/**
 	 * Removes a special Bubble
 	 * @param row row-index
@@ -197,15 +196,15 @@ public abstract class Game extends MouseAdapter {
 			playground.removeBubble(row,col);
 		}
 	}
-	
+
 	/**
 	 * Returns the game-Mode
 	 * @return the gameMode name 
 	 */
 	public abstract String getMode();
-	
+
 	/**
-	 * Unmarks all Bubbles
+	 * Unmark all Bubbles
 	 */
 	private void unMarkAll() {
 		marked=0;
