@@ -23,14 +23,14 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 /**
- * Emulates a modal JFrame by disabling the "owner" JFrame as long as the modal JFrame is active.  
+ * Emulates a modal JFrame by disabling the "owner" JFrame as long as the modal JFrame is active.
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
 public class MyModalJFrame extends MyJFrame implements WindowListener {
 	/**
 	 * Stores the reference to the owner jFrame
-	 */	
+	 */
 	protected JFrame parentJFrame = null;
 
 	/**
@@ -62,7 +62,7 @@ public class MyModalJFrame extends MyJFrame implements WindowListener {
 	}
 
 	/**
-	 * Makes the JFrame modal by disabling the owner JFrame 
+	 * Makes the JFrame modal by disabling the owner JFrame
 	 * @param parentJFrame reference of the owner JFrame
 	 */
 	private void makeModal(JFrame parentJFrame) {
@@ -70,7 +70,7 @@ public class MyModalJFrame extends MyJFrame implements WindowListener {
 			return;
 		}
 		addWindowListener(this);
-		this.parentJFrame = parentJFrame; 
+		this.parentJFrame = parentJFrame;
 		parentJFrame.setEnabled(false);
 	}
 

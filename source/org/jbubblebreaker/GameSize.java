@@ -35,7 +35,7 @@ public class GameSize {
 	private int maxRows = maxSize;
 	private int minColumns = minSize;
 	private int maxColumns = maxSize;
-	
+
 	/**
 	 * Sets the allowed size
 	 * @param minRows min. count of rows

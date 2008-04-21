@@ -32,16 +32,16 @@ public class Bubble3DCircle extends BubbleDefault {
 	/**
 	 * Stores the name of this bubble set
 	 */
-	static public String name = "3DCircle"; 
+	static public String name = "3DCircle";
 	/**
-	 * Buffer the image 
+	 * Buffer the image
 	 */
 	static private Image[] image = {null, null, null, null, null};
 	/**
 	 * store the last radian
 	 */
 	static private int oldradian = 0;
-	
+
 	/**
 	 * Create a Bubble on a specific position and size with a random color
 	 * @param radian radian of Bubble
@@ -51,7 +51,7 @@ public class Bubble3DCircle extends BubbleDefault {
 	public Bubble3DCircle(int radian, int row, int col) {
 		super(radian, row, col);
 	}
-	
+
 	/**
 	 * Create a Bubble on a specific position, size and color
 	 * @param radian radian of Bubble
@@ -62,7 +62,7 @@ public class Bubble3DCircle extends BubbleDefault {
 	public Bubble3DCircle(int radian, int row, int col, int colorIndex) {
 		super(radian, row, col, colorIndex);
 	}
-	
+
 	@Override
 	public String getName() {
 		return name;

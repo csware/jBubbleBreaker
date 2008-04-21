@@ -41,11 +41,11 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
-	
+
 	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots,menuGameStatistics,menuGameGuestMode,menuGameClose,menuGameSounds;
 
 	/**
-	 * Start GUI, but only once 
+	 * Start GUI, but only once
 	 */
 	public static void startGUI() {
 		if (started == false) {
@@ -59,7 +59,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	 */
 	private GUI() {
 		super("jBubbleBreaker","jbubblebreaker.png",407,470,true,true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);	
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// insert Menu
 		JMenuBar menuBar = new JMenuBar();
@@ -129,7 +129,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		newContentPane.setVisible(false);
 		this.setContentPane(newContentPane);
 		newContentPane.setVisible(true);
-		
+
 		setLayout(new BorderLayout());
 
 		getContentPane().add(infoPanel, BorderLayout.SOUTH);
@@ -138,11 +138,10 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		infoPanel.setLayout(new BorderLayout());
 
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
-		
+
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
 		pointsLabel.setText(Localization.getString("PointsZero"));
 
-		
 		gameModeLabel.setText(game.getMode());
 		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		game.setPointsLabel(pointsLabel);

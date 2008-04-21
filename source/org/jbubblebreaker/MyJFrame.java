@@ -21,7 +21,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
- * JFrame Implementation which allows you to set icon, center-state and size more flexible 
+ * JFrame Implementation which allows you to set icon, center-state and size more flexible
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
@@ -61,9 +61,9 @@ public abstract class MyJFrame extends JFrame {
 	protected void setIcon(String filename) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/"+filename)));
 	}
-	
+
 	/**
-	 * Centers the window on the screen 
+	 * Centers the window on the screen
 	 */
 	protected void setCentered() {
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width-getWidth())/2,(Toolkit.getDefaultToolkit().getScreenSize().height-getHeight())/2);

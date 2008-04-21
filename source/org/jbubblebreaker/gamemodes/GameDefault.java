@@ -33,7 +33,7 @@ public class GameDefault extends Game {
 	 * Stores the possible matrix-sizes for this mode
 	 */
 	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
-	
+
 	/**
 	 * Creates a game with default rules
 	 * @param rows of the matrix
@@ -42,7 +42,7 @@ public class GameDefault extends Game {
 	public GameDefault(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);
 	}
-	
+
 	@Override
 	public String getMode() {
 		return name;
@@ -56,7 +56,7 @@ public class GameDefault extends Game {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void findsame(int row, int col) {
 		if (playground.isEmpty(row, col) == true) { return; }

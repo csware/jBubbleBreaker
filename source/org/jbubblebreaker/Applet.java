@@ -138,7 +138,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		infoPanel.setLayout(new BorderLayout());
 
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
-		
+
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
 		pointsLabel.setText(Localization.getString("PointsZero"));
 

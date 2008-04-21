@@ -44,7 +44,7 @@ public class BubbleType {
 	}
 
 	/**
-	 * Returns the type name 
+	 * Returns the type name
 	 * @return the modiName
 	 */
 	public String getTypeName() {

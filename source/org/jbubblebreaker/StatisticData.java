@@ -42,7 +42,7 @@ public class StatisticData implements Serializable {
 		maxPoints = points;
 		averagePoints = points;
 	}
-	
+
 	/**
 	 * @param points
 	 */
@@ -53,7 +53,7 @@ public class StatisticData implements Serializable {
 		countOfGames++;
 		averagePoints = (averagePoints + points)/2;
 	}
-	
+
 	/**
 	 * @return the countOfGames
 	 */
@@ -97,7 +97,7 @@ public class StatisticData implements Serializable {
 	public int getColors() {
 		return colors;
 	}
-	
+
 	/**
 	 * @return the cols
 	 */

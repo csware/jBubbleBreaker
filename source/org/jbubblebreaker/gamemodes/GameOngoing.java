@@ -32,7 +32,7 @@ public class GameOngoing extends GameDefault {
 	 * Stores the possible matrix-sizes for this mode
 	 */
 	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
-	
+
 	/**
 	 * Creates a game with rules for an ongoing game
 	 * @param rows of the matrix
@@ -46,7 +46,7 @@ public class GameOngoing extends GameDefault {
 	public String getMode() {
 		return name;
 	};
-	
+
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		super.removeMarkedBubbles(row, col);

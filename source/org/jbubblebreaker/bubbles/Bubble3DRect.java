@@ -29,7 +29,7 @@ public class Bubble3DRect extends BubbleDefault {
 	/**
 	 * Stores the name of this bubble set
 	 */
-	static public String name = "3DRect"; 
+	static public String name = "3DRect";
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
@@ -40,7 +40,7 @@ public class Bubble3DRect extends BubbleDefault {
 	public Bubble3DRect(int radian, int row, int col) {
 		super(radian, row, col);
 	}
-	
+
 	/**
 	 * Create a Bubble on a specific position, size and color
 	 * @param radian radian of Bubble

@@ -33,7 +33,7 @@ public class JBubbleBreaker {
 	 * Stores all available bubble styles for jBubbleBreaker
 	 */
 	static private List<BubbleType> bubbleTypes = new LinkedList<BubbleType>();
-	
+
 	/**
 	 * Starts jBubbleBreaker
 	 * @param args no parameter evaluation
@@ -45,7 +45,7 @@ public class JBubbleBreaker {
 
 	/**
 	 * Returns the version number
-	 * @return version numer 
+	 * @return version number
 	 */
 	static public String getVersion() {
 		// check application.properties for all locations where version needs to kept up to date
@@ -59,7 +59,7 @@ public class JBubbleBreaker {
 	static public String getProjectHomepage() {
 		return "http://jbubblebreaker.sf.net";
 	}
-	
+
 	/**
 	 * register all default modes and bubble styles
 	 */
@@ -78,7 +78,7 @@ public class JBubbleBreaker {
 		addBubbleType("org.jbubblebreaker.bubbles.BubbleCaro");
 		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DRect");
 	}
-	
+
 	/**
 	 * Registers a new game mode to jBubbleBreaker
 	 * @param mode
@@ -99,7 +99,7 @@ public class JBubbleBreaker {
 			try {
 				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),(GameSize) newMode.getDeclaredField("allowedSize").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class, int.class})));
 			} catch (IllegalArgumentException e) {
-				throw(new RuntimeException(mode+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
+				throw(new RuntimeException(mode+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));
 			} catch (ClassCastException e) {
 				throw(new ClassCastException(mode+" is no jBubbleBreaker extension, it doesn't have the static name-field with type String or the static allowedSize-field with type GameSize."));
 			} catch (NoSuchFieldException e) {
@@ -136,7 +136,7 @@ public class JBubbleBreaker {
 			try {
 				bubbleTypes.add(new BubbleType((String) newType.getDeclaredField("name").get(null),newType.getDeclaredConstructor( new Class[] {int.class, int.class, int.class, int.class})));
 			} catch (IllegalArgumentException e) {
-				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));				
+				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));
 			} catch (ClassCastException e) {
 				throw(new ClassCastException(bubbleType+" is no jBubbleBreaker bubble type extension, it doesn't have the static name-field with type String."));
 			} catch (NoSuchFieldException e) {
@@ -155,7 +155,7 @@ public class JBubbleBreaker {
 
 	/**
 	 * Returns the registered jBubbleBreate bubble types
-	 * @return modi list
+	 * @return mode list
 	 */
 	static List<BubbleType> getBubbleTypes() {
 		return bubbleTypes;
@@ -163,7 +163,7 @@ public class JBubbleBreaker {
 
 	/**
 	 * Returns the registered jBubbleBreate game modi
-	 * @return modi list
+	 * @return mode list
 	 */
 	static List<GameMode> getModes() {
 		return gameModes;

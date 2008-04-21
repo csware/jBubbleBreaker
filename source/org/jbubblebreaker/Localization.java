@@ -21,7 +21,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * Localization class 
+ * Localization class
  * @author Sven Strickroth
  */
 public class Localization {

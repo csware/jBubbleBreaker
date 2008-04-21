@@ -31,8 +31,8 @@ public class BubbleDefault extends Bubble {
 	/**
 	 * Stores the name of this bubble set
 	 */
-	static public String name = "Default"; 
-	
+	static public String name = "Default";
+
 	/**
 	 * Create a Bubble on a specific position and size with a random color
 	 * @param radian radian of Bubble
@@ -42,7 +42,7 @@ public class BubbleDefault extends Bubble {
 	public BubbleDefault(int radian, int row, int col) {
 		super(radian, row, col, -1);
 	}
-	
+
 	/**
 	 * Create a Bubble on a specific position, size and color
 	 * @param radian radian of Bubble
@@ -58,7 +58,7 @@ public class BubbleDefault extends Bubble {
 	public String getName() {
 		return name;
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		if (isMarked() == true) {
@@ -77,7 +77,7 @@ public class BubbleDefault extends Bubble {
 	protected Color[] getAllColors() {
 		return new Color[] {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA};
 	}
-	
+
 	/**
 	 * Returns the color with color index from the getAllColors() array
 	 * @param colorIndex
@@ -86,7 +86,7 @@ public class BubbleDefault extends Bubble {
 	protected Color getColor(int colorIndex) {
 		return getAllColors()[colorIndex];
 	}
-	
+
 	@Override
 	protected int getColorsCount() {
 		return getAllColors().length;

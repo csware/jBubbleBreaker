@@ -32,7 +32,7 @@ public class GameShift extends GameDefault {
 	 * Stores the possible matrix-sizes for this mode
 	 */
 	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
-	
+
 	/**
 	 * Creates a game with default rules
 	 * @param rows of the matrix
@@ -41,7 +41,7 @@ public class GameShift extends GameDefault {
 	public GameShift(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);
 	}
-	
+
 	@Override
 	public String getMode() {
 		return name;
@@ -60,7 +60,7 @@ public class GameShift extends GameDefault {
 		}
 
 	}
-	
+
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		// first of all delete bubbles in col

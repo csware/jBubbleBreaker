@@ -98,8 +98,8 @@ public abstract class Game extends MouseAdapter {
 		points = 0;
 		marked = 0;
 		possiblePoints.setVisible(false);
-		
-		// remove all Bubbles from playgroundPanel 
+
+		// remove all Bubbles from playgroundPanel
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
 		while(col >= 0 && playground.isEmpty(row,col) == false) {
@@ -122,7 +122,7 @@ public abstract class Game extends MouseAdapter {
 	 * fills the playground/matrix with Bubbles
 	 */
 	protected abstract void fillPlayground();
-	
+
 	/**
 	 * Returns the JPanel with the Bubbles inside
 	 * @return playground-JPanel
@@ -132,14 +132,14 @@ public abstract class Game extends MouseAdapter {
 	}
 
 	/**
-	 * Find (recursively) all Bubbles with the same color-index which are next to each other 
+	 * Find (recursively) all Bubbles with the same color-index which are next to each other
 	 * @param row row-index to start the search
 	 * @param col column-index to start the search
 	 */
 	protected abstract void findsame(int row, int col);
 
 	/**
-	 * This method is called, when game is not solveable any more 
+	 * This method is called, when game is not solveable any more
 	 */
 	private void gameOver() {
 		playgroundPanel.setEnabled(false);
@@ -199,7 +199,7 @@ public abstract class Game extends MouseAdapter {
 
 	/**
 	 * Returns the game-Mode
-	 * @return the gameMode name 
+	 * @return the gameMode name
 	 */
 	public abstract String getMode();
 

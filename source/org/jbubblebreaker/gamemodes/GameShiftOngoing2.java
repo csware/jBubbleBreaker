@@ -32,7 +32,7 @@ public class GameShiftOngoing2 extends GameShift {
 	 * Stores the possible matrix-sizes for this mode
 	 */
 	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
-	
+
 	/**
 	 * Creates a game with default rules
 	 * @param rows of the matrix
@@ -41,7 +41,7 @@ public class GameShiftOngoing2 extends GameShift {
 	public GameShiftOngoing2(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);
 	}
-	
+
 	@Override
 	public String getMode() {
 		return name;

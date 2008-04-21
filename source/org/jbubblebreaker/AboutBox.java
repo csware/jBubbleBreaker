@@ -35,7 +35,7 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 
 	/**
 	 * Create and show the AboutBox
-	 * @param parentJFrame parent Frame for modal emulation 
+	 * @param parentJFrame parent Frame for modal emulation
 	 */
 	public AboutBox(JFrame parentJFrame) {
 		super("About jBubbleBreaker",icon, 332, 210, false, parentJFrame);
@@ -44,14 +44,14 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 			// we're in an applet, so we need some more height
 			setSize(332,227);
 		}
-		
+
 		setLayout(null);
 
 		final PicturePanel titlePanel = new PicturePanel("jBubbleBreaker-text.png",219,43);
 		titlePanel.setLocation(64,10);
 		titlePanel.setToolTipText("jBubbleBreaker");
 		getContentPane().add(titlePanel);
-		
+
 		PicturePanel panel = new PicturePanel(icon,32,32);
 		panel.setBounds(10, 10, 32, 32);
 		getContentPane().add(panel);

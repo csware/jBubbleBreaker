@@ -45,7 +45,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * Statistics handling and Statistics JFrame 
+ * Statistics handling and Statistics JFrame
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
@@ -86,7 +86,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 			// setAutoCreateRowSorter is Java 1.6 specific and doesn't work with 1.5
 			table.setAutoCreateRowSorter(true);
 		}
-		
+
 		setVisible(true);
 	}
 
@@ -175,7 +175,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 				out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker-statistics")));
 				boolean found = false;
 				while(myIterator.hasNext()) {
-					StatisticData myItem = myIterator.next(); 
+					StatisticData myItem = myIterator.next();
 					if (myItem.getMode().equals(mode) && myItem.getColors() == colors && myItem.getRows() == rows && myItem.getCols() == cols) {
 						myItem.newGame(points);
 						returnString = "\n"+Localization.getString("GamesPlayed")+": " + myItem.getCountOfGames()+"\n"+Localization.getString("AvgPoints")+": "+myItem.getAveragePoints()+"\n"+Localization.getString("MaxPoints")+": "+myItem.getMaxPoints();

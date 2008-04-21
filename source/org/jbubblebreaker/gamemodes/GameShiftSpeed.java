@@ -45,19 +45,18 @@ public class GameShiftSpeed extends GameShift {
 	public GameShiftSpeed(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);
 	}
-	
+
 	@Override
 	public String getMode() {
 		return name;
 	};
-
 
 	@Override
 	protected void fillPlayground() {
 		super.fillPlayground();
 		time = System.currentTimeMillis();
 	}
-	
+
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		super.removeMarkedBubbles(row, col);

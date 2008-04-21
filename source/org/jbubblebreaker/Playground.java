@@ -52,7 +52,7 @@ public class Playground {
 	 * Stores the differnet colors the current bubble type provides
 	 */
 	private int bubbleColors = 0;
-	
+
 	/**
 	 * Creates a new empty Playground/Matrix
 	 * @param rows row count
@@ -63,7 +63,7 @@ public class Playground {
 		this.cols = cols;
 		this.rows = rows;
 		this.bubbleType = bubbleType;
-		
+
 		radian = calulateRadian(windowWidth, windowHeight);
 		playground = new Bubble[rows][cols];
 		mouseListener = ml;
@@ -105,7 +105,7 @@ public class Playground {
 			return windowHeight / getRows();
 		}
 	}
-	
+
 	/**
 	 * Creates a new Bubble on the playground at position x,y
 	 * @param x row-index
@@ -136,7 +136,7 @@ public class Playground {
 				if (bubbleColors == 0) {
 					bubbleColors = playground[x][y].getColorsCount();
 				}
-				return true;				
+				return true;
 			}
 		}
 		return false;
@@ -149,12 +149,12 @@ public class Playground {
 	public int getColors() {
 		return bubbleColors;
 	}
-	
+
 	/**
 	 * Returns the color-index of a  Bubble at a specific position in the matrix
 	 * @param x row-index
 	 * @param y column-index
-	 * @return Bubble-Color-index, -1 if this Bubble doesn't exist 
+	 * @return Bubble-Color-index, -1 if this Bubble doesn't exist
 	 */
 	public int getColor(int x, int y) {
 		if (isEmpty(x,y) == true) {
@@ -163,7 +163,7 @@ public class Playground {
 			return playground[x][y].getColorIndex();
 		}
 	}
-	
+
 	/**
 	 * Returns the Bubble of a  Bubble at a specific position in the matrix
 	 * @param x row-index
@@ -179,7 +179,7 @@ public class Playground {
 	}
 
 	/**
-	 * Checks if at a specific position a Bubble exists 
+	 * Checks if at a specific position a Bubble exists
 	 * @param x row-index
 	 * @param y column-index
 	 * @return exists a Bubble at x,y?
@@ -231,9 +231,9 @@ public class Playground {
 			playground[x][y] = null;
 		}
 	}
-	
+
 	/**
-	 * Mark a specific Bubble 
+	 * Mark a specific Bubble
 	 * @param x row-index
 	 * @param y column-index
 	 */
@@ -244,7 +244,7 @@ public class Playground {
 	}
 
 	/**
-	 * Unmarks all Bubbles on the playground 
+	 * Unmarks all Bubbles on the playground
 	 */
 	public void unMarkAll() {
 		int row = getRows() - 1;

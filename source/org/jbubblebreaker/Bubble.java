@@ -80,16 +80,16 @@ public abstract class Bubble extends JPanel {
 
 	/**
 	 * Returns the bubble type
-	 * @return the bubble type name 
+	 * @return the bubble type name
 	 */
 	public abstract String getName();
-	
+
 	/**
 	 * Returns the count of different colors available
 	 * @return color count
 	 */
 	protected abstract int getColorsCount();
-	
+
 	/**
 	 * Returns the colour-index of this bubble
 	 * @return color-index
@@ -97,7 +97,7 @@ public abstract class Bubble extends JPanel {
 	final public int getColorIndex() {
 		return color;
 	}
-	
+
 	/**
 	 * Returns the row of the position of this bubble
 	 * @return Row
@@ -105,7 +105,7 @@ public abstract class Bubble extends JPanel {
 	final public int getRow() {
 		return row;
 	}
-	
+
 	/**
 	 * Returns the column of the position of this bubble
 	 * @return Col
@@ -122,7 +122,7 @@ public abstract class Bubble extends JPanel {
 		marked = what;
 		this.repaint();
 	}
-	
+
 	/**
 	 * Returns if this bubble is marked
 	 * @return is bubble marked
@@ -130,7 +130,7 @@ public abstract class Bubble extends JPanel {
 	final public boolean isMarked() {
 		return marked;
 	}
-	
+
 	/**
 	 * changes the position of this bubble
 	 * @param row row-index

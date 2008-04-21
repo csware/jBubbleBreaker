@@ -31,8 +31,8 @@ public class PicturePanel extends JPanel {
 	/**
 	 * stores the filename of the picture of the PicturePanel
 	 */
-	private URL filename; 
-	
+	private URL filename;
+
 	/**
 	 * Creates a PicturePanel w/o any location parameters, 0x0 will be used
 	 * @param filename path and filename of the picture
@@ -42,7 +42,7 @@ public class PicturePanel extends JPanel {
 	public PicturePanel(String filename, int width, int height) {
 		this(filename,0,0,width,height);
 	}
-	
+
 	/**
 	 * Creates a PicturePanel on a specific location.
 	 * @param filename path and filename of the picture
@@ -55,7 +55,7 @@ public class PicturePanel extends JPanel {
 		this.filename = getClass().getResource("/images/"+filename);
 		this.setBounds(x,y,width,height);
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

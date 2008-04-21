@@ -49,7 +49,7 @@ public class GameMode {
 	}
 
 	/**
-	 * Returns the mode name 
+	 * Returns the mode name
 	 * @return the modeName
 	 */
 	public String getModeName() {
@@ -63,7 +63,7 @@ public class GameMode {
 	public Constructor<Game> getConstructor() {
 		return constructor;
 	}
-	
+
 	/**
 	 * Returns the minimal size for this mode, 0 if there is not limit
 	 * @return allowed sizes array

@@ -29,7 +29,7 @@ public class BubbleCaro extends BubbleDefault {
 	/**
 	 * Stores the name of this bubble set
 	 */
-	static public String name = "Caro"; 
+	static public String name = "Caro";
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
@@ -40,7 +40,7 @@ public class BubbleCaro extends BubbleDefault {
 	public BubbleCaro(int radian, int row, int col) {
 		super(radian, row, col);
 	}
-	
+
 	/**
 	 * Create a Bubble on a specific position, size and color
 	 * @param radian radian of Bubble

@@ -47,7 +47,7 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 	private JButton startButton = new JButton();
 	private Component component = null;
 	private JPanel backgroundPanel = new JPanel();
-	
+
 	public NewGameAskUserPanel(Component component) {
 		super();
 		this.component=component;
@@ -61,7 +61,7 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		titlePanel.setToolTipText("jBubbleBreaker " + JBubbleBreaker.getVersion());
 		titlePanel.setLocation(10,9);
 		backgroundPanel.add(titlePanel);
-		
+
 		final JLabel gameModeLabel = new JLabel();
 		gameModeLabel.setBounds(10+15, 9+55, 91, 14);
 		gameModeLabel.setText(Localization.getString("GameMode"));
@@ -71,7 +71,7 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		bubbleTypeLabel.setText(Localization.getString("BubbleType"));
 		bubbleTypeLabel.setBounds(10+15, 104+55, 91, 14);
 		backgroundPanel.add(bubbleTypeLabel);
-		
+
 		rowsLabel.setBounds(10+15, 42+55, 91, 14);
 		rowsLabel.setText(Localization.getString("Rows"));
 		backgroundPanel.add(rowsLabel);
@@ -90,7 +90,7 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		backgroundPanel.add(rowsSlider);
 		rowsSlider.addChangeListener(this);
 		rowsSlider.setValue(12);
-		
+
 		columnsSlider = new JSlider();
 		columnsSlider.setBounds(107+15, 71+55, 91, 23);
 		backgroundPanel.add(columnsSlider);

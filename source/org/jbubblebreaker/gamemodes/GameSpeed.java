@@ -36,7 +36,7 @@ public class GameSpeed extends GameDefault {
 	 * Stores the timestamp for time different calculations
 	 */
 	private long time;
-	
+
 	/**
 	 * Creates a game with default rules
 	 * @param rows of the matrix
@@ -56,7 +56,7 @@ public class GameSpeed extends GameDefault {
 		super.fillPlayground();
 		time = System.currentTimeMillis();
 	}
-	
+
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		super.removeMarkedBubbles(row, col);
