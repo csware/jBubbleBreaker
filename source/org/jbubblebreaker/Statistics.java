@@ -167,7 +167,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 	 */
 	static String updateStatistics(String mode, int colors, int rows, int cols, int points) {
 		String returnString = "";
-		if (JBubbleBreaker.isApplicationMode() == false && !JBubbleBreaker.getUserProperty("enableGuestMode","false").equalsIgnoreCase("true")) {
+		if (JBubbleBreaker.isApplicationMode() == true && !JBubbleBreaker.getUserProperty("enableGuestMode","false").equalsIgnoreCase("true")) {
 			ObjectOutputStream out = null;
 			try {
 				Iterator<StatisticData> myIterator = getStatistics().iterator();
