@@ -33,12 +33,17 @@ public class JBubbleBreaker {
 	 * Stores all available bubble styles for jBubbleBreaker
 	 */
 	static private List<BubbleType> bubbleTypes = new LinkedList<BubbleType>();
+	/**
+	 * Stores if we are in applicationMode
+	 */
+	static private Boolean applicationMode = false;
 
 	/**
 	 * Starts jBubbleBreaker
 	 * @param args no parameter evaluation
 	 */
 	public static void main(String[] args)  {
+		applicationMode = true;
 		registerDefault();
 		GUI.startGUI();
 	}
@@ -167,5 +172,13 @@ public class JBubbleBreaker {
 	 */
 	static List<GameMode> getModes() {
 		return gameModes;
+	}
+
+	/**
+	 * Are we in applicationMode (i.e. not in an applet)
+	 * @return if we are in application mode
+	 */
+	public static Boolean isApplicationMode() {
+		return applicationMode;
 	}
 }
