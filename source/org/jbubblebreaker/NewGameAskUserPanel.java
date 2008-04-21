@@ -115,6 +115,14 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		if (bubbleTypeComboBox.getItemCount() == 0 || gameTypeComboBox.getItemCount() == 0) {
 			startButton.setEnabled(false);
 		}
+		gameTypeComboBox.setSelectedItem(JBubbleBreaker.getUserProperty("lastGameMode",""));
+		bubbleTypeComboBox.setSelectedItem(JBubbleBreaker.getUserProperty("lastBubbleType",""));
+		try {
+			rowsSlider.setValue(Integer.parseInt(JBubbleBreaker.getUserProperty("lastRows","")));
+			columnsSlider.setValue(Integer.parseInt(JBubbleBreaker.getUserProperty("lastColumns","")));
+		} catch (Exception e) {
+			// ignore
+		}
 	}
 
 	/**
@@ -149,6 +157,10 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 			}
 			if (game != null) {
 				((GUIIf)component).startNewGame(game);
+				JBubbleBreaker.setUserProperty("lastGameMode", (String) gameTypeComboBox.getSelectedItem());
+				JBubbleBreaker.setUserProperty("lastBubbleType", (String) bubbleTypeComboBox.getSelectedItem());
+				JBubbleBreaker.setUserProperty("lastRows", ((Integer) rowsSlider.getValue()).toString());
+				JBubbleBreaker.setUserProperty("lastColumns", ((Integer) columnsSlider.getValue()).toString());
 			}
 		}
 	}
