@@ -33,7 +33,7 @@ public class GameSpeed extends GameDefault {
 	 */
 	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
 	/**
-	 * Stores the timestamp for time differenz calculations
+	 * Stores the timestamp for time different calculations
 	 */
 	private long time;
 	
