@@ -119,8 +119,10 @@ public abstract class Bubble extends JPanel {
 	 * @param what mark active
 	 */
 	final public void setMark(boolean what) {
-		marked = what;
-		this.repaint();
+		if (marked != what) {
+			marked = what;
+			repaint();
+		}
 	}
 
 	/**
