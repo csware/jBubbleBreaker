@@ -44,6 +44,9 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 
 	@Override
 	public void init() {
+		if (getParameter("enablesound") != null && getParameter("enablesound").equalsIgnoreCase("false")) {
+			PlaySound.setSoundEnabled(false);
+		}
 		JBubbleBreaker.registerDefault();
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
