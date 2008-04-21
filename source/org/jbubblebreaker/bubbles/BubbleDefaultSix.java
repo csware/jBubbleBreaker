@@ -58,6 +58,6 @@ public class BubbleDefaultSix extends BubbleDefault {
 
 	@Override
 	protected Color[] getAllColors() {
-		return new Color[] {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.BLACK};
+		return new Color[] {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN};
 	}
 }
