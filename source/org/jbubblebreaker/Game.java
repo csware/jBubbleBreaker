@@ -226,7 +226,7 @@ public abstract class Game extends MouseAdapter {
 			if (my.isMarked() == false) {
 				unMarkAll();
 			} else {
-				if (PlaySound.isSoundEnabled()) {
+				if (JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true")) {
 					new PlaySound(Sounds.REMOVE_BUBBLES);
 				}
 				points += getCalculatedPoints();

@@ -87,10 +87,12 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuGameGuestMode = new JCheckBoxMenuItem(Localization.getString("MenuGuestMode"));
 		menuGameGuestMode.addActionListener(this);
 		menuGameGuestMode.setMnemonic(Localization.getChar("MenuGuestModeMnemonic"));
+		menuGameGuestMode.setSelected(JBubbleBreaker.getUserProperty("enableGuestMode","false").equalsIgnoreCase("true"));
 		menuGame.add(menuGameGuestMode);
 		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
 		menuGameSounds.addActionListener(this);
 		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
+		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true"));
 		menuGame.add(menuGameSounds);
 		menuGameClose = new JMenuItem(Localization.getString("MenuQuit"));
 		menuGameClose.addActionListener(this);
@@ -103,7 +105,6 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuHelp.add(menuHelpInfo);
 
 		newGameDots();
-		Statistics.setGuestMode(false);
 
 		setVisible(true);
 	}
@@ -162,10 +163,17 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
 		} else if (arg0.getSource() == menuGameGuestMode) {
-			Statistics.setGuestMode(!Statistics.isGuestMode());
-			menuGameGuestMode.setSelected(Statistics.isGuestMode());
+			if (menuGameGuestMode.isSelected()) {
+				JBubbleBreaker.setUserProperty("enableGuestMode","true");
+			} else {
+				JBubbleBreaker.setUserProperty("enableGuestMode","false");
+			}
 		} else if (arg0.getSource() == menuGameSounds) {
-			PlaySound.setSoundEnabled(!PlaySound.isSoundEnabled());
+			if (menuGameSounds.isSelected()) {
+				JBubbleBreaker.setUserProperty("enableSound","true");
+			} else {
+				JBubbleBreaker.setUserProperty("enableSound","false");
+			}
 		}
 	}
 }

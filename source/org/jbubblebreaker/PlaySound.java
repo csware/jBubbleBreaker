@@ -27,11 +27,6 @@ import javax.sound.sampled.Clip;
  */
 public class PlaySound extends Thread {
 	/**
-	 * Stores if sounds are enables or disabled
-	 */
-	private static Boolean soundEnabled = true;
-
-	/**
 	 * Cache for the sound-clips
 	 */
 	private static Clip[] clip = new Clip[Sounds.values().length];
@@ -43,7 +38,7 @@ public class PlaySound extends Thread {
 	 */
 	public PlaySound(Sounds sound) {
 		super();
-		if (isSoundEnabled()) {
+		if (JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true")) {
 			soundID = sound.ordinal();
 			start();
 		}
@@ -66,21 +61,5 @@ public class PlaySound extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Checks if sounds are enabled atm
-	 * @return the soundEnabled
-	 */
-	public static final Boolean isSoundEnabled() {
-		return soundEnabled;
-	}
-
-	/**
-	 * Enables or disables sounds
-	 * @param enableSound
-	 */
-	public static final void setSoundEnabled(Boolean enableSound) {
-		soundEnabled = enableSound;
 	}
 }

@@ -17,8 +17,11 @@
  */
 package org.jbubblebreaker;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Main class for jBubbleBreaker
@@ -33,6 +36,10 @@ public class JBubbleBreaker {
 	 * Stores all available bubble styles for jBubbleBreaker
 	 */
 	static private List<BubbleType> bubbleTypes = new LinkedList<BubbleType>();
+	/**
+	 * Stores the user properties
+	 */
+	static private Properties userProperties = null;
 	/**
 	 * Stores if we are in applicationMode
 	 */
@@ -172,6 +179,48 @@ public class JBubbleBreaker {
 	 */
 	static List<GameMode> getModes() {
 		return gameModes;
+	}
+
+	/**
+	 * Loads the user properties from the user property file
+	 */
+	private static void loadUserProperties() {
+		if (userProperties == null) {
+			userProperties = new Properties();
+			if (isApplicationMode()) {
+				try {
+					userProperties.loadFromXML(new FileInputStream(System.getProperty("user.home")+"/.jbubblebreaker-properties"));
+				} catch (Exception e) {
+					// ignore
+				}
+			}
+		}
+	}
+
+	/**
+	 * Returns the user property value for a specific property
+	 * @param property name of the property
+	 * @param defaultValue default value for property
+	 * @return property value
+	 */
+	static String getUserProperty(String property, String defaultValue) {
+		loadUserProperties();
+		return userProperties.getProperty(property, defaultValue);
+	}
+
+	/**
+	 * Sets a user property to a specific value
+	 * @param property name of the property
+	 * @param value value to set the property to
+	 */
+	static void setUserProperty(String property, String value) {
+		loadUserProperties();
+		userProperties.setProperty(property, value);
+		try {
+			userProperties.storeToXML(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker-properties"), "");
+		} catch (Exception e) {
+			// ignore
+		}
 	}
 
 	/**

@@ -50,7 +50,6 @@ import javax.swing.table.AbstractTableModel;
  */
 @SuppressWarnings("serial")
 public class Statistics extends MyModalJFrame implements ActionListener {
-	private static boolean guestMode = true;
 	final JTable table;
 	private List<StatisticData> myData;
 
@@ -168,7 +167,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 	 */
 	static String updateStatistics(String mode, int colors, int rows, int cols, int points) {
 		String returnString = "";
-		if (isGuestMode() == false) {
+		if (JBubbleBreaker.isApplicationMode() == false && !JBubbleBreaker.getUserProperty("enableGuestMode","false").equalsIgnoreCase("true")) {
 			ObjectOutputStream out = null;
 			try {
 				Iterator<StatisticData> myIterator = getStatistics().iterator();
@@ -220,19 +219,5 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 			in.close();
 		} catch (IOException e) {}
 		return myList;
-	}
-
-	/**
-	 * @return the guestMode
-	 */
-	public static boolean isGuestMode() {
-		return guestMode;
-	}
-
-	/**
-	 * @param guestMode the guestMode to set
-	 */
-	public static void setGuestMode(boolean guestMode) {
-		Statistics.guestMode = guestMode;
 	}
 }

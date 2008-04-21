@@ -45,7 +45,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	@Override
 	public void init() {
 		if (getParameter("enablesound") != null && getParameter("enablesound").equalsIgnoreCase("false")) {
-			PlaySound.setSoundEnabled(false);
+			JBubbleBreaker.setUserProperty("enableSound","false");
 		}
 		JBubbleBreaker.registerDefault();
 		try {
@@ -83,7 +83,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
 		menuGameSounds.addActionListener(this);
 		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
-		menuGameSounds.setSelected(PlaySound.isSoundEnabled());
+		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true"));
 		menuGame.add(menuGameSounds);
 		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
 		menuHelpInfo.addActionListener(this);
@@ -115,7 +115,11 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
 		} else if (arg0.getSource() == menuGameSounds) {
-			PlaySound.setSoundEnabled(!PlaySound.isSoundEnabled());
+			if (menuGameSounds.isSelected()) {
+				JBubbleBreaker.setUserProperty("enableSound","true");
+			} else {
+				JBubbleBreaker.setUserProperty("enableSound","false");
+			}
 		}
 	}
 
