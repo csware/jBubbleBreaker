@@ -18,6 +18,7 @@
 package org.jbubblebreaker;
 
 /**
+ * Defines the interface for the GUI-callback
  * @author Sven Strickroth
  */
 public interface GUIIf {
