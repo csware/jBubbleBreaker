@@ -83,6 +83,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuGameStatistics = new JMenuItem(Localization.getString("MenuStatistics"));
 		menuGameStatistics.addActionListener(this);
 		menuGameStatistics.setMnemonic(Localization.getChar("MenuGameStatisticsMnemonic"));
+		menuGameStatistics.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,0));
 		menuGame.add(menuGameStatistics);
 		menuGameGuestMode = new JCheckBoxMenuItem(Localization.getString("MenuGuestMode"));
 		menuGameGuestMode.addActionListener(this);
