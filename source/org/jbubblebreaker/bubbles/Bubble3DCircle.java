@@ -70,6 +70,7 @@ public class Bubble3DCircle extends BubbleDefault {
 
 	@Override
 	public void paint(Graphics g) {
+		g.clearRect(0, 0, radian, radian);
 		if (isMarked() == true) {
 			g.setColor(Color.GRAY);
 			g.fillRect(0, 0, radian, radian);
