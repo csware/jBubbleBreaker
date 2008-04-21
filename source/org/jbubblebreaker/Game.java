@@ -188,7 +188,7 @@ public abstract class Game extends MouseAdapter {
 	/**
 	 * Removes a special Bubble
 	 * @param row row-index
-	 * @param col col-index
+	 * @param col column-index
 	 */
 	final protected void removeBubble(int row, int col) {
 		if (playground.isEmpty(row,col) == false) {

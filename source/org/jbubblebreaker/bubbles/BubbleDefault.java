@@ -35,23 +35,23 @@ public class BubbleDefault extends Bubble {
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 */
-	public BubbleDefault(int radian, int row, int col) {
-		super(radian, row, col, -1);
+	public BubbleDefault(int radius, int row, int col) {
+		super(radius, row, col, -1);
 	}
 
 	/**
 	 * Create a Bubble on a specific position, size and color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public BubbleDefault(int radian, int row, int col, int colorIndex) {
-		super(radian, row, col, colorIndex);
+	public BubbleDefault(int radius, int row, int col, int colorIndex) {
+		super(radius, row, col, colorIndex);
 	}
 
 	@Override
@@ -63,10 +63,10 @@ public class BubbleDefault extends Bubble {
 	public void paint(Graphics g) {
 		if (isMarked() == true) {
 			g.setColor(Color.GRAY);
-			g.fillRect(0, 0, radian, radian);
+			g.fillRect(0, 0, radius, radius);
 		}
 		g.setColor(getColor(getColorIndex()));
-		g.fillOval(0, 0, radian, radian);
+		g.fillOval(0, 0, radius, radius);
 
 	}
 

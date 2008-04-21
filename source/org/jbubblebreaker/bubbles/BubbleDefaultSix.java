@@ -32,23 +32,23 @@ public class BubbleDefaultSix extends BubbleDefault {
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 */
-	public BubbleDefaultSix(int radian, int row, int col) {
-		super(radian, row, col);
+	public BubbleDefaultSix(int radius, int row, int col) {
+		super(radius, row, col);
 	}
 
 	/**
 	 * Create a Bubble on a specific position, size and color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public BubbleDefaultSix(int radian, int row, int col, int colorIndex) {
-		super(radian, row, col, colorIndex);
+	public BubbleDefaultSix(int radius, int row, int col, int colorIndex) {
+		super(radius, row, col, colorIndex);
 	}
 
 	@Override

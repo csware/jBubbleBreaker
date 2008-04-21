@@ -33,23 +33,23 @@ public class Bubble3DRect extends BubbleDefault {
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 */
-	public Bubble3DRect(int radian, int row, int col) {
-		super(radian, row, col);
+	public Bubble3DRect(int radius, int row, int col) {
+		super(radius, row, col);
 	}
 
 	/**
 	 * Create a Bubble on a specific position, size and color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public Bubble3DRect(int radian, int row, int col, int colorIndex) {
-		super(radian, row, col, colorIndex);
+	public Bubble3DRect(int radius, int row, int col, int colorIndex) {
+		super(radius, row, col, colorIndex);
 	}
 
 	@Override
@@ -60,10 +60,10 @@ public class Bubble3DRect extends BubbleDefault {
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(getColor(getColorIndex()));
-		g.fill3DRect(0, 0, radian, radian, true);
+		g.fill3DRect(0, 0, radius, radius, true);
 		if (isMarked() == true) {
 			g.setColor(Color.GRAY);
-			g.fillOval(radian/4, radian/4, radian/2, radian/2);
+			g.fillOval(radius/4, radius/4, radius/2, radius/2);
 		}
 	}
 }

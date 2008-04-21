@@ -38,29 +38,29 @@ public class Bubble3DCircle extends BubbleDefault {
 	 */
 	static private Image[] image = {null, null, null, null, null};
 	/**
-	 * store the last radian
+	 * store the last radius
 	 */
-	static private int oldradian = 0;
+	static private int oldradius = 0;
 
 	/**
 	 * Create a Bubble on a specific position and size with a random color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 */
-	public Bubble3DCircle(int radian, int row, int col) {
-		super(radian, row, col);
+	public Bubble3DCircle(int radius, int row, int col) {
+		super(radius, row, col);
 	}
 
 	/**
 	 * Create a Bubble on a specific position, size and color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public Bubble3DCircle(int radian, int row, int col, int colorIndex) {
-		super(radian, row, col, colorIndex);
+	public Bubble3DCircle(int radius, int row, int col, int colorIndex) {
+		super(radius, row, col, colorIndex);
 	}
 
 	@Override
@@ -70,22 +70,22 @@ public class Bubble3DCircle extends BubbleDefault {
 
 	@Override
 	public void paint(Graphics g) {
-		g.clearRect(0, 0, radian, radian);
+		g.clearRect(0, 0, radius, radius);
 		if (isMarked() == true) {
 			g.setColor(Color.GRAY);
-			g.fillRect(0, 0, radian, radian);
+			g.fillRect(0, 0, radius, radius);
 		}
-		if (image[0] == null || radian != oldradian) {
+		if (image[0] == null || radius != oldradius) {
 			String[] filenames = {"bubble-red","bubble-blue","bubble-yellow"
 				,"bubble-magenta","bubble-green"};
 			for(int i = 0; i < 5; i++) {
 				try {
-					image[i] = ImageIO.read(getClass().getResource("/images/"+filenames[i]+".png")).getScaledInstance(radian, radian, Image.SCALE_SMOOTH);
+					image[i] = ImageIO.read(getClass().getResource("/images/"+filenames[i]+".png")).getScaledInstance(radius, radius, Image.SCALE_SMOOTH);
 				} catch (IOException e) {
 					// should not occour
 				}
 			}
-			oldradian = radian;
+			oldradius = radius;
 		}
 		g.drawImage(image[getColorIndex()], 0, 0, this);
 	}

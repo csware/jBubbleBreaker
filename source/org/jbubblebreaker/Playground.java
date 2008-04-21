@@ -33,9 +33,9 @@ public class Playground {
 	 */
 	private int rows;
 	/**
-	 * radian of the bubbles
+	 * radius of the bubbles
 	 */
-	private int radian;
+	private int radius;
 	/**
 	 * stores the matrix
 	 */
@@ -56,7 +56,7 @@ public class Playground {
 	/**
 	 * Creates a new empty Playground/Matrix
 	 * @param rows row count
-	 * @param cols col count
+	 * @param cols column count
 	 * @param ml MouseListener
 	 */
 	public Playground(int windowWidth, int windowHeight, int rows, int cols, MouseListener ml, int bubbleType) {
@@ -64,7 +64,7 @@ public class Playground {
 		this.rows = rows;
 		this.bubbleType = bubbleType;
 
-		radian = calulateRadian(windowWidth, windowHeight);
+		radius = calulateRadius(windowWidth, windowHeight);
 		playground = new Bubble[rows][cols];
 		mouseListener = ml;
 	}
@@ -75,14 +75,14 @@ public class Playground {
 	 * @param windowHeight new height of the playground
 	 */
 	public void resized(int windowWidth, int windowHeight) {
-		if (radian != calulateRadian(windowWidth, windowHeight)) {
-			radian = calulateRadian(windowWidth, windowHeight);
+		if (radius != calulateRadius(windowWidth, windowHeight)) {
+			radius = calulateRadius(windowWidth, windowHeight);
 			int row = getRows() - 1;
 			int col = getCols() - 1;
 			while(col >= 0 && isEmpty(row,col) == false) {
 				while(row >= 0 && isEmpty(row, col) == false) {
 					if (isEmpty(row, col) == false) {
-						getBubble(row, col).resized(radian);
+						getBubble(row, col).resized(radius);
 					}
 					row--;
 				}
@@ -93,12 +93,12 @@ public class Playground {
 	}
 
 	/**
-	 * Calculates the best radian for the Bubbles from the window-size
+	 * Calculates the best radius for the Bubbles from the window-size
 	 * @param windowWidth window/jpanel width
 	 * @param windowHeight window/jpanel height
-	 * @return calculated radian for the Bubbles
+	 * @return calculated radius for the Bubbles
 	 */
-	private int calulateRadian(int windowWidth, int windowHeight) {
+	private int calulateRadius(int windowWidth, int windowHeight) {
 		if (windowWidth / getCols() < windowHeight / getRows()) {
 			return windowWidth / getCols();
 		} else {
@@ -127,7 +127,7 @@ public class Playground {
 		if (x >= 0 && y >= 0 && x < getRows() && y < getCols()) {
 			playground[x][y] = null;
 			try {
-				playground[x][y] = (Bubble)JBubbleBreaker.getBubbleTypes().get(bubbleType).getConstructor().newInstance( new Object[] {radian, x, y, colorIndex} );
+				playground[x][y] = (Bubble)JBubbleBreaker.getBubbleTypes().get(bubbleType).getConstructor().newInstance( new Object[] {radius, x, y, colorIndex} );
 				playground[x][y].addMouseListener(mouseListener);
 			} catch (Exception e) {
 				e.printStackTrace();

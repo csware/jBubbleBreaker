@@ -27,9 +27,9 @@ import javax.swing.JPanel;
  */
 public abstract class Bubble extends JPanel {
 	/**
-	 * stores the radian of this Bubble
+	 * stores the radius of this Bubble
 	 */
-	protected int radian;
+	protected int radius;
 	/**
 	 * stores the row of this Bubble-position
 	 */
@@ -49,14 +49,14 @@ public abstract class Bubble extends JPanel {
 
 	/**
 	 * Create a Bubble on a specific position, size and color
-	 * @param radian radian of Bubble
+	 * @param radius radius of Bubble
 	 * @param row Row of Bubble
-	 * @param col Col of Bubble
+	 * @param col Column of Bubble
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
-	public Bubble(int radian, int row, int col, int colorIndex) {
-		this.radian=radian;
-		this.setSize(radian, radian);
+	public Bubble(int radius, int row, int col, int colorIndex) {
+		this.radius=radius;
+		this.setSize(radius, radius);
 		moveTo(row,col);
 		if (colorIndex >= 0 && colorIndex < getColorsCount()) {
 			color = colorIndex;
@@ -66,14 +66,14 @@ public abstract class Bubble extends JPanel {
 	}
 
 	/**
-	 * Resize and move optical position of a Bubble if the radian changed
-	 * @param radian new radian of the Bubble
+	 * Resize and move optical position of a Bubble if the radius changed
+	 * @param radius new radius of the Bubble
 	 */
-	final public void resized(int radian) {
-		if (this.radian != radian) {
-			this.radian=radian;
-			this.setSize(radian, radian);
-			this.setLocation(getCol()*radian, getRow()*radian);
+	final public void resized(int radius) {
+		if (this.radius != radius) {
+			this.radius=radius;
+			this.setSize(radius, radius);
+			this.setLocation(getCol()*radius, getRow()*radius);
 			repaint();
 		}
 	}
@@ -141,7 +141,7 @@ public abstract class Bubble extends JPanel {
 	final public void moveTo(int row, int col) {
 		this.row = row;
 		this.col = col;
-		this.setLocation(col*radian, row*radian);
+		this.setLocation(col*radius, row*radius);
 	}
 
 	@Override
