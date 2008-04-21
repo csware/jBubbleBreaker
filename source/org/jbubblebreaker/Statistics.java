@@ -157,6 +157,15 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Update the statistics
+	 * @param mode the game mode name
+	 * @param colors count of different colors
+	 * @param rows count of rows
+	 * @param cols count of columns
+	 * @param points points
+	 * @return the string that can be used for the message box for the user
+	 */
 	static String updateStatistics(String mode, int colors, int rows, int cols, int points) {
 		String returnString = "";
 		if (isGuestMode() == false) {
@@ -186,6 +195,10 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		return returnString;
 	}
 
+	/**
+	 * Opens and returns the stored statistics from the datafile
+	 * @return statistics
+	 */
 	public static List<StatisticData> getStatistics() {
 		List<StatisticData> myList = new LinkedList<StatisticData>();
 		ObjectInputStream in = null;
