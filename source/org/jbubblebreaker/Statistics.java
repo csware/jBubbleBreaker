@@ -144,7 +144,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (((JButton) arg0.getSource()).getText().equals(Localization.getString("ResetStatistics"))) {
 			if (JOptionPane.showConfirmDialog(null, Localization.getString("ResetStatisticsAreYouSure"),Localization.getString("ResetStatistics"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-				if (new File(System.getProperty("user.home")+"/.jbubblebreaker-statistics").delete() == false) {
+				if (new File(System.getProperty("user.home")+"/.jbubblebreaker/statistics").delete() == false) {
 					JOptionPane.showMessageDialog(null, Localization.getString("ResetStatisticsError"), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					myData = new LinkedList<StatisticData>();
@@ -171,7 +171,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 			ObjectOutputStream out = null;
 			try {
 				Iterator<StatisticData> myIterator = getStatistics().iterator();
-				out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker-statistics")));
+				out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker/statistics")));
 				boolean found = false;
 				while(myIterator.hasNext()) {
 					StatisticData myItem = myIterator.next();
@@ -202,7 +202,7 @@ public class Statistics extends MyModalJFrame implements ActionListener {
 		List<StatisticData> myList = new LinkedList<StatisticData>();
 		ObjectInputStream in = null;
 		try {
-			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(System.getProperty("user.home")+"/.jbubblebreaker-statistics")));
+			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(System.getProperty("user.home")+"/.jbubblebreaker/statistics")));
 		} catch (FileNotFoundException e) {
 			return myList;
 		} catch (IOException e) {

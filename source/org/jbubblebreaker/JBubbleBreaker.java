@@ -17,6 +17,7 @@
  */
 package org.jbubblebreaker;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.LinkedList;
@@ -50,6 +51,19 @@ public class JBubbleBreaker {
 	 * @param args no parameter evaluation
 	 */
 	public static void main(String[] args)  {
+		// move old files
+		File a = new File(System.getProperty("user.home")+"/.jbubblebreaker");
+		if (!a.exists()) {
+			a.mkdir();
+		}
+		a = new File(System.getProperty("user.home")+"/.jbubblebreaker-statistics");
+		if (a.exists() && a.isFile()) {
+			a.renameTo(new File(System.getProperty("user.home")+"/.jbubblebreaker/statistics"));
+		}
+		a = new File(System.getProperty("user.home")+"/.jbubblebreaker-properties");
+		if (a.exists() && a.isFile()) {
+			a.renameTo(new File(System.getProperty("user.home")+"/.jbubblebreaker/properties"));
+		}
 		applicationMode = true;
 		registerDefault();
 		GUI.startGUI();
@@ -190,7 +204,7 @@ public class JBubbleBreaker {
 			userProperties = new Properties();
 			if (isApplicationMode()) {
 				try {
-					userProperties.loadFromXML(new FileInputStream(System.getProperty("user.home")+"/.jbubblebreaker-properties"));
+					userProperties.loadFromXML(new FileInputStream(System.getProperty("user.home")+"/.jbubblebreaker/properties"));
 				} catch (Exception e) {
 					// ignore
 				}
@@ -218,7 +232,7 @@ public class JBubbleBreaker {
 		loadUserProperties();
 		userProperties.setProperty(property, value);
 		try {
-			userProperties.storeToXML(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker-properties"), "");
+			userProperties.storeToXML(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker/properties"), "");
 		} catch (Exception e) {
 			// ignore
 		}
