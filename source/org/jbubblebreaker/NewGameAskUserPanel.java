@@ -54,12 +54,12 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		setLayout(null);
 
 		add(backgroundPanel);
-		backgroundPanel.setSize(238,213);
+		backgroundPanel.setSize(267,213);
 		backgroundPanel.setLayout(null);
 
 		final PicturePanel titlePanel = new PicturePanel("jBubbleBreaker-text.png",219,43);
 		titlePanel.setToolTipText("jBubbleBreaker " + JBubbleBreaker.getVersion());
-		titlePanel.setLocation(10,9);
+		titlePanel.setLocation(25,9);
 		backgroundPanel.add(titlePanel);
 
 		final JLabel gameModeLabel = new JLabel();
@@ -80,24 +80,24 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 		columnsLabel.setText(Localization.getString("Columns"));
 		backgroundPanel.add(columnsLabel);
 
-		startButton.setBounds(10+15, 128+55, 188, 23);
+		startButton.setBounds(10+15, 128+55, 217, 23);
 		startButton.setText(Localization.getString("Start"));
 		backgroundPanel.add(startButton);
 		startButton.addActionListener(this);
 
 		rowsSlider = new JSlider();
-		rowsSlider.setBounds(107+15, 33+55, 91, 23);
+		rowsSlider.setBounds(107+15, 33+55, 120, 23);
 		backgroundPanel.add(rowsSlider);
 		rowsSlider.addChangeListener(this);
 		rowsSlider.setValue(12);
 
 		columnsSlider = new JSlider();
-		columnsSlider.setBounds(107+15, 71+55, 91, 23);
+		columnsSlider.setBounds(107+15, 71+55, 120, 23);
 		backgroundPanel.add(columnsSlider);
 		columnsSlider.addChangeListener(this);
 		columnsSlider.setValue(12);
 
-		gameTypeComboBox.setBounds(107+15, 5+55, 91, 22);
+		gameTypeComboBox.setBounds(107+15, 5+55, 120, 22);
 		gameTypeComboBox.addActionListener(this);
 		backgroundPanel.add(gameTypeComboBox);
 		Iterator<GameMode> gameModesIterator = JBubbleBreaker.getModes().iterator();
@@ -105,7 +105,7 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 			gameTypeComboBox.addItem((gameModesIterator.next()).getModeName());
 		}
 
-		bubbleTypeComboBox.setBounds(107+15, 100+55, 91, 22);
+		bubbleTypeComboBox.setBounds(107+15, 100+55, 120, 22);
 		backgroundPanel.add(bubbleTypeComboBox);
 		Iterator<BubbleType> bubbleTypesIterator = JBubbleBreaker.getBubbleTypes().iterator();
 		while(bubbleTypesIterator.hasNext()) {
