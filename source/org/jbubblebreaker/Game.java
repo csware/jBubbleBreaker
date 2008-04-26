@@ -98,6 +98,7 @@ public abstract class Game extends MouseAdapter {
 		points = 0;
 		marked = 0;
 		possiblePoints.setVisible(false);
+		prepareNewGame();
 
 		// remove all Bubbles from playgroundPanel
 		int row = playground.getRows() - 1;
@@ -117,6 +118,11 @@ public abstract class Game extends MouseAdapter {
 			gameOver(0);
 		}
 	}
+
+	/**
+	 * Game modes can add specific code which gets executed when a new Game is started.
+	 */
+	protected void prepareNewGame() {}
 
 	/**
 	 * fills the playground/matrix with Bubbles
