@@ -32,6 +32,9 @@ public class GameLevelBreaker extends GameDefault {
 	 * Stores the possible matrix-sizes for this mode
 	 */
 	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
+	/**
+	 * store the gameLevel of the current game
+	 */
 	private int gameLevel;
 
 	/**

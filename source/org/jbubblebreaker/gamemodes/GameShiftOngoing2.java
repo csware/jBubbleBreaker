@@ -20,7 +20,7 @@ package org.jbubblebreaker.gamemodes;
 import org.jbubblebreaker.GameSize;
 
 /**
- * Default Rules
+ * Ongoing with Shift Rules 2
  * @author Sven Strickroth
  */
 public class GameShiftOngoing2 extends GameShift {

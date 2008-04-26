@@ -20,7 +20,7 @@ package org.jbubblebreaker.gamemodes;
 import org.jbubblebreaker.GameSize;
 
 /**
- * Level Breaker Rules
+ * Level Breaker with Shift Rules
  * @author Sven Strickroth
  */
 public class GameLevelBreakerShift extends GameShift {
@@ -32,6 +32,9 @@ public class GameLevelBreakerShift extends GameShift {
 	 * Stores the possible matrix-sizes for this mode
 	 */
 	static public GameSize allowedSize = new GameSize(0, 0, 0, 0);
+	/**
+	 * store the gameLevel of the current game
+	 */
 	private int gameLevel;
 
 	/**
