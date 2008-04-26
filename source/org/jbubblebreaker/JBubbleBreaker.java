@@ -99,6 +99,7 @@ public class JBubbleBreaker {
 		addMode("org.jbubblebreaker.gamemodes.GameOngoingSpeed");
 		addMode("org.jbubblebreaker.gamemodes.GameShiftSpeed");
 		addMode("org.jbubblebreaker.gamemodes.GameLevelBreaker");
+		addMode("org.jbubblebreaker.gamemodes.GameLevelBreakerShift");
 		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DCircle");
 		addBubbleType("org.jbubblebreaker.bubbles.Bubble3DCircleSix");
 		addBubbleType("org.jbubblebreaker.bubbles.BubbleDefault");
