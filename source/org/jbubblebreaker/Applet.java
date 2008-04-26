@@ -45,7 +45,19 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	@Override
 	public void init() {
 		if (getParameter("enablesound") != null && getParameter("enablesound").equalsIgnoreCase("false")) {
-			JBubbleBreaker.setUserProperty("enableSound","false");
+			JBubbleBreaker.setUserProperty("enableSound", "false");
+		}
+		if (getParameter("lastGameMode") != null) {
+			JBubbleBreaker.setUserProperty("lastGameMode", getParameter("lastGameMode"));
+		}
+		if (getParameter("lastBubbleType") != null) {
+			JBubbleBreaker.setUserProperty("lastBubbleType", getParameter("lastBubbleType"));
+		}
+		if (getParameter("lastRows") != null) {
+			JBubbleBreaker.setUserProperty("lastRows", getParameter("lastRows"));
+		}
+		if (getParameter("lastColumns") != null) {
+			JBubbleBreaker.setUserProperty("lastColumns", getParameter("lastColumns"));
 		}
 		JBubbleBreaker.registerDefault();
 		try {
