@@ -44,6 +44,16 @@ public class GameDefault extends Game {
 	}
 
 	@Override
+	protected boolean isSolvable() {
+		return true;
+	}
+
+	@Override
+	protected int solvedAction() {
+		return 1000;
+	}
+
+	@Override
 	public String getMode() {
 		return name;
 	};
@@ -79,7 +89,7 @@ public class GameDefault extends Game {
 	}
 
 	@Override
-	protected boolean isSolveable() {
+	protected boolean isPlaygroundSolvable() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
 		while(col >= 0 && playground.isEmpty(row,col) == false) {

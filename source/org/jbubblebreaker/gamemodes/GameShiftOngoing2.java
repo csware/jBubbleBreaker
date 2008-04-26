@@ -48,6 +48,11 @@ public class GameShiftOngoing2 extends GameShift {
 	};
 
 	@Override
+	protected boolean isSolvable() {
+		return false;
+	}
+
+	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		super.removeMarkedBubbles(row, col);
 		int i = playground.getRows()-1;

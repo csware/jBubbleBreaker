@@ -48,6 +48,11 @@ public class GameOngoing extends GameDefault {
 	};
 
 	@Override
+	protected boolean isSolvable() {
+		return false;
+	}
+
+	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		super.removeMarkedBubbles(row, col);
 		// add new Bubbles at the left frontier

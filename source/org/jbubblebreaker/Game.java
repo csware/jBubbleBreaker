@@ -113,8 +113,8 @@ public abstract class Game extends MouseAdapter {
 		fillPlayground();
 		playgroundPanel.repaint();
 		playgroundPanel.setEnabled(true);
-		if (isSolveable() == false) {
-			gameOver();
+		if (isPlaygroundSolvable() == false) {
+			gameOver(0);
 		}
 	}
 
@@ -139,18 +139,40 @@ public abstract class Game extends MouseAdapter {
 	protected abstract void findsame(int row, int col);
 
 	/**
-	 * This method is called, when game is not solveable any more
+	 * This method is called, when game is over (solved or not solvable any more)
+	 * @param solvedPoints the number of points the user got for solving the game, not used if solvedPoints < 0 or game mode is not solvable
+	 * @see #isSolvable()
 	 */
-	private void gameOver() {
+	final private void gameOver(int solvedPoints) {
 		playgroundPanel.setEnabled(false);
-		JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+		if (solvedPoints >= 0 && isSolvable()) {
+			JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + "\n" + Localization.getString("BreakerBonus") + ": " + solvedPoints + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()+solvedPoints), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	/**
 	 * Checks if the current game is solvable
 	 * @return playground solvable?
 	 */
-	protected abstract boolean isSolveable();
+	protected abstract boolean isPlaygroundSolvable();
+
+	/**
+	 * Returns if the current game mode is solvable (i.e. not endless)
+	 * @return game mode solvable?
+	 */
+	protected abstract boolean isSolvable();
+
+	/**
+	 * Action to perform when playground is solved (i.e. all bubbles are removed by the user)
+	 * @return points the user gets if he solved the game (i.e. cleared all bubbles). If -1 then gameOver(X) isn't called.
+	 * @see #isSolvable()
+	 * @see #gameOver(int solvedPoints)
+	 */
+	protected int solvedAction() {
+		return 0;
+	}
 
 	/**
 	 * Remove all marked Bubbles
@@ -235,8 +257,15 @@ public abstract class Game extends MouseAdapter {
 				playgroundPanel.repaint();
 				marked=0;
 				possiblePoints.setVisible(false);
-				if (isSolveable() == false) {
-					gameOver();
+				if (playground.isEmpty(playground.getRows()-1,playground.getCols()-1) == true) {
+					int solvedPoints = solvedAction();
+					if (solvedPoints>=0) {
+						gameOver(solvedPoints);
+						return;
+					}
+				}
+				if (isPlaygroundSolvable() == false) {
+					gameOver(0);
 				}
 			}
 			return;
