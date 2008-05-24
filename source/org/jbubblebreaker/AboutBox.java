@@ -70,7 +70,7 @@ public class AboutBox extends MyModalJFrame implements ActionListener {
 		lblCopyright.setBounds(64, 76, 250, 25);
 		getContentPane().add(lblCopyright);
 
-		JLabel lblComment = new JLabel("<html>BubbleBreaker Java clone,<br>Hosted on SourceForge.net:<br>"+JBubbleBreaker.getProjectHomepage()+"</html>");
+		JLabel lblComment = new JLabel("<html>GPLv3 BubbleBreaker Java clone,<br>Hosted on SourceForge.net:<br>"+JBubbleBreaker.getProjectHomepage()+"</html>");
 		lblComment.setVerticalAlignment(SwingConstants.TOP);
 		lblComment.setBounds(64, 99, 250, 50);
 		getContentPane().add(lblComment);
