@@ -37,7 +37,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -49,15 +48,17 @@ import javax.swing.table.AbstractTableModel;
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class Statistics extends MyModalJFrame implements ActionListener {
+public class Statistics extends MyJDialog implements ActionListener {
 	final JTable table;
 	private List<StatisticData> myData;
 
 	/**
 	 * Create the frame
 	 */
-	public Statistics(JFrame parentJFrame) {
-		super(Localization.getString("Statistics"), "jbubblebreaker.png", 677, 175, true, parentJFrame);
+	public Statistics() {
+		super(Localization.getString("Statistics"), "jbubblebreaker.png", 677, 175, true);
+		setModal(true);
+
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 

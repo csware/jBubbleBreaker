@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -30,17 +29,18 @@ import javax.swing.SwingConstants;
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class AboutBox extends MyModalJFrame implements ActionListener {
+public class AboutBox extends MyJDialog implements ActionListener {
 	final private static String icon = "jbubblebreaker.png";
 
 	/**
 	 * Create and show the AboutBox
 	 * @param parentJFrame parent Frame for modal emulation
 	 */
-	public AboutBox(JFrame parentJFrame) {
-		super("About jBubbleBreaker",icon, 332, 210, false, parentJFrame);
+	public AboutBox() {
+		super("About jBubbleBreaker",icon, 332, 210);
+		setModal(true);
 
-		if (parentJFrame == null) {
+		if (JBubbleBreaker.isApplicationMode() == false) {
 			// we're in an applet, so we need some more height
 			setSize(332,227);
 		}

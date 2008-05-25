@@ -155,12 +155,12 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		if (arg0.getSource() == menuGameClose) {
 			dispose();
 		} else if (arg0.getSource() == menuHelpInfo) {
-			new AboutBox(this);
+			new AboutBox();
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
 			pointsLabel.setText(Localization.getString("PointsZero"));
 		} else if (arg0.getSource() == menuGameStatistics) {
-			new Statistics(this);
+			new Statistics();
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
 		} else if (arg0.getSource() == menuGameGuestMode) {

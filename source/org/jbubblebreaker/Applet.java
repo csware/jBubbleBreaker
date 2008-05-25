@@ -120,7 +120,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == menuHelpInfo) {
-			new AboutBox(null);
+			new AboutBox();
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
 			pointsLabel.setText(Localization.getString("PointsZero"));
