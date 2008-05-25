@@ -39,16 +39,16 @@ public abstract class MyJFrame extends JFrame {
 	 * @param iconFileName the icon filename, null for no icon
 	 * @param width width of the JFrame
 	 * @param height height of the JFrame
-	 * @param resizAble create resizable JFrame?
+	 * @param resizable create resizable JFrame?
 	 * @param centered center the JFrame?
 	 */
-	public MyJFrame(String title, String iconFileName, int width, int height, boolean resizAble, boolean centered) {
+	public MyJFrame(String title, String iconFileName, int width, int height, boolean resizable, boolean centered) {
 		super(title);
 		if (iconFileName != null) {
 			setIcon(iconFileName);
 		}
 		setSize(width, height);
-		setResizable(resizAble);
+		setResizable(resizable);
 		if (centered == true) {
 			setCentered();
 		}

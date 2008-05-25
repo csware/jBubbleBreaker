@@ -51,10 +51,10 @@ public abstract class MyJDialog extends JDialog {
 	 * @param iconFileName the icon filename, null for no icon
 	 * @param width width of the JDialog
 	 * @param height height of the JDialog
-	 * @param resizeAble create resizable JDialog?
+	 * @param resizable create resizable JDialog?
 	 */
-	public MyJDialog(String title, String iconFileName, int width, int height, boolean resizAble) {
-		this(title, iconFileName, width, height, resizAble, true);
+	public MyJDialog(String title, String iconFileName, int width, int height, boolean resizable) {
+		this(title, iconFileName, width, height, resizable, true);
 	}
 
 	/**
@@ -63,17 +63,17 @@ public abstract class MyJDialog extends JDialog {
 	 * @param iconFileName the icon filename, null for no icon
 	 * @param width width of the JDialog
 	 * @param height height of the JDialog
-	 * @param resizeAble create resizable JDialog?
+	 * @param resizable create resizable JDialog?
 	 * @param centered center the JDialog?
 	 */
-	public MyJDialog(String title, String iconFileName, int width, int height, boolean resizeAble, boolean centered) {
+	public MyJDialog(String title, String iconFileName, int width, int height, boolean resizable, boolean centered) {
 		super();
 		setTitle(title);
 		if (iconFileName != null) {
 			setIcon(iconFileName);
 		}
 		setSize(width, height);
-		setResizable(resizeAble);
+		setResizable(resizable);
 		if (centered == true) {
 			setCentered();
 		}

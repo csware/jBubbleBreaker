@@ -34,7 +34,6 @@ public class AboutBox extends MyJDialog implements ActionListener {
 
 	/**
 	 * Create and show the AboutBox
-	 * @param parentJFrame parent Frame for modal emulation
 	 */
 	public AboutBox() {
 		super("About jBubbleBreaker",icon, 332, 210);
