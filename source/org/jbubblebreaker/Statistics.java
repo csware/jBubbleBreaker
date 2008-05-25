@@ -82,7 +82,7 @@ public class Statistics extends MyJDialog implements ActionListener {
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
 		table.setModel(new TableTableModel());
-		if (! System.getProperty("java.version").substring(0, 3).equals("1.5")) {
+		if (!System.getProperty("java.version").substring(0, 3).equals("1.5")) {
 			// setAutoCreateRowSorter is Java 1.6 specific and doesn't work with 1.5
 			table.setAutoCreateRowSorter(true);
 		}
@@ -90,62 +90,62 @@ public class Statistics extends MyJDialog implements ActionListener {
 		setVisible(true);
 	}
 
-		private class TableTableModel extends AbstractTableModel {
-			private final String[] COLUMN_NAMES = new String[] {Localization.getString("Mode"), Localization.getString("Colors"), Localization.getString("Rows"),Localization.getString("Columns"),Localization.getString("GamesPlayed"),Localization.getString("MaxPoints"),Localization.getString("AvgPoints")};
+	private class TableTableModel extends AbstractTableModel {
+		private final String[] COLUMN_NAMES = new String[] { Localization.getString("Mode"), Localization.getString("Colors"), Localization.getString("Rows"), Localization.getString("Columns"), Localization.getString("GamesPlayed"), Localization.getString("MaxPoints"), Localization.getString("AvgPoints") };
 
-			public TableTableModel() {
-				super();
-				myData = getStatistics();
-			}
+		public TableTableModel() {
+			super();
+			myData = getStatistics();
+		}
 
-			public int getRowCount() {
-				return myData.size();
-			}
+		public int getRowCount() {
+			return myData.size();
+		}
 
-			public int getColumnCount() {
-				return COLUMN_NAMES.length;
-			}
+		public int getColumnCount() {
+			return COLUMN_NAMES.length;
+		}
 
-			public String getColumnName(int columnIndex) {
-				return COLUMN_NAMES[columnIndex];
-			}
+		public String getColumnName(int columnIndex) {
+			return COLUMN_NAMES[columnIndex];
+		}
 
-			public Object getValueAt(int rowIndex, int columnIndex) {
-				if (columnIndex == 0) {
-					return myData.get(rowIndex).getMode();
-				} else if (columnIndex == 1) {
-					return myData.get(rowIndex).getColors();
-				} else if (columnIndex == 2) {
-					return myData.get(rowIndex).getRows();
-				} else if (columnIndex == 3) {
-					return myData.get(rowIndex).getCols();
-				} else if (columnIndex == 4) {
-					return myData.get(rowIndex).getCountOfGames();
-				} else if (columnIndex == 5) {
-					return myData.get(rowIndex).getMaxPoints();
-				} else {
-					return myData.get(rowIndex).getAveragePoints();
-				}
-			}
-
-			public boolean isCellEditable(int row, int col) {
-				return false;
-			}
-
-			@SuppressWarnings("unchecked")
-			public Class getColumnClass(int c) {
-				if (c == 0) {
-					return String.class;
-				} else {
-					return Integer.class;
-				}
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			if (columnIndex == 0) {
+				return myData.get(rowIndex).getMode();
+			} else if (columnIndex == 1) {
+				return myData.get(rowIndex).getColors();
+			} else if (columnIndex == 2) {
+				return myData.get(rowIndex).getRows();
+			} else if (columnIndex == 3) {
+				return myData.get(rowIndex).getCols();
+			} else if (columnIndex == 4) {
+				return myData.get(rowIndex).getCountOfGames();
+			} else if (columnIndex == 5) {
+				return myData.get(rowIndex).getMaxPoints();
+			} else {
+				return myData.get(rowIndex).getAveragePoints();
 			}
 		}
 
+		public boolean isCellEditable(int row, int col) {
+			return false;
+		}
+
+		@SuppressWarnings("unchecked")
+		public Class getColumnClass(int c) {
+			if (c == 0) {
+				return String.class;
+			} else {
+				return Integer.class;
+			}
+		}
+	}
+
 	public void actionPerformed(ActionEvent arg0) {
 		if (((JButton) arg0.getSource()).getText().equals(Localization.getString("ResetStatistics"))) {
-			if (JOptionPane.showConfirmDialog(null, Localization.getString("ResetStatisticsAreYouSure"),Localization.getString("ResetStatistics"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-				if (new File(System.getProperty("user.home")+"/.jbubblebreaker/statistics").delete() == false) {
+			if (JOptionPane.showConfirmDialog(null, Localization.getString("ResetStatisticsAreYouSure"), Localization.getString("ResetStatistics"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+				if (new File(System.getProperty("user.home") + "/.jbubblebreaker/statistics").delete() == false) {
 					JOptionPane.showMessageDialog(null, Localization.getString("ResetStatisticsError"), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					myData = new LinkedList<StatisticData>();
@@ -168,24 +168,24 @@ public class Statistics extends MyJDialog implements ActionListener {
 	 */
 	static String updateStatistics(String mode, int colors, int rows, int cols, int points) {
 		String returnString = "";
-		if (JBubbleBreaker.isApplicationMode() == true && !JBubbleBreaker.getUserProperty("enableGuestMode","false").equalsIgnoreCase("true")) {
+		if (JBubbleBreaker.isApplicationMode() == true && !JBubbleBreaker.getUserProperty("enableGuestMode", "false").equalsIgnoreCase("true")) {
 			ObjectOutputStream out = null;
 			try {
 				Iterator<StatisticData> myIterator = getStatistics().iterator();
-				out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker/statistics")));
+				out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(System.getProperty("user.home") + "/.jbubblebreaker/statistics")));
 				boolean found = false;
-				while(myIterator.hasNext()) {
+				while (myIterator.hasNext()) {
 					StatisticData myItem = myIterator.next();
 					if (myItem.getMode().equals(mode) && myItem.getColors() == colors && myItem.getRows() == rows && myItem.getCols() == cols) {
 						myItem.newGame(points);
-						returnString = "\n"+Localization.getString("GamesPlayed")+": " + myItem.getCountOfGames()+"\n"+Localization.getString("AvgPoints")+": "+myItem.getAveragePoints()+"\n"+Localization.getString("MaxPoints")+": "+myItem.getMaxPoints();
+						returnString = "\n" + Localization.getString("GamesPlayed") + ": " + myItem.getCountOfGames() + "\n" + Localization.getString("AvgPoints") + ": " + myItem.getAveragePoints() + "\n" + Localization.getString("MaxPoints") + ": " + myItem.getMaxPoints();
 						found = true;
 					}
 					out.writeObject(myItem);
 				}
 				if (found == false) {
 					out.writeObject(new StatisticData(mode, colors, rows, cols, points));
-					returnString = "\n"+Localization.getString("FirstTime");
+					returnString = "\n" + Localization.getString("FirstTime");
 				}
 				out.close();
 			} catch (FileNotFoundException e) {
@@ -203,7 +203,7 @@ public class Statistics extends MyJDialog implements ActionListener {
 		List<StatisticData> myList = new LinkedList<StatisticData>();
 		ObjectInputStream in = null;
 		try {
-			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(System.getProperty("user.home")+"/.jbubblebreaker/statistics")));
+			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(System.getProperty("user.home") + "/.jbubblebreaker/statistics")));
 		} catch (FileNotFoundException e) {
 			return myList;
 		} catch (IOException e) {
@@ -211,14 +211,16 @@ public class Statistics extends MyJDialog implements ActionListener {
 		}
 		try {
 			StatisticData statisticData;
-			while ((statisticData = (StatisticData)in.readObject()) != null) {
+			while ((statisticData = (StatisticData) in.readObject()) != null) {
 				myList.add(statisticData);
 			}
 		} catch (IOException e) {
-		} catch (ClassNotFoundException e) {}
+		} catch (ClassNotFoundException e) {
+		}
 		try {
 			in.close();
-		} catch (IOException e) {}
+		} catch (IOException e) {
+		}
 		return myList;
 	}
 }

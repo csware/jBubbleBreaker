@@ -38,7 +38,7 @@ public class PlaySound extends Thread {
 	 */
 	public PlaySound(Sounds sound) {
 		super();
-		if (JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true")) {
+		if (JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true")) {
 			soundID = sound.ordinal();
 			start();
 		}

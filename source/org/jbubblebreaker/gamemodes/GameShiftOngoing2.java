@@ -55,11 +55,11 @@ public class GameShiftOngoing2 extends GameShift {
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		super.removeMarkedBubbles(row, col);
-		int i = playground.getRows()-1;
-		while (i>0 && playground.isEmpty(i,0)==false) {
+		int i = playground.getRows() - 1;
+		while (i > 0 && playground.isEmpty(i, 0) == false) {
 			i--;
 		}
-		newBubble(i,0);
+		newBubble(i, 0);
 		doShift();
 	}
 }

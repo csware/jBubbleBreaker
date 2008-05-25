@@ -60,8 +60,8 @@ public class GameDefault extends Game {
 
 	@Override
 	protected void fillPlayground() {
-		for(int i=0; i < playground.getRows(); i++) {
-			for(int j=0; j < playground.getCols(); j++) {
+		for (int i = 0; i < playground.getRows(); i++) {
+			for (int j = 0; j < playground.getCols(); j++) {
 				newBubble(i, j);
 			}
 		}
@@ -69,22 +69,24 @@ public class GameDefault extends Game {
 
 	@Override
 	protected void findsame(int row, int col) {
-		if (playground.isEmpty(row, col) == true) { return; }
+		if (playground.isEmpty(row, col) == true) {
+			return;
+		}
 		marked++;
 		playground.setMark(row, col, true);
 		int color = playground.getColor(row, col);
 
 		if (playground.getColor(row, col + 1) == color && playground.isMarked(row, col + 1) == false) {
-			findsame(row,col + 1);
+			findsame(row, col + 1);
 		}
 		if (playground.getColor(row, col - 1) == color && playground.isMarked(row, col - 1) == false) {
-			findsame(row,col - 1);
+			findsame(row, col - 1);
 		}
-		if (playground.getColor(row + 1, col) == color && playground.isMarked(row+1, col) == false) {
-			findsame(row + 1,col);
+		if (playground.getColor(row + 1, col) == color && playground.isMarked(row + 1, col) == false) {
+			findsame(row + 1, col);
 		}
 		if (playground.getColor(row - 1, col) == color && playground.isMarked(row - 1, col) == false) {
-			findsame(row - 1,col);
+			findsame(row - 1, col);
 		}
 	}
 
@@ -92,8 +94,8 @@ public class GameDefault extends Game {
 	protected boolean isPlaygroundSolvable() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
-		while(col >= 0 && playground.isEmpty(row,col) == false) {
-			while(row >= 0 && playground.isEmpty(row, col) == false) {
+		while (col >= 0 && playground.isEmpty(row, col) == false) {
+			while (row >= 0 && playground.isEmpty(row, col) == false) {
 				if (playground.isEmpty(row - 1, col) == false && playground.getColor(row, col) == playground.getColor(row - 1, col)) {
 					return true;
 				}
@@ -110,20 +112,20 @@ public class GameDefault extends Game {
 
 	@Override
 	protected Integer getCalculatedPoints() {
-		return (marked*(marked-1));
+		return (marked * (marked - 1));
 	}
 
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		// first of all delete bubbles in col
-		for(int k=0; k < playground.getCols(); k++) {
-			for(int i=0; i < playground.getRows(); i++) {
+		for (int k = 0; k < playground.getCols(); k++) {
+			for (int i = 0; i < playground.getRows(); i++) {
 				//System.out.println(i);
-				if (playground.isMarked(i,k) == true) {
+				if (playground.isMarked(i, k) == true) {
 					//System.out.println("wech:"+i);
 					removeBubble(i, k);
-					for(int j=i; j > 0; j--) {
-						playground.moveTo(j-1, k, j, k);
+					for (int j = i; j > 0; j--) {
+						playground.moveTo(j - 1, k, j, k);
 						//System.out.println("wandern "+(j-1)+" nach "+j);
 					}
 				}
@@ -131,17 +133,17 @@ public class GameDefault extends Game {
 		}
 		// now remove empty columns
 		int firstEmpty = -1;
-		for(int k=0; k < playground.getCols(); k++) {
-			if (playground.isEmpty(playground.getRows()-1, k) == true && firstEmpty == -1) {
+		for (int k = 0; k < playground.getCols(); k++) {
+			if (playground.isEmpty(playground.getRows() - 1, k) == true && firstEmpty == -1) {
 				firstEmpty = k;
 			}
 		}
-		for(int k=playground.getCols()-1; k > 0; k--) {
-			while (playground.isEmpty(playground.getRows()-1, k) == true && firstEmpty <= k) {
-				for(int j=k; j > 0; j--) {
+		for (int k = playground.getCols() - 1; k > 0; k--) {
+			while (playground.isEmpty(playground.getRows() - 1, k) == true && firstEmpty <= k) {
+				for (int j = k; j > 0; j--) {
 					//System.out.println("wandern "+(j-1)+" nach "+j);
-					for(int i=0; i < playground.getRows(); i++) {
-						playground.moveTo(i, j-1, i, j);
+					for (int i = 0; i < playground.getRows(); i++) {
+						playground.moveTo(i, j - 1, i, j);
 					}
 				}
 				firstEmpty++;

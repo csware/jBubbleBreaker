@@ -49,11 +49,11 @@ public class GameShift extends GameDefault {
 
 	protected void doShift() {
 		// shift empty columns
-		for(int l=0; l < playground.getRows(); l++) {
-			for(int k=0; k < playground.getCols(); k++) {
+		for (int l = 0; l < playground.getRows(); l++) {
+			for (int k = 0; k < playground.getCols(); k++) {
 				if (playground.isEmpty(l, k) == true) {
-					for (int i = k; i > 0; i--)  {
-						playground.moveTo(l, i-1, l, i);
+					for (int i = k; i > 0; i--) {
+						playground.moveTo(l, i - 1, l, i);
 					}
 				}
 			}
@@ -64,12 +64,12 @@ public class GameShift extends GameDefault {
 	@Override
 	protected void removeMarkedBubbles(int row, int col) {
 		// first of all delete bubbles in col
-		for(int k=0; k < playground.getCols(); k++) {
-			for(int i=0; i < playground.getRows(); i++) {
-				if (playground.isMarked(i,k) == true) {
+		for (int k = 0; k < playground.getCols(); k++) {
+			for (int i = 0; i < playground.getRows(); i++) {
+				if (playground.isMarked(i, k) == true) {
 					removeBubble(i, k);
-					for(int j=i; j > 0; j--) {
-						playground.moveTo(j-1, k, j, k);
+					for (int j = i; j > 0; j--) {
+						playground.moveTo(j - 1, k, j, k);
 					}
 				}
 			}

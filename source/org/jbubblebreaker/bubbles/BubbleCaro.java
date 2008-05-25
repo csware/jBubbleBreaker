@@ -64,6 +64,6 @@ public class BubbleCaro extends BubbleDefault {
 			g.fillRect(0, 0, radius, radius);
 		}
 		g.setColor(getColor(getColorIndex()));
-		g.fillPolygon(new int[] {radius/2,radius,radius/2,0},new int[] {0,radius/2,radius,radius/2},4);
+		g.fillPolygon(new int[] { radius / 2, radius, radius / 2, 0 }, new int[] { 0, radius / 2, radius, radius / 2 }, 4);
 	}
 }

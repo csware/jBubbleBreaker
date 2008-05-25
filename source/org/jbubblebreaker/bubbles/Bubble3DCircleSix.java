@@ -36,7 +36,7 @@ public class Bubble3DCircleSix extends Bubble3DCircle {
 	/**
 	 * Buffer the image
 	 */
-	static private Image[] image = {null, null, null, null, null, null};
+	static private Image[] image = { null, null, null, null, null, null };
 	/**
 	 * store the last radius
 	 */
@@ -70,7 +70,7 @@ public class Bubble3DCircleSix extends Bubble3DCircle {
 
 	@Override
 	protected Color[] getAllColors() {
-		return new Color[] {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN};
+		return new Color[] { Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN };
 	}
 
 	@Override
@@ -81,11 +81,10 @@ public class Bubble3DCircleSix extends Bubble3DCircle {
 			g.fillRect(0, 0, radius, radius);
 		}
 		if (image[0] == null || radius != oldradius) {
-			String[] filenames = {"bubble-red","bubble-blue","bubble-yellow"
-				,"bubble-magenta","bubble-green","bubble-cyan"};
-			for(int i = 0; i < 6; i++) {
+			String[] filenames = { "bubble-red", "bubble-blue", "bubble-yellow", "bubble-magenta", "bubble-green", "bubble-cyan" };
+			for (int i = 0; i < 6; i++) {
 				try {
-					image[i] = ImageIO.read(getClass().getResource("/images/"+filenames[i]+".png")).getScaledInstance(radius, radius, Image.SCALE_SMOOTH);
+					image[i] = ImageIO.read(getClass().getResource("/images/" + filenames[i] + ".png")).getScaledInstance(radius, radius, Image.SCALE_SMOOTH);
 				} catch (IOException e) {
 					// should not occour
 				}

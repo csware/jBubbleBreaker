@@ -65,10 +65,10 @@ public class GameOngoingSpeed extends GameOngoing {
 
 	@Override
 	protected Integer getCalculatedPoints() {
-		int calculatedTime = 10-(int)((System.currentTimeMillis()-time)/100);
+		int calculatedTime = 10 - (int) ((System.currentTimeMillis() - time) / 100);
 		if (calculatedTime < 0) {
 			calculatedTime = 0;
 		}
-		return (marked*calculatedTime);
+		return (marked * calculatedTime);
 	}
 }

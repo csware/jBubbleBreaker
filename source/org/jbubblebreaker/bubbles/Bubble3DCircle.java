@@ -36,7 +36,7 @@ public class Bubble3DCircle extends BubbleDefault {
 	/**
 	 * Buffer the image
 	 */
-	static private Image[] image = {null, null, null, null, null};
+	static private Image[] image = { null, null, null, null, null };
 	/**
 	 * store the last radius
 	 */
@@ -75,11 +75,10 @@ public class Bubble3DCircle extends BubbleDefault {
 			g.fillRect(0, 0, radius, radius);
 		}
 		if (image[0] == null || radius != oldradius) {
-			String[] filenames = {"bubble-red","bubble-blue","bubble-yellow"
-				,"bubble-magenta","bubble-green"};
-			for(int i = 0; i < 5; i++) {
+			String[] filenames = { "bubble-red", "bubble-blue", "bubble-yellow", "bubble-magenta", "bubble-green" };
+			for (int i = 0; i < 5; i++) {
 				try {
-					image[i] = ImageIO.read(getClass().getResource("/images/"+filenames[i]+".png")).getScaledInstance(radius, radius, Image.SCALE_SMOOTH);
+					image[i] = ImageIO.read(getClass().getResource("/images/" + filenames[i] + ".png")).getScaledInstance(radius, radius, Image.SCALE_SMOOTH);
 				} catch (IOException e) {
 					// should not occour
 				}

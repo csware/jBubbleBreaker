@@ -51,7 +51,7 @@ public class StatisticData implements Serializable {
 			maxPoints = points;
 		}
 		countOfGames++;
-		averagePoints = (averagePoints + points)/2;
+		averagePoints = (averagePoints + points) / 2;
 	}
 
 	/**
@@ -60,30 +60,35 @@ public class StatisticData implements Serializable {
 	public int getCountOfGames() {
 		return countOfGames;
 	}
+
 	/**
 	 * @param countOfGames the countOfGames to set
 	 */
 	public void setCountOfGames(int countOfGames) {
 		this.countOfGames = countOfGames;
 	}
+
 	/**
 	 * @return the maxPoints
 	 */
 	public int getMaxPoints() {
 		return maxPoints;
 	}
+
 	/**
 	 * @param maxPoints the maxPoints to set
 	 */
 	public void setMaxPoints(int maxPoints) {
 		this.maxPoints = maxPoints;
 	}
+
 	/**
 	 * @return the averagePoints
 	 */
 	public int getAveragePoints() {
 		return averagePoints;
 	}
+
 	/**
 	 * @return the mode
 	 */

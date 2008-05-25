@@ -74,9 +74,9 @@ public class GameLevelBreakerShift extends GameShift {
 
 	@Override
 	protected void fillPlayground() {
-		for(int i=0; i < playground.getRows(); i++) {
-			for(int j=0; j < playground.getCols(); j++) {
-				newBubble(i, j, (int)(Math.random()*gameLevel));
+		for (int i = 0; i < playground.getRows(); i++) {
+			for (int j = 0; j < playground.getCols(); j++) {
+				newBubble(i, j, (int) (Math.random() * gameLevel));
 			}
 		}
 	}

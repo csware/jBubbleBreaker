@@ -79,8 +79,8 @@ public class Playground {
 			radius = calulateRadius(windowWidth, windowHeight);
 			int row = getRows() - 1;
 			int col = getCols() - 1;
-			while(col >= 0 && isEmpty(row,col) == false) {
-				while(row >= 0 && isEmpty(row, col) == false) {
+			while (col >= 0 && isEmpty(row, col) == false) {
+				while (row >= 0 && isEmpty(row, col) == false) {
 					if (isEmpty(row, col) == false) {
 						getBubble(row, col).resized(radius);
 					}
@@ -127,7 +127,7 @@ public class Playground {
 		if (x >= 0 && y >= 0 && x < getRows() && y < getCols()) {
 			playground[x][y] = null;
 			try {
-				playground[x][y] = (Bubble)JBubbleBreaker.getBubbleTypes().get(bubbleType).getConstructor().newInstance( new Object[] {radius, x, y, colorIndex} );
+				playground[x][y] = (Bubble) JBubbleBreaker.getBubbleTypes().get(bubbleType).getConstructor().newInstance(new Object[] { radius, x, y, colorIndex });
 				playground[x][y].addMouseListener(mouseListener);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -157,7 +157,7 @@ public class Playground {
 	 * @return Bubble-Color-index, -1 if this Bubble doesn't exist
 	 */
 	public int getColor(int x, int y) {
-		if (isEmpty(x,y) == true) {
+		if (isEmpty(x, y) == true) {
 			return -1;
 		} else {
 			return playground[x][y].getColorIndex();
@@ -171,7 +171,7 @@ public class Playground {
 	 * @return Bubble-reference, null if this Bubble doesn't exist
 	 */
 	Bubble getBubble(int x, int y) {
-		if (isEmpty(x,y) == false) {
+		if (isEmpty(x, y) == false) {
 			return playground[x][y];
 		} else {
 			return null;
@@ -188,7 +188,7 @@ public class Playground {
 		if (x < 0 || y < 0 || x >= getRows() || y >= getCols()) {
 			return true;
 		}
-		return (playground[x][y]==null);
+		return (playground[x][y] == null);
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class Playground {
 	 * @return is marked?, false if Bubble doesn't exist
 	 */
 	public boolean isMarked(int x, int y) {
-		if (isEmpty(x,y) == true) {
+		if (isEmpty(x, y) == true) {
 			return false;
 		}
 		return playground[x][y].isMarked();
@@ -214,8 +214,8 @@ public class Playground {
 	public void moveTo(int x, int y, int toX, int toY) {
 		if (x != toX || y != toY) {
 			playground[toX][toY] = playground[x][y];
-			if (isEmpty(toX,toY) == false) {
-				playground[toX][toY].moveTo(toX,toY);
+			if (isEmpty(toX, toY) == false) {
+				playground[toX][toY].moveTo(toX, toY);
 			}
 			playground[x][y] = null;
 		}
@@ -227,7 +227,7 @@ public class Playground {
 	 * @param y column-index
 	 */
 	void removeBubble(int x, int y) {
-		if (isEmpty(x,y) == false) {
+		if (isEmpty(x, y) == false) {
 			playground[x][y] = null;
 		}
 	}
@@ -238,7 +238,7 @@ public class Playground {
 	 * @param y column-index
 	 */
 	public void setMark(int x, int y, boolean setTo) {
-		if (isEmpty(x,y) == false) {
+		if (isEmpty(x, y) == false) {
 			playground[x][y].setMark(setTo);
 		}
 	}
@@ -249,8 +249,8 @@ public class Playground {
 	public void unMarkAll() {
 		int row = getRows() - 1;
 		int col = getCols() - 1;
-		while(col >= 0 && isEmpty(row,col) == false) {
-			while(row >= 0 && isEmpty(row, col) == false) {
+		while (col >= 0 && isEmpty(row, col) == false) {
+			while (row >= 0 && isEmpty(row, col) == false) {
 				setMark(row, col, false);
 				row--;
 			}

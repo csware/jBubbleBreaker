@@ -63,7 +63,7 @@ public class Bubble3DRect extends BubbleDefault {
 		g.fill3DRect(0, 0, radius, radius, true);
 		if (isMarked() == true) {
 			g.setColor(Color.GRAY);
-			g.fillOval(radius/4, radius/4, radius/2, radius/2);
+			g.fillOval(radius / 4, radius / 4, radius / 2, radius / 2);
 		}
 	}
 }

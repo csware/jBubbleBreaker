@@ -50,19 +50,19 @@ public class JBubbleBreaker {
 	 * Starts jBubbleBreaker
 	 * @param args no parameter evaluation
 	 */
-	public static void main(String[] args)  {
+	public static void main(String[] args) {
 		// move old files
-		File a = new File(System.getProperty("user.home")+"/.jbubblebreaker");
+		File a = new File(System.getProperty("user.home") + "/.jbubblebreaker");
 		if (!a.exists()) {
 			a.mkdir();
 		}
-		a = new File(System.getProperty("user.home")+"/.jbubblebreaker-statistics");
+		a = new File(System.getProperty("user.home") + "/.jbubblebreaker-statistics");
 		if (a.exists() && a.isFile()) {
-			a.renameTo(new File(System.getProperty("user.home")+"/.jbubblebreaker/statistics"));
+			a.renameTo(new File(System.getProperty("user.home") + "/.jbubblebreaker/statistics"));
 		}
-		a = new File(System.getProperty("user.home")+"/.jbubblebreaker-properties");
+		a = new File(System.getProperty("user.home") + "/.jbubblebreaker-properties");
 		if (a.exists() && a.isFile()) {
-			a.renameTo(new File(System.getProperty("user.home")+"/.jbubblebreaker/properties"));
+			a.renameTo(new File(System.getProperty("user.home") + "/.jbubblebreaker/properties"));
 		}
 		applicationMode = true;
 		registerDefault();
@@ -118,30 +118,30 @@ public class JBubbleBreaker {
 		try {
 			possibleNewMode = (Class<Game>) Class.forName(mode);
 		} catch (ClassNotFoundException e1) {
-			throw(new RuntimeException(mode+" not found!"));
+			throw (new RuntimeException(mode + " not found!"));
 		}
 		Class<Game> newMode = possibleNewMode;
-		while (possibleNewMode.getSuperclass() != null && ! possibleNewMode.getSuperclass().getName().equals("org.jbubblebreaker.Game")) {
+		while (possibleNewMode.getSuperclass() != null && !possibleNewMode.getSuperclass().getName().equals("org.jbubblebreaker.Game")) {
 			possibleNewMode = (Class<Game>) possibleNewMode.getSuperclass();
 		}
 		if (newMode != null && possibleNewMode.getSuperclass() != null && possibleNewMode.getSuperclass().getName().equals("org.jbubblebreaker.Game")) {
 			try {
-				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null),(GameSize) newMode.getDeclaredField("allowedSize").get(null),newMode.getDeclaredConstructor( new Class[] {int.class, int.class, int.class})));
+				gameModes.add(new GameMode((String) newMode.getDeclaredField("name").get(null), (GameSize) newMode.getDeclaredField("allowedSize").get(null), newMode.getDeclaredConstructor(new Class[] { int.class, int.class, int.class })));
 			} catch (IllegalArgumentException e) {
-				throw(new RuntimeException(mode+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));
+				throw (new RuntimeException(mode + " could not be loaded, because a IllegalArgumentException was thrown: " + e.getLocalizedMessage()));
 			} catch (ClassCastException e) {
-				throw(new ClassCastException(mode+" is no jBubbleBreaker extension, it doesn't have the static name-field with type String or the static allowedSize-field with type GameSize."));
+				throw (new ClassCastException(mode + " is no jBubbleBreaker extension, it doesn't have the static name-field with type String or the static allowedSize-field with type GameSize."));
 			} catch (NoSuchFieldException e) {
-				throw(new RuntimeException(mode+" is no jBubbleBreaker extension, it doesn't have the static name- or allowedSize-field."));
+				throw (new RuntimeException(mode + " is no jBubbleBreaker extension, it doesn't have the static name- or allowedSize-field."));
 			} catch (IllegalAccessException e) {
-				throw(new RuntimeException(mode+" could not be loaded, because a IllegalAccessException was thrown: "+e.getLocalizedMessage()));
+				throw (new RuntimeException(mode + " could not be loaded, because a IllegalAccessException was thrown: " + e.getLocalizedMessage()));
 			} catch (SecurityException e) {
-				throw(new RuntimeException(mode+" could not be loaded, because a SecurityException was thrown: "+e.getLocalizedMessage()));
+				throw (new RuntimeException(mode + " could not be loaded, because a SecurityException was thrown: " + e.getLocalizedMessage()));
 			} catch (NoSuchMethodException e) {
-				throw(new RuntimeException(mode+" is no jBubbleBreaker extension, it doesn't have a constructor for (int, int, int)."));
+				throw (new RuntimeException(mode + " is no jBubbleBreaker extension, it doesn't have a constructor for (int, int, int)."));
 			}
 		} else {
-			throw(new RuntimeException(mode+" is no jBubbleBreaker extension, it must extend org.jbubblebreaker.Game."));
+			throw (new RuntimeException(mode + " is no jBubbleBreaker extension, it must extend org.jbubblebreaker.Game."));
 		}
 	}
 
@@ -155,30 +155,30 @@ public class JBubbleBreaker {
 		try {
 			possibleNewType = (Class<Bubble>) Class.forName(bubbleType);
 		} catch (ClassNotFoundException e1) {
-			throw(new RuntimeException(bubbleType+" not found!"));
+			throw (new RuntimeException(bubbleType + " not found!"));
 		}
 		Class<Bubble> newType = possibleNewType;
-		while (possibleNewType.getSuperclass() != null && ! possibleNewType.getSuperclass().getName().equals("org.jbubblebreaker.Bubble")) {
+		while (possibleNewType.getSuperclass() != null && !possibleNewType.getSuperclass().getName().equals("org.jbubblebreaker.Bubble")) {
 			possibleNewType = (Class<Bubble>) possibleNewType.getSuperclass();
 		}
 		if (newType != null && possibleNewType.getSuperclass() != null && possibleNewType.getSuperclass().getName().equals("org.jbubblebreaker.Bubble")) {
 			try {
-				bubbleTypes.add(new BubbleType((String) newType.getDeclaredField("name").get(null),newType.getDeclaredConstructor( new Class[] {int.class, int.class, int.class, int.class})));
+				bubbleTypes.add(new BubbleType((String) newType.getDeclaredField("name").get(null), newType.getDeclaredConstructor(new Class[] { int.class, int.class, int.class, int.class })));
 			} catch (IllegalArgumentException e) {
-				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalArgumentException was thrown: "+e.getLocalizedMessage()));
+				throw (new RuntimeException(bubbleType + " could not be loaded, because a IllegalArgumentException was thrown: " + e.getLocalizedMessage()));
 			} catch (ClassCastException e) {
-				throw(new ClassCastException(bubbleType+" is no jBubbleBreaker bubble type extension, it doesn't have the static name-field with type String."));
+				throw (new ClassCastException(bubbleType + " is no jBubbleBreaker bubble type extension, it doesn't have the static name-field with type String."));
 			} catch (NoSuchFieldException e) {
-				throw(new RuntimeException(bubbleType+" is no jBubbleBreaker bubble type extension, it doesn't have the static name-field."));
+				throw (new RuntimeException(bubbleType + " is no jBubbleBreaker bubble type extension, it doesn't have the static name-field."));
 			} catch (IllegalAccessException e) {
-				throw(new RuntimeException(bubbleType+" could not be loaded, because a IllegalAccessException was thrown: "+e.getLocalizedMessage()));
+				throw (new RuntimeException(bubbleType + " could not be loaded, because a IllegalAccessException was thrown: " + e.getLocalizedMessage()));
 			} catch (SecurityException e) {
-				throw(new RuntimeException(bubbleType+" could not be loaded, because a SecurityException was thrown: "+e.getLocalizedMessage()));
+				throw (new RuntimeException(bubbleType + " could not be loaded, because a SecurityException was thrown: " + e.getLocalizedMessage()));
 			} catch (NoSuchMethodException e) {
-				throw(new RuntimeException(bubbleType+" is no jBubbleBreaker bubble type extension, it doesn't have a constructor for (int, int, int, int)."));
+				throw (new RuntimeException(bubbleType + " is no jBubbleBreaker bubble type extension, it doesn't have a constructor for (int, int, int, int)."));
 			}
 		} else {
-			throw(new RuntimeException(bubbleType+" is no jBubbleBreaker bubble type extension, it must extend org.jbubblebreaker.Bubble."));
+			throw (new RuntimeException(bubbleType + " is no jBubbleBreaker bubble type extension, it must extend org.jbubblebreaker.Bubble."));
 		}
 	}
 
@@ -206,7 +206,7 @@ public class JBubbleBreaker {
 			userProperties = new Properties();
 			if (isApplicationMode()) {
 				try {
-					userProperties.loadFromXML(new FileInputStream(System.getProperty("user.home")+"/.jbubblebreaker/properties"));
+					userProperties.loadFromXML(new FileInputStream(System.getProperty("user.home") + "/.jbubblebreaker/properties"));
 				} catch (Exception e) {
 					// ignore
 				}
@@ -234,7 +234,7 @@ public class JBubbleBreaker {
 		loadUserProperties();
 		userProperties.setProperty(property, value);
 		try {
-			userProperties.storeToXML(new FileOutputStream(System.getProperty("user.home")+"/.jbubblebreaker/properties"), "");
+			userProperties.storeToXML(new FileOutputStream(System.getProperty("user.home") + "/.jbubblebreaker/properties"), "");
 		} catch (Exception e) {
 			// ignore
 		}

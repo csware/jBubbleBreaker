@@ -40,7 +40,7 @@ public class PicturePanel extends JPanel {
 	 * @param height height of the picture
 	 */
 	public PicturePanel(String filename, int width, int height) {
-		this(filename,0,0,width,height);
+		this(filename, 0, 0, width, height);
 	}
 
 	/**
@@ -52,8 +52,8 @@ public class PicturePanel extends JPanel {
 	 * @param height height of the picture
 	 */
 	public PicturePanel(String filename, int x, int y, int width, int height) {
-		this.filename = getClass().getResource("/images/"+filename);
-		this.setBounds(x,y,width,height);
+		this.filename = getClass().getResource("/images/" + filename);
+		this.setBounds(x, y, width, height);
 	}
 
 	@Override

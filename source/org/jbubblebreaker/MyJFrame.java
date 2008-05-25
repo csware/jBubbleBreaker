@@ -39,17 +39,17 @@ public abstract class MyJFrame extends JFrame {
 	 * @param iconFileName the icon filename, null for no icon
 	 * @param width width of the JFrame
 	 * @param height height of the JFrame
-	 * @param resizeAble create resizebale JFrame?
+	 * @param resizAble create resizable JFrame?
 	 * @param centered center the JFrame?
 	 */
-	public MyJFrame(String title, String iconFileName, int width, int height, boolean resizeAble, boolean centered) {
+	public MyJFrame(String title, String iconFileName, int width, int height, boolean resizAble, boolean centered) {
 		super(title);
 		if (iconFileName != null) {
 			setIcon(iconFileName);
 		}
-		setSize(width,height);
-		setResizable(resizeAble);
-		if (centered==true) {
+		setSize(width, height);
+		setResizable(resizAble);
+		if (centered == true) {
 			setCentered();
 		}
 	}
@@ -59,13 +59,13 @@ public abstract class MyJFrame extends JFrame {
 	 * @param filename the path and name of the image to use as the icon for the JFrame
 	 */
 	protected void setIcon(String filename) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/"+filename)));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/" + filename)));
 	}
 
 	/**
 	 * Centers the window on the screen
 	 */
 	protected void setCentered() {
-		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width-getWidth())/2,(Toolkit.getDefaultToolkit().getScreenSize().height-getHeight())/2);
+		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - getHeight()) / 2);
 	}
 }

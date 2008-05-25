@@ -42,7 +42,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
 
-	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots,menuGameStatistics,menuGameGuestMode,menuGameClose,menuGameSounds;
+	private JMenuItem menuHelpInfo, menuGameNew, menuGameNewDots, menuGameStatistics, menuGameGuestMode, menuGameClose, menuGameSounds;
 
 	/**
 	 * Start GUI, but only once
@@ -58,7 +58,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	 * Create the JFrame and prepare everything for the game
 	 */
 	private GUI() {
-		super("jBubbleBreaker","jbubblebreaker.png",407,470,true,true);
+		super("jBubbleBreaker", "jbubblebreaker.png", 407, 470, true, true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// insert Menu
@@ -73,32 +73,32 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuGameNew = new JMenuItem(Localization.getString("MenuNew"));
 		menuGameNew.addActionListener(this);
 		menuGameNew.setMnemonic(Localization.getChar("MenuNewMnemonic"));
-		menuGameNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
+		menuGameNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
 		menuGame.add(menuGameNew);
 		menuGameNewDots = new JMenuItem(Localization.getString("MenuNewDots"));
 		menuGameNewDots.addActionListener(this);
 		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
-		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3,0));
+		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		menuGame.add(menuGameNewDots);
 		menuGameStatistics = new JMenuItem(Localization.getString("MenuStatistics"));
 		menuGameStatistics.addActionListener(this);
 		menuGameStatistics.setMnemonic(Localization.getChar("MenuGameStatisticsMnemonic"));
-		menuGameStatistics.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,0));
+		menuGameStatistics.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
 		menuGame.add(menuGameStatistics);
 		menuGameGuestMode = new JCheckBoxMenuItem(Localization.getString("MenuGuestMode"));
 		menuGameGuestMode.addActionListener(this);
 		menuGameGuestMode.setMnemonic(Localization.getChar("MenuGuestModeMnemonic"));
-		menuGameGuestMode.setSelected(JBubbleBreaker.getUserProperty("enableGuestMode","false").equalsIgnoreCase("true"));
+		menuGameGuestMode.setSelected(JBubbleBreaker.getUserProperty("enableGuestMode", "false").equalsIgnoreCase("true"));
 		menuGame.add(menuGameGuestMode);
 		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
 		menuGameSounds.addActionListener(this);
 		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
-		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true"));
+		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true"));
 		menuGame.add(menuGameSounds);
 		menuGameClose = new JMenuItem(Localization.getString("MenuQuit"));
 		menuGameClose.addActionListener(this);
 		menuGameClose.setMnemonic(Localization.getChar("MenuQuitMnemonic"));
-		menuGameClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,ActionEvent.ALT_MASK));
+		menuGameClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
 		menuGame.add(menuGameClose);
 		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
 		menuHelpInfo.addActionListener(this);
@@ -165,15 +165,15 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 			newGameDots();
 		} else if (arg0.getSource() == menuGameGuestMode) {
 			if (menuGameGuestMode.isSelected()) {
-				JBubbleBreaker.setUserProperty("enableGuestMode","true");
+				JBubbleBreaker.setUserProperty("enableGuestMode", "true");
 			} else {
-				JBubbleBreaker.setUserProperty("enableGuestMode","false");
+				JBubbleBreaker.setUserProperty("enableGuestMode", "false");
 			}
 		} else if (arg0.getSource() == menuGameSounds) {
 			if (menuGameSounds.isSelected()) {
-				JBubbleBreaker.setUserProperty("enableSound","true");
+				JBubbleBreaker.setUserProperty("enableSound", "true");
 			} else {
-				JBubbleBreaker.setUserProperty("enableSound","false");
+				JBubbleBreaker.setUserProperty("enableSound", "false");
 			}
 		}
 	}

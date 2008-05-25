@@ -66,7 +66,7 @@ public abstract class Game extends MouseAdapter {
 
 		playground = new Playground(playgroundPanel.getWidth(), playgroundPanel.getHeight(), rows, cols, this, bubbleType);
 
-		possiblePoints.setSize(50,50);
+		possiblePoints.setSize(50, 50);
 		playgroundPanel.add(possiblePoints);
 		possiblePoints.setVisible(false);
 
@@ -87,7 +87,7 @@ public abstract class Game extends MouseAdapter {
 	 */
 	final void setPointsLabel(JLabel pointsLabel) {
 		this.pointsLabel = pointsLabel;
-		pointsLabel.setText(Localization.getString("Points")+ points);
+		pointsLabel.setText(Localization.getString("Points") + points);
 	}
 
 	/**
@@ -103,8 +103,8 @@ public abstract class Game extends MouseAdapter {
 		// remove all Bubbles from playgroundPanel
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
-		while(col >= 0 && playground.isEmpty(row,col) == false) {
-			while(row >= 0 && playground.isEmpty(row, col) == false) {
+		while (col >= 0 && playground.isEmpty(row, col) == false) {
+			while (row >= 0 && playground.isEmpty(row, col) == false) {
 				removeBubble(row, col);
 				row--;
 			}
@@ -152,7 +152,7 @@ public abstract class Game extends MouseAdapter {
 	final private void gameOver(int solvedPoints) {
 		playgroundPanel.setEnabled(false);
 		if (solvedPoints >= 0 && isSolvable()) {
-			JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + "\n" + Localization.getString("BreakerBonus") + ": " + solvedPoints + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()+solvedPoints), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + "\n" + Localization.getString("BreakerBonus") + ": " + solvedPoints + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints() + solvedPoints), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints()), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -219,9 +219,9 @@ public abstract class Game extends MouseAdapter {
 	 * @param col column-index
 	 */
 	final protected void removeBubble(int row, int col) {
-		if (playground.isEmpty(row,col) == false) {
-			playgroundPanel.remove(playground.getBubble(row,col));
-			playground.removeBubble(row,col);
+		if (playground.isEmpty(row, col) == false) {
+			playgroundPanel.remove(playground.getBubble(row, col));
+			playground.removeBubble(row, col);
 		}
 	}
 
@@ -235,37 +235,39 @@ public abstract class Game extends MouseAdapter {
 	 * Unmark all Bubbles
 	 */
 	private void unMarkAll() {
-		marked=0;
+		marked = 0;
 		playground.unMarkAll();
 		possiblePoints.setVisible(false);
 	}
 
 	@Override
 	final public void mouseClicked(MouseEvent arg0) {
-		pointsLabel.setText(Localization.getString("Points")+ points);
+		pointsLabel.setText(Localization.getString("Points") + points);
 		if (arg0.getSource() == playgroundPanel || playgroundPanel.isEnabled() == false) {
 			unMarkAll();
 			return;
 		}
-		Bubble my = (Bubble)(arg0.getSource());
-		if (my == null) { return; }
+		Bubble my = (Bubble) (arg0.getSource());
+		if (my == null) {
+			return;
+		}
 		//System.out.println(my.getRow() +"x"+ my.getCol());
 		if (marked != 0) {
 			if (my.isMarked() == false) {
 				unMarkAll();
 			} else {
-				if (JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true")) {
+				if (JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true")) {
 					new PlaySound(Sounds.REMOVE_BUBBLES);
 				}
 				points += getCalculatedPoints();
-				removeMarkedBubbles(my.getRow(),my.getCol());
-				pointsLabel.setText(Localization.getString("Points")+ points);
+				removeMarkedBubbles(my.getRow(), my.getCol());
+				pointsLabel.setText(Localization.getString("Points") + points);
 				playgroundPanel.repaint();
-				marked=0;
+				marked = 0;
 				possiblePoints.setVisible(false);
-				if (playground.isEmpty(playground.getRows()-1,playground.getCols()-1) == true) {
+				if (playground.isEmpty(playground.getRows() - 1, playground.getCols() - 1) == true) {
 					int solvedPoints = solvedAction();
-					if (solvedPoints>=0) {
+					if (solvedPoints >= 0) {
 						gameOver(solvedPoints);
 						return;
 					}
@@ -276,12 +278,12 @@ public abstract class Game extends MouseAdapter {
 			}
 			return;
 		}
-		marked=0;
-		findsame(my.getRow(),my.getCol());
+		marked = 0;
+		findsame(my.getRow(), my.getCol());
 		possiblePoints.setText(getCalculatedPoints().toString());
-		possiblePoints.setLocation((int)my.getLocation().getX()+10,(int)my.getLocation().getY()-12);
+		possiblePoints.setLocation((int) my.getLocation().getX() + 10, (int) my.getLocation().getY() - 12);
 		possiblePoints.setVisible(true);
-		if (marked==1) {
+		if (marked == 1) {
 			unMarkAll();
 		}
 	}

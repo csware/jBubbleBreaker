@@ -40,7 +40,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
-	private JMenuItem menuHelpInfo,menuGameNew,menuGameNewDots,menuGameSounds;
+	private JMenuItem menuHelpInfo, menuGameNew, menuGameNewDots, menuGameSounds;
 
 	@Override
 	public void init() {
@@ -95,7 +95,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
 		menuGameSounds.addActionListener(this);
 		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
-		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound","true").equalsIgnoreCase("true"));
+		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true"));
 		menuGame.add(menuGameSounds);
 		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
 		menuHelpInfo.addActionListener(this);
@@ -109,7 +109,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 	 * Ask the user for game details for a new game
 	 */
 	private void newGameDots() {
-		game=null;
+		game = null;
 		menuGameNew.setEnabled(false);
 		menuGameNewDots.setEnabled(false);
 		NewGameAskUserPanel nGAuP = new NewGameAskUserPanel(this);
@@ -128,9 +128,9 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 			newGameDots();
 		} else if (arg0.getSource() == menuGameSounds) {
 			if (menuGameSounds.isSelected()) {
-				JBubbleBreaker.setUserProperty("enableSound","true");
+				JBubbleBreaker.setUserProperty("enableSound", "true");
 			} else {
-				JBubbleBreaker.setUserProperty("enableSound","false");
+				JBubbleBreaker.setUserProperty("enableSound", "false");
 			}
 		}
 	}

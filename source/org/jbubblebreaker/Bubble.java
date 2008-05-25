@@ -55,13 +55,13 @@ public abstract class Bubble extends JPanel {
 	 * @param colorIndex color index for new Bubble, if this colorIndex is not valid a random color is used
 	 */
 	public Bubble(int radius, int row, int col, int colorIndex) {
-		this.radius=radius;
+		this.radius = radius;
 		this.setSize(radius, radius);
-		moveTo(row,col);
+		moveTo(row, col);
 		if (colorIndex >= 0 && colorIndex < getColorsCount()) {
 			color = colorIndex;
 		} else {
-			color = (int)(Math.random()*getColorsCount());
+			color = (int) (Math.random() * getColorsCount());
 		}
 	}
 
@@ -71,9 +71,9 @@ public abstract class Bubble extends JPanel {
 	 */
 	final public void resized(int radius) {
 		if (this.radius != radius) {
-			this.radius=radius;
+			this.radius = radius;
 			this.setSize(radius, radius);
-			this.setLocation(getCol()*radius, getRow()*radius);
+			this.setLocation(getCol() * radius, getRow() * radius);
 			repaint();
 		}
 	}
@@ -141,7 +141,7 @@ public abstract class Bubble extends JPanel {
 	final public void moveTo(int row, int col) {
 		this.row = row;
 		this.col = col;
-		this.setLocation(col*radius, row*radius);
+		this.setLocation(col * radius, row * radius);
 	}
 
 	@Override

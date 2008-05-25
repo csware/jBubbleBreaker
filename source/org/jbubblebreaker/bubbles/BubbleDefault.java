@@ -75,7 +75,7 @@ public class BubbleDefault extends Bubble {
 	 * @return color-array
 	 */
 	protected Color[] getAllColors() {
-		return new Color[] {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA};
+		return new Color[] { Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.MAGENTA };
 	}
 
 	/**

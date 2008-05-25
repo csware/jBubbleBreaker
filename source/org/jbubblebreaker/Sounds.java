@@ -42,6 +42,6 @@ public enum Sounds {
 	 * @return path of the sound file
 	 */
 	public String getFilename() {
-		return "/sounds/"+filename;
+		return "/sounds/" + filename;
 	}
 }

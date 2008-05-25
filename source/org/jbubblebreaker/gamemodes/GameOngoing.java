@@ -56,15 +56,14 @@ public class GameOngoing extends GameDefault {
 	protected void removeMarkedBubbles(int row, int col) {
 		super.removeMarkedBubbles(row, col);
 		// add new Bubbles at the left frontier
-		for(int k=0; k < playground.getCols(); k++) {
-			if (playground.isEmpty(playground.getRows()-1, k) == true) {
-				for(int i=playground.getRows() - 1; i >= Math.random()*(playground.getRows() - 1); i--) {
+		for (int k = 0; k < playground.getCols(); k++) {
+			if (playground.isEmpty(playground.getRows() - 1, k) == true) {
+				for (int i = playground.getRows() - 1; i >= Math.random() * (playground.getRows() - 1); i--) {
 					newBubble(i, k);
 				}
 			} else {
 				break;
 			}
 		}
- 
 	}
 }
