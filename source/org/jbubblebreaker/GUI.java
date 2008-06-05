@@ -21,12 +21,14 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -42,7 +44,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
 
-	private JMenuItem menuHelpInfo, menuGameNew, menuGameNewDots, menuGameStatistics, menuGameGuestMode, menuGameClose, menuGameSounds;
+	private JMenuItem menuHelpUpdate, menuHelpInfo, menuGameNew, menuGameNewDots, menuGameStatistics, menuGameGuestMode, menuGameClose, menuGameSounds;
 
 	/**
 	 * Start GUI, but only once
@@ -100,6 +102,10 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuGameClose.setMnemonic(Localization.getChar("MenuQuitMnemonic"));
 		menuGameClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
 		menuGame.add(menuGameClose);
+		menuHelpUpdate = new JMenuItem(Localization.getString("MenuHelpUpdate"));
+		menuHelpUpdate.addActionListener(this);
+		menuHelpUpdate.setMnemonic(Localization.getChar("MenuHelpUpdateMnemonic"));
+		menuHelp.add(menuHelpUpdate);
 		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
 		menuHelpInfo.addActionListener(this);
 		menuHelpInfo.setMnemonic(Localization.getChar("MenuAboutMnemonic"));
@@ -156,6 +162,16 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 			dispose();
 		} else if (arg0.getSource() == menuHelpInfo) {
 			new AboutBox();
+		} else if (arg0.getSource() == menuHelpUpdate) {
+			try {
+				if (JBubbleBreaker.checkForUpdate() == true) {
+					JOptionPane.showMessageDialog(null, Localization.getString("NewVersionAvailable") + " " + JBubbleBreaker.getProjectHomepage(), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, Localization.getString("NoNewVersionAvailable"), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+				}
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, Localization.getString("NewVersionError"), "jBubbleBreaker", JOptionPane.ERROR_MESSAGE);
+			}
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
 			pointsLabel.setText(Localization.getString("PointsZero"));

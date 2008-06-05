@@ -20,6 +20,10 @@ package org.jbubblebreaker;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.InvalidPropertiesFormatException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -75,7 +79,7 @@ public class JBubbleBreaker {
 	 */
 	static public String getVersion() {
 		// check application.properties for all locations where version needs to kept up to date
-		return "0.7";
+		return "0.8";
 	}
 
 	/**
@@ -246,5 +250,24 @@ public class JBubbleBreaker {
 	 */
 	public static Boolean isApplicationMode() {
 		return applicationMode;
+	}
+
+	/**
+	 * Checks on the WebSite if a new version is available.
+	 * @return true if an update is available, false otherwise
+	 * @throws IOException
+	 */
+	public static boolean checkForUpdate() throws IOException {
+		Properties versionProperties = new Properties();
+		try {
+			versionProperties.loadFromXML(new URL(getProjectHomepage() + "/jbubblebreaker.xml").openStream());
+		} catch (MalformedURLException e) {
+			// ignore
+		}
+		if (getVersion().equalsIgnoreCase(versionProperties.getProperty("latestVersion"))) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
