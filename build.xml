@@ -28,7 +28,7 @@
 			<zipfileset dir="." includes=".project" prefix="jbubblebreaker" />
 			<zipfileset dir="." includes="application.properties" prefix="jbubblebreaker" />
 			<zipfileset dir="." includes="build.xml" prefix="jbubblebreaker" />
-			<zipfileset dir="source" prefix="jbubblebreaker/source" />
+			<zipfileset dir="${source.dir}" prefix="jbubblebreaker/${source.dir}" />
 			<zipfileset dir="doc" prefix="jbubblebreaker/doc" />
 			<zipfileset dir="innosetup" prefix="jbubblebreaker/innosetup" />
 		</zip>
