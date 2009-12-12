@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2008 - 2009 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -55,21 +55,49 @@ public class JBubbleBreaker {
 	 */
 	public static void main(String[] args) {
 		// move old files
-		File a = new File(System.getProperty("user.home") + "/.jbubblebreaker");
-		if (!a.exists()) {
-			a.mkdir();
-		}
-		a = new File(System.getProperty("user.home") + "/.jbubblebreaker-statistics");
+		File a = new File(System.getProperty("user.home"), ".jbubblebreaker-statistics");
 		if (a.exists() && a.isFile()) {
-			a.renameTo(new File(System.getProperty("user.home") + "/.jbubblebreaker/statistics"));
+			a.renameTo(new File(getPreferencesDirFile().getAbsolutePath(), "statistics"));
 		}
-		a = new File(System.getProperty("user.home") + "/.jbubblebreaker-properties");
+		a = new File(System.getProperty("user.home"), ".jbubblebreaker-properties");
 		if (a.exists() && a.isFile()) {
-			a.renameTo(new File(System.getProperty("user.home") + "/.jbubblebreaker/properties"));
+			a.renameTo(new File(getPreferencesDirFile().getAbsolutePath(), "properties"));
 		}
+		// migrate pre 0.9
+		a = new File(System.getProperty("user.home"), ".jbubblebreaker");
+		if (!a.equals(getPreferencesDirFile())) {
+			File b = new File(a, "statistics");
+			File c = new File(a, "properties");
+			if (b.exists() && b.isFile()) {
+				b.renameTo(new File(getPreferencesDirFile().getAbsolutePath(), "statistics"));
+			}
+			if (c.exists() && c.isFile()) {
+				c.renameTo(new File(getPreferencesDirFile().getAbsolutePath(), "properties"));
+			}
+			a.delete();
+		}
+
 		applicationMode = true;
 		registerDefault();
 		GUI.startGUI();
+	}
+
+	/**
+	 * Returns a File to the preferences directory
+	 * @return preferences directory file
+	 */
+	public static File getPreferencesDirFile() {
+		File dataPath;
+		String path = System.getenv("APPDATA");
+		if (path != null) {
+			dataPath = new File(path, "jBubbleBreaker");
+		} else {
+			dataPath = new File(System.getProperty("user.home"), ".jbubblebreaker");
+		}
+		if (!dataPath.exists()) {
+			dataPath.mkdir();
+		}
+		return dataPath;
 	}
 
 	/**
@@ -209,7 +237,7 @@ public class JBubbleBreaker {
 			userProperties = new Properties();
 			if (isApplicationMode()) {
 				try {
-					userProperties.loadFromXML(new FileInputStream(System.getProperty("user.home") + "/.jbubblebreaker/properties"));
+					userProperties.loadFromXML(new FileInputStream(new File(getPreferencesDirFile(), "properties")));
 				} catch (Exception e) {
 					// ignore
 				}
@@ -237,7 +265,7 @@ public class JBubbleBreaker {
 		loadUserProperties();
 		userProperties.setProperty(property, value);
 		try {
-			userProperties.storeToXML(new FileOutputStream(System.getProperty("user.home") + "/.jbubblebreaker/properties"), "");
+			userProperties.storeToXML(new FileOutputStream(new File(getPreferencesDirFile(), "properties")), "");
 		} catch (Exception e) {
 			// ignore
 		}
