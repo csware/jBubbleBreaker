@@ -41,6 +41,7 @@ public class GameLevelBreaker extends GameDefault {
 	 * Creates a game with rules for an ongoing game
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public GameLevelBreaker(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);

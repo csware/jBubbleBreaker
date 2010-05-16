@@ -38,6 +38,7 @@ public class GameDefault extends Game {
 	 * Creates a game with default rules
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public GameDefault(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);

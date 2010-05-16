@@ -37,6 +37,7 @@ public class GameShiftOngoing2 extends GameShift {
 	 * Creates a game with default rules
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public GameShiftOngoing2(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);

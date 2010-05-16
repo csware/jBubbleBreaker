@@ -41,6 +41,7 @@ public class GameShiftSpeed extends GameShift {
 	 * Creates a game with default rules
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public GameShiftSpeed(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);

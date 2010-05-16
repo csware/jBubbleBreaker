@@ -41,6 +41,7 @@ public class GameLevelBreakerShift extends GameShift {
 	 * Creates a game with rules for an ongoing game
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public GameLevelBreakerShift(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);

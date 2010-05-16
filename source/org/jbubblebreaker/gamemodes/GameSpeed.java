@@ -41,6 +41,7 @@ public class GameSpeed extends GameDefault {
 	 * Creates a game with default rules
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public GameSpeed(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);

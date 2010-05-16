@@ -60,6 +60,7 @@ public abstract class Game extends MouseAdapter {
 	 * Prepares a new playground
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public Game(int rows, int cols, int bubbleType) {
 		playgroundPanel.setLayout(null);

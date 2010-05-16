@@ -55,9 +55,12 @@ public class Playground {
 
 	/**
 	 * Creates a new empty Playground/Matrix
+	 * @param windowWidth width of the windows which contains the playground
+	 * @param windowHeight height of the windows which contains the playground
 	 * @param rows row count
 	 * @param cols column count
 	 * @param ml MouseListener
+	 * @param bubbleType bubbleType index
 	 */
 	public Playground(int windowWidth, int windowHeight, int rows, int cols, MouseListener ml, int bubbleType) {
 		this.cols = cols;
@@ -236,6 +239,7 @@ public class Playground {
 	 * Mark a specific Bubble
 	 * @param x row-index
 	 * @param y column-index
+	 * @param setTo set mark to setTo
 	 */
 	public void setMark(int x, int y, boolean setTo) {
 		if (isEmpty(x, y) == false) {

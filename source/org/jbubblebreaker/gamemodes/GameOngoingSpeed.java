@@ -41,6 +41,7 @@ public class GameOngoingSpeed extends GameOngoing {
 	 * Creates a game with rules for an ongoing game
 	 * @param rows of the matrix
 	 * @param cols of the matrix
+	 * @param bubbleType bubbleType index
 	 */
 	public GameOngoingSpeed(int rows, int cols, int bubbleType) {
 		super(rows, cols, bubbleType);

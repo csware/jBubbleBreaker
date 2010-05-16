@@ -40,6 +40,7 @@ public class GameMode {
 	/**
 	 * Creates a datastorage for a game mode
 	 * @param modeName Mode name
+	 * @param allowedSize allowed GameSize
 	 * @param constructor Reference of the constructor
 	 */
 	public GameMode(String modeName, GameSize allowedSize, Constructor<Game> constructor) {
