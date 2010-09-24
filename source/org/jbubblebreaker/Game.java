@@ -101,7 +101,19 @@ public abstract class Game extends MouseAdapter {
 		possiblePoints.setVisible(false);
 		prepareNewGame();
 
-		// remove all Bubbles from playgroundPanel
+		removeAllBubblesFromPlayground();
+		fillPlayground();
+		playgroundPanel.repaint();
+		playgroundPanel.setEnabled(true);
+		if (isPlaygroundSolvable() == false) {
+			gameOver(0);
+		}
+	}
+
+	/**
+	 * Removes all bubbles from playgroundPanel
+	 */
+	private void removeAllBubblesFromPlayground() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
 		while (col >= 0 && playground.isEmpty(row, col) == false) {
@@ -111,12 +123,6 @@ public abstract class Game extends MouseAdapter {
 			}
 			col--;
 			row = playground.getRows() - 1;
-		}
-		fillPlayground();
-		playgroundPanel.repaint();
-		playgroundPanel.setEnabled(true);
-		if (isPlaygroundSolvable() == false) {
-			gameOver(0);
 		}
 	}
 
