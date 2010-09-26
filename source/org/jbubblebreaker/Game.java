@@ -47,6 +47,7 @@ public abstract class Game extends MouseAdapter {
 	 * Stores the playground, the matrix of Bubbles
 	 */
 	protected Playground playground;
+	private Integer[][] playgroundCopy;
 	/**
 	 * Stores a reference of the points label in the GUI, instantiate on creation with a JPanel to avoid null-PounterExceptions
 	 */
@@ -55,6 +56,7 @@ public abstract class Game extends MouseAdapter {
 	 * Stores the points the user gained
 	 */
 	private int points = 0;
+	private int oldPoints = 0;
 
 	/**
 	 * Prepares a new playground
@@ -66,6 +68,7 @@ public abstract class Game extends MouseAdapter {
 		playgroundPanel.setLayout(null);
 
 		playground = new Playground(playgroundPanel.getWidth(), playgroundPanel.getHeight(), rows, cols, this, bubbleType);
+		playgroundCopy = new Integer[rows][cols];
 
 		possiblePoints.setSize(50, 50);
 		playgroundPanel.add(possiblePoints);
@@ -266,6 +269,7 @@ public abstract class Game extends MouseAdapter {
 				if (JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true")) {
 					new PlaySound(Sounds.REMOVE_BUBBLES);
 				}
+				makeBackup();
 				points += getCalculatedPoints();
 				removeMarkedBubbles(my.getRow(), my.getCol());
 				pointsLabel.setText(Localization.getString("Points") + points);
@@ -307,5 +311,46 @@ public abstract class Game extends MouseAdapter {
 	 */
 	final public int getPoints() {
 		return points;
+	}
+
+	public void makeBackup() {
+		oldPoints = points;
+		int row = playground.getRows() - 1;
+		int col = playground.getCols() - 1;
+		while (col >= 0) {
+			while (row >= 0) {
+				if (playground.isEmpty(row, col) == false) {
+					playgroundCopy[row][col] = playground.getBubble(row, col).getColorIndex();
+				} else {
+					playgroundCopy[row][col] = null;
+				}
+				row--;
+			}
+			col--;
+			row = playground.getRows() - 1;
+		}
+	}
+
+	public void restoreBackup() {
+		int row = playground.getRows() - 1;
+		int col = playground.getCols() - 1;
+		while (col >= 0) {
+			while (row >= 0) {
+				if (playgroundCopy[row][col] != null) {
+					newBubble(row, col, playgroundCopy[row][col]);
+				}
+				row--;
+			}
+			col--;
+			row = playground.getRows() - 1;
+		}
+		points = oldPoints;
+	}
+
+	public void redo() {
+		this.removeAllBubblesFromPlayground();
+		restoreBackup();
+		playgroundPanel.repaint();
+		pointsLabel.setText(Localization.getString("Points") + points);
 	}
 }
