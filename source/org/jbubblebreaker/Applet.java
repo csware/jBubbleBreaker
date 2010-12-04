@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2008 - 2010 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -20,6 +20,7 @@ package org.jbubblebreaker;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JApplet;
 import javax.swing.JCheckBoxMenuItem;
@@ -28,6 +29,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 /**
@@ -35,12 +37,12 @@ import javax.swing.SwingUtilities;
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class Applet extends JApplet implements ActionListener, GUIIf {
+public class Applet extends JApplet implements ActionListener, GUIIf, GameLifecycleObserverIf {
 	private JPanel infoPanel = new JPanel();
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
-	private JMenuItem menuHelpInfo, menuGameNew, menuGameNewDots, menuGameSounds;
+	private JMenuItem menuHelpInfo, menuGameNew, menuGameNewDots, menuGameRedo, menuGameSounds;
 
 	@Override
 	public void init() {
@@ -92,6 +94,11 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		menuGameNewDots.addActionListener(this);
 		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
 		menuGame.add(menuGameNewDots);
+		menuGameRedo = new JMenuItem(Localization.getString("MenuRedo"));
+		menuGameRedo.addActionListener(this);
+		menuGameRedo.setMnemonic(Localization.getChar("MenuRedoMnemonic"));
+		menuGameRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
+		menuGame.add(menuGameRedo);
 		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
 		menuGameSounds.addActionListener(this);
 		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
@@ -112,6 +119,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		game = null;
 		menuGameNew.setEnabled(false);
 		menuGameNewDots.setEnabled(false);
+		menuGameRedo.setEnabled(false);
 		NewGameAskUserPanel nGAuP = new NewGameAskUserPanel(this);
 		nGAuP.setVisible(false);
 		setContentPane(nGAuP);
@@ -126,6 +134,10 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 			pointsLabel.setText(Localization.getString("PointsZero"));
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
+		} else if (arg0.getSource() == menuGameRedo) {
+			pointsLabel.setText(Localization.getString("PointsZero"));
+			menuGameRedo.setEnabled(false);
+			game.redo();
 		} else if (arg0.getSource() == menuGameSounds) {
 			if (menuGameSounds.isSelected()) {
 				JBubbleBreaker.setUserProperty("enableSound", "true");
@@ -150,6 +162,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 		gameModeLabel.setText(game.getMode());
 		getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		game.setPointsLabel(pointsLabel);
+		game.setGameLifecycleObserver(this);
 
 		infoPanel.setLayout(new BorderLayout());
 
@@ -160,5 +173,13 @@ public class Applet extends JApplet implements ActionListener, GUIIf {
 
 		menuGameNew.setEnabled(true);
 		menuGameNewDots.setEnabled(true);
+	}
+
+	public void firstMoveTaken() {
+		menuGameRedo.setEnabled(true);
+	}
+
+	public void gameOver() {
+		menuGameRedo.setEnabled(false);
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2008 - 2010 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -58,6 +58,9 @@ public abstract class Game extends MouseAdapter {
 	private int points = 0;
 	private int oldPoints = 0;
 
+	private boolean firstMove = true;
+	private GameLifecycleObserverIf gameLifecycleObserver;
+	
 	/**
 	 * Prepares a new playground
 	 * @param rows of the matrix
@@ -101,12 +104,14 @@ public abstract class Game extends MouseAdapter {
 	final public void newGame() {
 		points = 0;
 		marked = 0;
+		firstMove = true;
 		possiblePoints.setVisible(false);
+		playgroundPanel.setVisible(false);
 		prepareNewGame();
 
 		removeAllBubblesFromPlayground();
 		fillPlayground();
-		playgroundPanel.repaint();
+		playgroundPanel.setVisible(true);
 		playgroundPanel.setEnabled(true);
 		if (isPlaygroundSolvable() == false) {
 			gameOver(0);
@@ -160,6 +165,7 @@ public abstract class Game extends MouseAdapter {
 	 * @see #isSolvable()
 	 */
 	final private void gameOver(int solvedPoints) {
+		gameLifecycleObserver.gameOver();
 		playgroundPanel.setEnabled(false);
 		if (solvedPoints >= 0 && isSolvable()) {
 			JOptionPane.showMessageDialog(null, Localization.getString("GameOver") + "\n" + Localization.getString("Points") + getPoints() + "\n" + Localization.getString("BreakerBonus") + ": " + solvedPoints + Statistics.updateStatistics(getMode(), playground.getColors(), playground.getRows(), playground.getCols(), getPoints() + solvedPoints), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
@@ -269,6 +275,10 @@ public abstract class Game extends MouseAdapter {
 				if (JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true")) {
 					new PlaySound(Sounds.REMOVE_BUBBLES);
 				}
+				if (firstMove) {
+					gameLifecycleObserver.firstMoveTaken();
+					firstMove = false;
+				}
 				makeBackup();
 				points += getCalculatedPoints();
 				removeMarkedBubbles(my.getRow(), my.getCol());
@@ -348,9 +358,20 @@ public abstract class Game extends MouseAdapter {
 	}
 
 	public void redo() {
+		playgroundPanel.setVisible(false);
 		this.removeAllBubblesFromPlayground();
 		restoreBackup();
-		playgroundPanel.repaint();
+		playgroundPanel.setVisible(true);
+		marked = 0;
+		firstMove = true;
+		possiblePoints.setVisible(false);
 		pointsLabel.setText(Localization.getString("Points") + points);
+	}
+
+	/**
+	 * @param gameLifecycleObserver the gameLifecycleObserver to set
+	 */
+	public void setGameLifecycleObserver(GameLifecycleObserverIf gameLifecycleObserver) {
+		this.gameLifecycleObserver = gameLifecycleObserver;
 	}
 }

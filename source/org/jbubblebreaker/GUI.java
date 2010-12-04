@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2008 - 2010 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -37,14 +37,14 @@ import javax.swing.KeyStroke;
  * @author Sven Strickroth
  */
 @SuppressWarnings("serial")
-public class GUI extends MyJFrame implements ActionListener, GUIIf {
+public class GUI extends MyJFrame implements ActionListener, GUIIf, GameLifecycleObserverIf {
 	private JPanel infoPanel = new JPanel();
 	private Game game;
 	private JLabel pointsLabel = new JLabel();
 	private JLabel gameModeLabel = new JLabel();
 	private static boolean started = false;
 
-	private JMenuItem menuHelpUpdate, menuHelpInfo, menuGameNew, menuGameNewDots, menuGameStatistics, menuGameGuestMode, menuGameClose, menuGameSounds;
+	private JMenuItem menuHelpUpdate, menuHelpInfo, menuGameNew, menuGameNewDots, menuGameRedo, menuGameStatistics, menuGameGuestMode, menuGameClose, menuGameSounds;
 
 	/**
 	 * Start GUI, but only once
@@ -82,6 +82,11 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
 		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		menuGame.add(menuGameNewDots);
+		menuGameRedo = new JMenuItem(Localization.getString("MenuRedo"));
+		menuGameRedo.addActionListener(this);
+		menuGameRedo.setMnemonic(Localization.getChar("MenuRedoMnemonic"));
+		menuGameRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
+		menuGame.add(menuGameRedo);
 		menuGameStatistics = new JMenuItem(Localization.getString("MenuStatistics"));
 		menuGameStatistics.addActionListener(this);
 		menuGameStatistics.setMnemonic(Localization.getChar("MenuGameStatisticsMnemonic"));
@@ -123,6 +128,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		game = null;
 		menuGameNew.setEnabled(false);
 		menuGameNewDots.setEnabled(false);
+		menuGameRedo.setEnabled(false);
 		NewGameAskUserPanel nGAuP = new NewGameAskUserPanel(this);
 		nGAuP.setVisible(false);
 		setContentPane(nGAuP);
@@ -153,6 +159,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 		gameModeLabel.setText(game.getMode());
 		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
 		game.setPointsLabel(pointsLabel);
+		game.setGameLifecycleObserver(this);
 		menuGameNew.setEnabled(true);
 		menuGameNewDots.setEnabled(true);
 	}
@@ -174,11 +181,14 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 			}
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
-			pointsLabel.setText(Localization.getString("PointsZero"));
 		} else if (arg0.getSource() == menuGameStatistics) {
 			new Statistics();
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
+		} else if (arg0.getSource() == menuGameRedo) {
+			pointsLabel.setText(Localization.getString("PointsZero"));
+			menuGameRedo.setEnabled(false);
+			game.redo();
 		} else if (arg0.getSource() == menuGameGuestMode) {
 			if (menuGameGuestMode.isSelected()) {
 				JBubbleBreaker.setUserProperty("enableGuestMode", "true");
@@ -192,5 +202,13 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf {
 				JBubbleBreaker.setUserProperty("enableSound", "false");
 			}
 		}
+	}
+
+	public void firstMoveTaken() {
+		menuGameRedo.setEnabled(true);
+	}
+
+	public void gameOver() {
+		menuGameRedo.setEnabled(false);
 	}
 }
