@@ -1,5 +1,5 @@
 #define version="0.8"
-#define copyright="Coded by Sven Strickroth 2007-2008"
+#define copyright="Coded by Sven Strickroth 2007-2010"
 
 [Setup]
 AppName=jBubbleBreaker

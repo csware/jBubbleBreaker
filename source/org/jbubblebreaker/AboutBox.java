@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2007 - 2008 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -64,7 +64,7 @@ public class AboutBox extends MyJDialog implements ActionListener {
 		okButton.addActionListener(this);
 		getContentPane().add(okButton);
 
-		JLabel lblCopyright = new JLabel("Coded by Sven Strickroth, 2007 - 2008");
+		JLabel lblCopyright = new JLabel("Coded by Sven Strickroth, 2007 - 2010");
 		lblCopyright.setVerticalAlignment(SwingConstants.TOP);
 		lblCopyright.setBounds(64, 76, 250, 25);
 		getContentPane().add(lblCopyright);
