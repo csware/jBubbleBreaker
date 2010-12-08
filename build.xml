@@ -22,7 +22,7 @@
 		</exec>
 	</target>
 	<target name="generateSourcesZip" description="Generates the sources zip-file" depends="generateJavaDoc">
-		<zip destfile="${basedir}/jbubblebreaker-src.zip">
+		<zip destfile="${basedir}/jbubblebreaker-src-${version}.zip">
 			<zipfileset dir="." includes="COPYING" prefix="jbubblebreaker"/>
 			<zipfileset dir="." includes=".classpath" prefix="jbubblebreaker"/>
 			<zipfileset dir="." includes=".project" prefix="jbubblebreaker"/>
@@ -57,7 +57,7 @@
 		</javadoc>
 	</target>
 	<target name="createJar" depends="compile" description="Generates the jar-file">
-		<jar destfile="${basedir}/jbubblebreaker.jar" basedir="${basedir}/bin">
+		<jar destfile="${basedir}/jbubblebreaker-${version}.jar" basedir="${basedir}/bin">
 			<manifest>
 				<attribute name="Main-Class" value="${main.class}"/>
 				<attribute name="Built-By" value="${user.name}"/>
@@ -82,7 +82,10 @@
 		<delete dir="${basedir}/${bin.dir}" />
 		<delete dir="${basedir}/${doc.dir}" />
 		<delete file="${basedir}/jbubblebreaker.jar" />
+		<delete file="${basedir}/jbubblebreaker-${version}.jar" />
 		<delete file="${basedir}/jbubblebreaker-src.zip" />
+		<delete file="${basedir}/jbubblebreaker-src-${version}.zip" />
 		<delete file="${basedir}/jBubbleBreaker-install.exe" />
+		<delete file="${basedir}/jBubbleBreaker-install-${version}.exe" />
 	</target>
 </project>

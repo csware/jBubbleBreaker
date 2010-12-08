@@ -1,4 +1,4 @@
-#define version="0.5"
+#define version="0.6"
 #define copyright="Coded by Sven Strickroth 2007-2008"
 
 [Setup]
@@ -13,7 +13,7 @@ AllowNoIcons=true
 DefaultDirName={pf}\jBubbleBreaker
 AppCopyright={#copyright}
 PrivilegesRequired=none
-OutputBaseFilename=jBubbleBreaker-install
+OutputBaseFilename=jBubbleBreaker-install-{#version}
 AllowRootDirectory=false
 UsePreviousGroup=true
 DisableStartupPrompt=true
@@ -31,9 +31,9 @@ AppID={{084C38F2-07C2-4EC8-8337-950BCBA09957}
 LicenseFile=..\COPYING
 
 [Files]
-Source: ..\jbubblebreaker.jar; DestDir: {app}
+Source: ..\jbubblebreaker-{#version}.jar; DestDir: {app}; DestName: jbubblebreaker.jar
 Source: ..\source\images\jbubblebreaker.ico; DestDir: {app}
-Source: ..\jbubblebreaker-src.zip; DestDir: {app}; Components: source; Tasks: 
+Source: ..\jbubblebreaker-src-{#version}.zip; DestDir: {app}; Components: source; DestName: jbubblebreaker-src.zip
 
 [Icons]
 Name: {group}\Uninstall jBubbleBreaker; Filename: {uninstallexe}

@@ -48,6 +48,7 @@ public class JBubbleBreaker {
 	 * @return version numer 
 	 */
 	static public String getVersion() {
+		// check application.properties for all locations where version needs to kept up to date
 		return "0.6";
 	}
 
