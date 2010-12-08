@@ -89,10 +89,12 @@ public class Applet extends JApplet implements ActionListener, GUIIf, GameLifecy
 		menuGameNew = new JMenuItem(Localization.getString("MenuNew"));
 		menuGameNew.addActionListener(this);
 		menuGameNew.setMnemonic(Localization.getChar("MenuNewMnemonic"));
+		menuGameNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
 		menuGame.add(menuGameNew);
 		menuGameNewDots = new JMenuItem(Localization.getString("MenuNewDots"));
 		menuGameNewDots.addActionListener(this);
 		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
+		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		menuGame.add(menuGameNewDots);
 		menuGameRedo = new JMenuItem(Localization.getString("MenuRedo"));
 		menuGameRedo.addActionListener(this);
