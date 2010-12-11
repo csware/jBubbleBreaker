@@ -4,3 +4,4 @@ jbubblebreaker-*.jar
 .settings
 jbubblebreaker-*.zip
 *.exe
+po/*.po~
