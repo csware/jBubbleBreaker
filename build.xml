@@ -21,6 +21,29 @@
 			<arg value="${basedir}/innosetup/install.iss" />
 		</exec>
 	</target>
+	<target name="generateGettextTranslations" description="Gettext">
+		<antcall target="generateGettextTranslation">
+			<param name="lang" value="en" />
+		</antcall>
+		<antcall target="generateGettextTranslation">
+			<param name="lang" value="de" />
+		</antcall>
+		<antcall target="generateGettextTranslation">
+			<param name="lang" value="gl" />
+		</antcall>
+	</target>
+	<target name="generateGettextTranslation" description="Gettext">
+		<exec executable="msgfmt" dir="${basedir}" failonerror="true">
+			<arg value="--java2" />
+			<arg value="-d" />
+			<arg value="${bin.dir}" />
+			<arg value="-r" />
+			<arg value="org.jbubblebreaker.i18n.Messages" />
+			<arg value="-l" />
+			<arg value="${lang}" />
+			<arg value="po/${lang}.po" />
+		</exec>
+	</target>
 	<target name="generateSourcesZip" description="Generates the sources zip-file" depends="generateJavaDoc">
 		<zip destfile="${basedir}/jbubblebreaker-src-${version}.zip">
 			<zipfileset dir="." includes="COPYING" prefix="jbubblebreaker" />
@@ -29,8 +52,11 @@
 			<zipfileset dir="." includes="application.properties" prefix="jbubblebreaker" />
 			<zipfileset dir="." includes="build.xml" prefix="jbubblebreaker" />
 			<zipfileset dir="${source.dir}" prefix="jbubblebreaker/${source.dir}" />
+			<zipfileset dir="po" prefix="jbubblebreaker/po" />
 			<zipfileset dir="doc" prefix="jbubblebreaker/doc" />
 			<zipfileset dir="innosetup" prefix="jbubblebreaker/innosetup" />
+			<zipfileset dir=".externalToolBuilders" prefix="jbubblebreaker/.externalToolBuilders" />
+			<zipfileset dir="." includes="gettext-commons-0.9.6.jar" prefix="jbubblebreaker" />
 		</zip>
 	</target>
 	<target name="generateJavaDoc" description="Generate JavaDoc">
@@ -65,21 +91,20 @@
 			<fileset dir="${basedir}">
 				<include name="COPYING" />
 			</fileset>
+			<zipfileset src="gettext-commons-0.9.6.jar" />
 		</jar>
 	</target>
 	<target name="compile" description="Compiles the source">
 		<delete dir="${basedir}/${bin.dir}" />
 		<mkdir dir="${basedir}/${bin.dir}" />
-		<javac destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" debug="${build.debug}" debuglevel="${build.debuglevel}" source="${target.java.version}" target="${target.java.version}" />
+		<javac classpath="gettext-commons-0.9.6.jar" destdir="${basedir}/${bin.dir}" srcdir="${basedir}/${source.dir}" debug="${build.debug}" debuglevel="${build.debuglevel}" source="${target.java.version}" target="${target.java.version}" />
 		<copy todir="${basedir}/${bin.dir}/images">
 			<fileset dir="${basedir}/${source.dir}/images" />
 		</copy>
 		<copy todir="${basedir}/${bin.dir}/sounds">
 			<fileset dir="${basedir}/${source.dir}/sounds" />
 		</copy>
-		<copy todir="${basedir}/${bin.dir}/org/jbubblebreaker/i18n">
-			<fileset dir="${basedir}/${source.dir}/org/jbubblebreaker/i18n" />
-		</copy>
+		<antcall target="generateGettextTranslations" />
 	</target>
 	<target name="clean" description="Remove all generated files">
 		<delete dir="${basedir}/${bin.dir}" />

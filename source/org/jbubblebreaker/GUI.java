@@ -66,54 +66,54 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf, GameLifecycl
 		// insert Menu
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		JMenu menuGame = new JMenu(Localization.getString("MenuGame"));
-		menuGame.setMnemonic(Localization.getChar("MenuGameMnemonic"));
+		JMenu menuGame = new JMenu();
+		Localization.setMemnoricText(menuGame, Localization.getI18n().tr("&Game"));
 		menuBar.add(menuGame);
-		JMenu menuHelp = new JMenu(Localization.getString("MenuHelp"));
-		menuHelp.setMnemonic(Localization.getChar("MenuHelpMnemonic"));
+		JMenu menuHelp = new JMenu();
+		Localization.setMemnoricText(menuHelp, Localization.getI18n().tr("&Help"));
 		menuBar.add(menuHelp);
-		menuGameNew = new JMenuItem(Localization.getString("MenuNew"));
+		menuGameNew = new JMenuItem();
+		Localization.setMemnoricText(menuGameNew, Localization.getI18n().tr("&New"));
 		menuGameNew.addActionListener(this);
-		menuGameNew.setMnemonic(Localization.getChar("MenuNewMnemonic"));
 		menuGameNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
 		menuGame.add(menuGameNew);
-		menuGameNewDots = new JMenuItem(Localization.getString("MenuNewDots"));
+		menuGameNewDots = new JMenuItem();
+		Localization.setMemnoricText(menuGameNewDots, Localization.getI18n().tr("N&ew..."));
 		menuGameNewDots.addActionListener(this);
-		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
 		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		menuGame.add(menuGameNewDots);
-		menuGameRedo = new JMenuItem(Localization.getString("MenuRedo"));
+		menuGameRedo = new JMenuItem();
+		Localization.setMemnoricText(menuGameRedo, Localization.getI18n().tr("&Redo"));
 		menuGameRedo.addActionListener(this);
-		menuGameRedo.setMnemonic(Localization.getChar("MenuRedoMnemonic"));
 		menuGameRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
 		menuGame.add(menuGameRedo);
-		menuGameStatistics = new JMenuItem(Localization.getString("MenuStatistics"));
+		menuGameStatistics = new JMenuItem();
+		Localization.setMemnoricText(menuGameStatistics, Localization.getI18n().tr("&Statistics"));
 		menuGameStatistics.addActionListener(this);
-		menuGameStatistics.setMnemonic(Localization.getChar("MenuGameStatisticsMnemonic"));
 		menuGameStatistics.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
 		menuGame.add(menuGameStatistics);
-		menuGameGuestMode = new JCheckBoxMenuItem(Localization.getString("MenuGuestMode"));
+		menuGameGuestMode = new JCheckBoxMenuItem();
+		Localization.setMemnoricText(menuGameGuestMode, Localization.getI18n().tr("&Guest mode"));
 		menuGameGuestMode.addActionListener(this);
-		menuGameGuestMode.setMnemonic(Localization.getChar("MenuGuestModeMnemonic"));
 		menuGameGuestMode.setSelected(JBubbleBreaker.getUserProperty("enableGuestMode", "false").equalsIgnoreCase("true"));
 		menuGame.add(menuGameGuestMode);
-		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
+		menuGameSounds = new JCheckBoxMenuItem();
+		Localization.setMemnoricText(menuGameSounds, Localization.getI18n().tr("S&ound"));
 		menuGameSounds.addActionListener(this);
-		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
 		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true"));
 		menuGame.add(menuGameSounds);
-		menuGameClose = new JMenuItem(Localization.getString("MenuQuit"));
+		menuGameClose = new JMenuItem();
+		Localization.setMemnoricText(menuGameClose, Localization.getI18n().tr("&Quit"));
 		menuGameClose.addActionListener(this);
-		menuGameClose.setMnemonic(Localization.getChar("MenuQuitMnemonic"));
 		menuGameClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
 		menuGame.add(menuGameClose);
-		menuHelpUpdate = new JMenuItem(Localization.getString("MenuHelpUpdate"));
+		menuHelpUpdate = new JMenuItem();
+		Localization.setMemnoricText(menuHelpUpdate, Localization.getI18n().tr("Check for &update"));
 		menuHelpUpdate.addActionListener(this);
-		menuHelpUpdate.setMnemonic(Localization.getChar("MenuHelpUpdateMnemonic"));
 		menuHelp.add(menuHelpUpdate);
-		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
+		menuHelpInfo = new JMenuItem();
+		Localization.setMemnoricText(menuHelpInfo, Localization.getI18n().tr("&About"));
 		menuHelpInfo.addActionListener(this);
-		menuHelpInfo.setMnemonic(Localization.getChar("MenuAboutMnemonic"));
 		menuHelp.add(menuHelpInfo);
 
 		newGameDots();
@@ -154,7 +154,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf, GameLifecycl
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
 
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
-		pointsLabel.setText(Localization.getString("PointsZero"));
+		pointsLabel.setText(Localization.getI18n().tr("Points: {0}", 0));
 
 		gameModeLabel.setText(game.getMode());
 		this.getContentPane().add(game.getPanel(), BorderLayout.CENTER);
@@ -172,12 +172,12 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf, GameLifecycl
 		} else if (arg0.getSource() == menuHelpUpdate) {
 			try {
 				if (JBubbleBreaker.checkForUpdate() == true) {
-					JOptionPane.showMessageDialog(null, Localization.getString("NewVersionAvailable") + " " + JBubbleBreaker.getProjectHomepage(), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, Localization.getI18n().tr("A new version is available.\nCheck out {0}", JBubbleBreaker.getProjectHomepage()), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, Localization.getString("NoNewVersionAvailable"), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, Localization.getI18n().tr("No new version is available.\nYou're already running the most current version."), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, Localization.getString("NewVersionError"), "jBubbleBreaker", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, Localization.getI18n().tr("Could not check for version information on the internet."), "jBubbleBreaker", JOptionPane.ERROR_MESSAGE);
 			}
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
@@ -186,7 +186,7 @@ public class GUI extends MyJFrame implements ActionListener, GUIIf, GameLifecycl
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
 		} else if (arg0.getSource() == menuGameRedo) {
-			pointsLabel.setText(Localization.getString("PointsZero"));
+			pointsLabel.setText(Localization.getI18n().tr("Points: {0}", 0));
 			menuGameRedo.setEnabled(false);
 			game.redo();
 		} else if (arg0.getSource() == menuGameGuestMode) {

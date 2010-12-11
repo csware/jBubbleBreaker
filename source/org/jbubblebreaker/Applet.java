@@ -80,35 +80,35 @@ public class Applet extends JApplet implements ActionListener, GUIIf, GameLifecy
 		// insert Menu
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		JMenu menuGame = new JMenu(Localization.getString("MenuGame"));
-		menuGame.setMnemonic(Localization.getChar("MenuGameMnemonic"));
+		JMenu menuGame = new JMenu();
+		Localization.setMemnoricText(menuGame, Localization.getI18n().tr("&Game"));
 		menuBar.add(menuGame);
-		JMenu menuHelp = new JMenu(Localization.getString("MenuHelp"));
-		menuHelp.setMnemonic(Localization.getChar("MenuHelpMnemonic"));
+		JMenu menuHelp = new JMenu();
+		Localization.setMemnoricText(menuHelp, Localization.getI18n().tr("&Help"));
 		menuBar.add(menuHelp);
-		menuGameNew = new JMenuItem(Localization.getString("MenuNew"));
+		menuGameNew = new JMenuItem();
+		Localization.setMemnoricText(menuGameNew, Localization.getI18n().tr("&New"));
 		menuGameNew.addActionListener(this);
-		menuGameNew.setMnemonic(Localization.getChar("MenuNewMnemonic"));
 		menuGameNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
 		menuGame.add(menuGameNew);
-		menuGameNewDots = new JMenuItem(Localization.getString("MenuNewDots"));
+		menuGameNewDots = new JMenuItem();
+		Localization.setMemnoricText(menuGameNewDots, Localization.getI18n().tr("N&ew..."));
 		menuGameNewDots.addActionListener(this);
-		menuGameNewDots.setMnemonic(Localization.getChar("MenuNewDotsMnemonic"));
 		menuGameNewDots.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		menuGame.add(menuGameNewDots);
-		menuGameRedo = new JMenuItem(Localization.getString("MenuRedo"));
+		menuGameRedo = new JMenuItem();
+		Localization.setMemnoricText(menuGameRedo, Localization.getI18n().tr("&Redo"));
 		menuGameRedo.addActionListener(this);
-		menuGameRedo.setMnemonic(Localization.getChar("MenuRedoMnemonic"));
 		menuGameRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
 		menuGame.add(menuGameRedo);
-		menuGameSounds = new JCheckBoxMenuItem(Localization.getString("MenuSounds"));
+		menuGameSounds = new JCheckBoxMenuItem();
+		Localization.setMemnoricText(menuGameSounds, Localization.getI18n().tr("S&ound"));
 		menuGameSounds.addActionListener(this);
-		menuGameSounds.setMnemonic(Localization.getChar("MenuSoundsMnemonic"));
 		menuGameSounds.setSelected(JBubbleBreaker.getUserProperty("enableSound", "true").equalsIgnoreCase("true"));
 		menuGame.add(menuGameSounds);
-		menuHelpInfo = new JMenuItem(Localization.getString("MenuAbout"));
+		menuHelpInfo = new JMenuItem();
+		Localization.setMemnoricText(menuHelpInfo, Localization.getI18n().tr("&About"));
 		menuHelpInfo.addActionListener(this);
-		menuHelpInfo.setMnemonic(Localization.getChar("MenuAboutMnemonic"));
 		menuHelp.add(menuHelpInfo);
 
 		newGameDots();
@@ -133,11 +133,11 @@ public class Applet extends JApplet implements ActionListener, GUIIf, GameLifecy
 			new AboutBox();
 		} else if (arg0.getSource() == menuGameNew) {
 			game.newGame();
-			pointsLabel.setText(Localization.getString("PointsZero"));
+			pointsLabel.setText(Localization.getI18n().tr("Points: {0}", 0));
 		} else if (arg0.getSource() == menuGameNewDots) {
 			newGameDots();
 		} else if (arg0.getSource() == menuGameRedo) {
-			pointsLabel.setText(Localization.getString("PointsZero"));
+			pointsLabel.setText(Localization.getI18n().tr("Points: {0}", 0));
 			menuGameRedo.setEnabled(false);
 			game.redo();
 		} else if (arg0.getSource() == menuGameSounds) {
@@ -171,7 +171,7 @@ public class Applet extends JApplet implements ActionListener, GUIIf, GameLifecy
 		infoPanel.add(pointsLabel, BorderLayout.WEST);
 
 		infoPanel.add(gameModeLabel, BorderLayout.EAST);
-		pointsLabel.setText(Localization.getString("PointsZero"));
+		pointsLabel.setText(Localization.getI18n().tr("Points: {0}", 0));
 
 		menuGameNew.setEnabled(true);
 		menuGameNewDots.setEnabled(true);

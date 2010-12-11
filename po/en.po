@@ -1,0 +1,183 @@
+# Copyright (C) 2010 Sven Strickroth <email@cs-ware.de>
+# This file is distributed under the same license as the jBubbleBreaker package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: jBubbleBreaker 0.8\n"
+"Report-Msgid-Bugs-To: email@cs-ware.de\n"
+"POT-Creation-Date: 2010-12-11 13:12+0100\n"
+"PO-Revision-Date: 2010-12-11 03:27+0100\n"
+"Last-Translator: nobody\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: org\jbubblebreaker\AboutBox.java:39
+msgid "About jBubbleBreaker"
+msgstr ""
+
+#: org\jbubblebreaker\AboutBox.java:58
+msgid "Version "
+msgstr ""
+
+#: org\jbubblebreaker\AboutBox.java:62
+msgid "OK"
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:84 org\jbubblebreaker\GUI.java:70
+msgid "&Game"
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:87 org\jbubblebreaker\GUI.java:73
+msgid "&Help"
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:90 org\jbubblebreaker\GUI.java:76
+msgid "&New"
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:95 org\jbubblebreaker\GUI.java:81
+msgid "N&ew..."
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:100 org\jbubblebreaker\GUI.java:86
+msgid "&Redo"
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:105 org\jbubblebreaker\GUI.java:101
+msgid "S&ound"
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:110 org\jbubblebreaker\GUI.java:115
+msgid "&About"
+msgstr ""
+
+#: org\jbubblebreaker\Applet.java:136 org\jbubblebreaker\Applet.java:140
+#: org\jbubblebreaker\Applet.java:174 org\jbubblebreaker\Game.java:97
+#: org\jbubblebreaker\Game.java:171 org\jbubblebreaker\Game.java:173
+#: org\jbubblebreaker\Game.java:261 org\jbubblebreaker\Game.java:285
+#: org\jbubblebreaker\Game.java:368 org\jbubblebreaker\GUI.java:157
+#: org\jbubblebreaker\GUI.java:189
+#, java-format
+msgid "Points: {0}"
+msgstr ""
+
+#: org\jbubblebreaker\Game.java:171 org\jbubblebreaker\Game.java:173
+msgid "Game over."
+msgstr ""
+
+#: org\jbubblebreaker\Game.java:171
+#, java-format
+msgid "Breaker Bonus: {0}"
+msgstr ""
+
+#: org\jbubblebreaker\GUI.java:91
+msgid "&Statistics"
+msgstr ""
+
+#: org\jbubblebreaker\GUI.java:96
+msgid "&Guest mode"
+msgstr ""
+
+#: org\jbubblebreaker\GUI.java:106
+msgid "&Quit"
+msgstr ""
+
+#: org\jbubblebreaker\GUI.java:111
+msgid "Check for &update"
+msgstr ""
+
+#: org\jbubblebreaker\GUI.java:175
+#, java-format
+msgid ""
+"A new version is available.\n"
+"Check out {0}"
+msgstr ""
+
+#: org\jbubblebreaker\GUI.java:177
+msgid ""
+"No new version is available.\n"
+"You're already running the most current version."
+msgstr ""
+
+#: org\jbubblebreaker\GUI.java:180
+msgid "Could not check for version information on the internet."
+msgstr ""
+
+#: org\jbubblebreaker\NewGameAskUserPanel.java:67
+msgid "Game Mode:"
+msgstr ""
+
+#: org\jbubblebreaker\NewGameAskUserPanel.java:71
+msgid "Bubble Type:"
+msgstr ""
+
+#: org\jbubblebreaker\NewGameAskUserPanel.java:76
+#: org\jbubblebreaker\NewGameAskUserPanel.java:170
+#: org\jbubblebreaker\Statistics.java:92
+msgid "Rows"
+msgstr ""
+
+#: org\jbubblebreaker\NewGameAskUserPanel.java:80
+#: org\jbubblebreaker\NewGameAskUserPanel.java:172
+#: org\jbubblebreaker\Statistics.java:92
+msgid "Columns"
+msgstr ""
+
+#: org\jbubblebreaker\NewGameAskUserPanel.java:84
+msgid "Start!"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:57
+msgid "Statistics"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:68
+#: org\jbubblebreaker\Statistics.java:144
+msgid "&Reset statistics"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:73
+msgid "&Close"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:92
+msgid "Mode"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:92
+msgid "Colors"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:92
+#: org\jbubblebreaker\Statistics.java:179
+msgid "Games played"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:92
+#: org\jbubblebreaker\Statistics.java:179
+msgid "Max. Points"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:92
+#: org\jbubblebreaker\Statistics.java:179
+msgid "Avg. Points"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:145
+msgid "Do you really want to reset the statistics?"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:145
+msgid "Reset statistics"
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:147
+msgid "An error occoured. The statistics were not reset."
+msgstr ""
+
+#: org\jbubblebreaker\Statistics.java:186
+msgid "First time you played this mode-, size-combination."
+msgstr ""

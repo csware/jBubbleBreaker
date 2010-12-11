@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2008 - 2010 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -64,24 +64,24 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 
 		final JLabel gameModeLabel = new JLabel();
 		gameModeLabel.setBounds(10 + 15, 9 + 55, 91, 14);
-		gameModeLabel.setText(Localization.getString("GameMode"));
+		gameModeLabel.setText(Localization.getI18n().tr("Game Mode:"));
 		backgroundPanel.add(gameModeLabel);
 
 		final JLabel bubbleTypeLabel = new JLabel();
-		bubbleTypeLabel.setText(Localization.getString("BubbleType"));
+		bubbleTypeLabel.setText(Localization.getI18n().tr("Bubble Type:"));
 		bubbleTypeLabel.setBounds(10 + 15, 104 + 55, 91, 14);
 		backgroundPanel.add(bubbleTypeLabel);
 
 		rowsLabel.setBounds(10 + 15, 42 + 55, 91, 14);
-		rowsLabel.setText(Localization.getString("Rows"));
+		rowsLabel.setText(Localization.getI18n().tr("Rows") + ":");
 		backgroundPanel.add(rowsLabel);
 
 		columnsLabel.setBounds(10 + 15, 75 + 55, 91, 14);
-		columnsLabel.setText(Localization.getString("Columns"));
+		columnsLabel.setText(Localization.getI18n().tr("Columns") + ":");
 		backgroundPanel.add(columnsLabel);
 
 		startButton.setBounds(10 + 15, 128 + 55, 240, 23);
-		startButton.setText(Localization.getString("Start"));
+		startButton.setText(Localization.getI18n().tr("Start!"));
 		backgroundPanel.add(startButton);
 		startButton.addActionListener(this);
 
@@ -167,9 +167,9 @@ public class NewGameAskUserPanel extends JPanel implements ActionListener, Chang
 
 	public void stateChanged(ChangeEvent arg0) {
 		if (arg0.getSource() == rowsSlider) {
-			rowsLabel.setText(Localization.getString("Rows") + ": " + String.valueOf(rowsSlider.getValue()));
+			rowsLabel.setText(Localization.getI18n().tr("Rows") + ": " + rowsSlider.getValue());
 		} else if (arg0.getSource() == columnsSlider) {
-			columnsLabel.setText(Localization.getString("Columns") + ": " + String.valueOf(columnsSlider.getValue()));
+			columnsLabel.setText(Localization.getI18n().tr("Columns") + ": " + columnsSlider.getValue());
 		}
 	}
 }

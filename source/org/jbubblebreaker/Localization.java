@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2008 - 2010 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -17,8 +17,13 @@
  */
 package org.jbubblebreaker;
 
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.AbstractButton;
+
+import org.xnap.commons.i18n.I18n;
+import org.xnap.commons.i18n.I18nFactory;
 
 /**
  * Localization class
@@ -28,31 +33,27 @@ public class Localization {
 	/**
 	 * Stores the ResourceBundle
 	 */
-	final static private ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("org.jbubblebreaker.i18n.LabelsBundle");
+	final private static I18n i18n = I18nFactory.getI18n(Localization.class, "org.jbubblebreaker.i18n.Messages");
 
 	/**
-	 * Returns the localized String, if not found, return the default one (English) or "!key!"
-	 * @param key localization key
-	 * @return localized string
+	 * Sets the text and the menmoric of an AbstractButton.
+	 * It uses the Windows convention: &Game -> G will become the memnoric
+	 * @param button
+	 * @param translation
 	 */
-	public static String getString(String key) {
-		try {
-			return RESOURCE_BUNDLE.getString(key);
-		} catch (MissingResourceException e) {
-			return '!' + key + '!';
+	public static void setMemnoricText(AbstractButton button, String translation) {
+		button.setText(translation.replaceAll("&([A-Za-z0-9])", "$1"));
+		Matcher m = Pattern.compile(".*&([A-Za-z0-9]).*").matcher(translation);
+		if (m.matches()) {
+			button.setMnemonic(m.group(1).charAt(0));
 		}
 	}
 
 	/**
-	 * Returns the localized Char, if not found, return the default one (English) or "!"
-	 * @param key localization key
-	 * @return localized char
+	 * Returns the I18n-object
+	 * @return i18n
 	 */
-	public static char getChar(String key) {
-		try {
-			return RESOURCE_BUNDLE.getString(key).charAt(0);
-		} catch (MissingResourceException e) {
-			return '!';
-		}
+	public static I18n getI18n() {
+		return i18n;
 	}
 }

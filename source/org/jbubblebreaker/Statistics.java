@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 - 2009 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2008 - 2010 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -54,7 +54,7 @@ public class Statistics extends MyJDialog implements ActionListener {
 	 * Create the frame
 	 */
 	public Statistics() {
-		super(Localization.getString("Statistics"), "jbubblebreaker.png", 677, 175, true);
+		super(Localization.getI18n().tr("Statistics"), "jbubblebreaker.png", 677, 175, true);
 		setModal(true);
 
 		getContentPane().setLayout(new BorderLayout());
@@ -64,13 +64,13 @@ public class Statistics extends MyJDialog implements ActionListener {
 		buttonsPanel.setLayout(new FlowLayout());
 		getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 
-		JButton resetStatisticsButton = new JButton(Localization.getString("ResetStatistics"));
-		resetStatisticsButton.setMnemonic(Localization.getChar("ResetStatisticsMnemonic"));
+		JButton resetStatisticsButton = new JButton();
+		Localization.setMemnoricText(resetStatisticsButton, Localization.getI18n().tr("&Reset statistics"));
 		buttonsPanel.add(resetStatisticsButton);
 		resetStatisticsButton.addActionListener(this);
 
-		JButton closeButton = new JButton(Localization.getString("Close"));
-		closeButton.setMnemonic(Localization.getChar("CloseMnemonic"));
+		JButton closeButton = new JButton();
+		Localization.setMemnoricText(closeButton, Localization.getI18n().tr("&Close"));
 		buttonsPanel.add(closeButton);
 		closeButton.addActionListener(this);
 
@@ -89,7 +89,7 @@ public class Statistics extends MyJDialog implements ActionListener {
 	}
 
 	private class TableTableModel extends AbstractTableModel {
-		private final String[] COLUMN_NAMES = new String[] { Localization.getString("Mode"), Localization.getString("Colors"), Localization.getString("Rows"), Localization.getString("Columns"), Localization.getString("GamesPlayed"), Localization.getString("MaxPoints"), Localization.getString("AvgPoints") };
+		private final String[] COLUMN_NAMES = new String[] { Localization.getI18n().tr("Mode"), Localization.getI18n().tr("Colors"), Localization.getI18n().tr("Rows"), Localization.getI18n().tr("Columns"), Localization.getI18n().tr("Games played"), Localization.getI18n().tr("Max. Points"), Localization.getI18n().tr("Avg. Points") };
 
 		public TableTableModel() {
 			super();
@@ -141,10 +141,10 @@ public class Statistics extends MyJDialog implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		if (((JButton) arg0.getSource()).getText().equals(Localization.getString("ResetStatistics"))) {
-			if (JOptionPane.showConfirmDialog(null, Localization.getString("ResetStatisticsAreYouSure"), Localization.getString("ResetStatistics"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+		if (((JButton) arg0.getSource()).getText().equals(Localization.getI18n().tr("&Reset statistics"))) {
+			if (JOptionPane.showConfirmDialog(null, Localization.getI18n().tr("Do you really want to reset the statistics?"), Localization.getI18n().tr("Reset statistics"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 				if (new File(JBubbleBreaker.getPreferencesDirFile(), "statistics").delete() == false) {
-					JOptionPane.showMessageDialog(null, Localization.getString("ResetStatisticsError"), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, Localization.getI18n().tr("An error occoured. The statistics were not reset."), "jBubbleBreaker", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					myData = new LinkedList<StatisticData>();
 					table.repaint();
@@ -176,14 +176,14 @@ public class Statistics extends MyJDialog implements ActionListener {
 					StatisticData myItem = myIterator.next();
 					if (myItem.getMode().equals(mode) && myItem.getColors() == colors && myItem.getRows() == rows && myItem.getCols() == cols) {
 						myItem.newGame(points);
-						returnString = "\n" + Localization.getString("GamesPlayed") + ": " + myItem.getCountOfGames() + "\n" + Localization.getString("AvgPoints") + ": " + myItem.getAveragePoints() + "\n" + Localization.getString("MaxPoints") + ": " + myItem.getMaxPoints();
+						returnString = "\n" + Localization.getI18n().tr("Games played") + ": " + myItem.getCountOfGames() + "\n" + Localization.getI18n().tr("Avg. Points") + ": " + myItem.getAveragePoints() + "\n" + Localization.getI18n().tr("Max. Points") + ": " + myItem.getMaxPoints();
 						found = true;
 					}
 					out.writeObject(myItem);
 				}
 				if (found == false) {
 					out.writeObject(new StatisticData(mode, colors, rows, cols, points));
-					returnString = "\n" + Localization.getString("FirstTime");
+					returnString = "\n" + Localization.getI18n().tr("First time you played this mode-, size-combination.");
 				}
 				out.close();
 			} catch (FileNotFoundException e) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 - 2008 Sven Strickroth <email@cs-ware.de>
+ * Copyright 2007 - 2010 Sven Strickroth <email@cs-ware.de>
  * 
  * This file is part of jBubbleBreaker.
  * 
@@ -36,7 +36,7 @@ public class AboutBox extends MyJDialog implements ActionListener {
 	 * Create and show the AboutBox
 	 */
 	public AboutBox() {
-		super("About jBubbleBreaker",icon, 332, 210);
+		super(Localization.getI18n().tr("About jBubbleBreaker"),icon, 332, 210);
 		setModal(true);
 
 		if (JBubbleBreaker.isApplicationMode() == false) {
@@ -55,11 +55,11 @@ public class AboutBox extends MyJDialog implements ActionListener {
 		panel.setBounds(10, 10, 32, 32);
 		getContentPane().add(panel);
 
-		JLabel lblVersion = new JLabel("Version "+JBubbleBreaker.getVersion());
+		JLabel lblVersion = new JLabel(Localization.getI18n().tr("Version ") + JBubbleBreaker.getVersion());
 		lblVersion.setBounds(64, 56, 252, 14);
 		getContentPane().add(lblVersion);
 
-		JButton okButton = new JButton("OK");
+		JButton okButton = new JButton(Localization.getI18n().tr("OK"));
 		okButton.setBounds(221, 152, 95, 23);
 		okButton.addActionListener(this);
 		getContentPane().add(okButton);
