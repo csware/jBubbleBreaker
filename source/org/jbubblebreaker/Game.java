@@ -289,6 +289,7 @@ public abstract class Game extends MouseAdapter {
 				if (playground.isEmpty(playground.getRows() - 1, playground.getCols() - 1) == true) {
 					int solvedPoints = solvedAction();
 					if (solvedPoints >= 0) {
+						pointsLabel.setText(Localization.getString("Points") + points);
 						gameOver(solvedPoints);
 						return;
 					}
