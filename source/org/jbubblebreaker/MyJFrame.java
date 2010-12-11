@@ -18,6 +18,7 @@
 package org.jbubblebreaker;
 
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 /**

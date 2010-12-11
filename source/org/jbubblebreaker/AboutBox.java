@@ -36,22 +36,22 @@ public class AboutBox extends MyJDialog implements ActionListener {
 	 * Create and show the AboutBox
 	 */
 	public AboutBox() {
-		super(Localization.getI18n().tr("About jBubbleBreaker"),icon, 332, 210);
+		super(Localization.getI18n().tr("About jBubbleBreaker"), icon, 332, 210);
 		setModal(true);
 
 		if (JBubbleBreaker.isApplicationMode() == false) {
 			// we're in an applet, so we need some more height
-			setSize(332,227);
+			setSize(332, 227);
 		}
 
 		setLayout(null);
 
-		final PicturePanel titlePanel = new PicturePanel("jBubbleBreaker-text.png",219,43);
-		titlePanel.setLocation(64,10);
+		final PicturePanel titlePanel = new PicturePanel("jBubbleBreaker-text.png", 219, 43);
+		titlePanel.setLocation(64, 10);
 		titlePanel.setToolTipText("jBubbleBreaker");
 		getContentPane().add(titlePanel);
 
-		PicturePanel panel = new PicturePanel(icon,32,32);
+		PicturePanel panel = new PicturePanel(icon, 32, 32);
 		panel.setBounds(10, 10, 32, 32);
 		getContentPane().add(panel);
 
@@ -69,7 +69,7 @@ public class AboutBox extends MyJDialog implements ActionListener {
 		lblCopyright.setBounds(64, 76, 250, 25);
 		getContentPane().add(lblCopyright);
 
-		JLabel lblComment = new JLabel("<html>GPLv3 BubbleBreaker Java clone,<br>Hosted on SourceForge.net:<br>"+JBubbleBreaker.getProjectHomepage()+"</html>");
+		JLabel lblComment = new JLabel("<html>GPLv3 BubbleBreaker Java clone,<br>Hosted on SourceForge.net:<br>" + JBubbleBreaker.getProjectHomepage() + "</html>");
 		lblComment.setVerticalAlignment(SwingConstants.TOP);
 		lblComment.setBounds(64, 99, 250, 50);
 		getContentPane().add(lblComment);

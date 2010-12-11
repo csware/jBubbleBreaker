@@ -17,10 +17,11 @@
  */
 package org.jbubblebreaker;
 
-import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.net.URL;
+
+import javax.swing.JPanel;
 
 /**
  * Provides a JPanel with a picture with "autoredraw" enabled in it

@@ -60,7 +60,7 @@ public abstract class Game extends MouseAdapter {
 
 	private boolean firstMove = true;
 	private GameLifecycleObserverIf gameLifecycleObserver;
-	
+
 	/**
 	 * Prepares a new playground
 	 * @param rows of the matrix
