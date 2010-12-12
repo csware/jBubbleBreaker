@@ -324,7 +324,7 @@ public abstract class Game extends MouseAdapter {
 		return points;
 	}
 
-	public void makeBackup() {
+	private void makeBackup() {
 		oldPoints = points;
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
@@ -342,7 +342,7 @@ public abstract class Game extends MouseAdapter {
 		}
 	}
 
-	public void restoreBackup() {
+	private void restoreBackup() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
 		while (col >= 0) {
