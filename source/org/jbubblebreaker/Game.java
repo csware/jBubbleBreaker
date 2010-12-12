@@ -47,6 +47,9 @@ public abstract class Game extends MouseAdapter {
 	 * Stores the playground, the matrix of Bubbles
 	 */
 	protected Playground playground;
+	/**
+	 * Stores the playground, the matrix of Bubble at the backup-point 
+	 */
 	private Integer[][] playgroundCopy;
 	/**
 	 * Stores a reference of the points label in the GUI, instantiate on creation with a JPanel to avoid null-PounterExceptions
@@ -56,9 +59,17 @@ public abstract class Game extends MouseAdapter {
 	 * Stores the points the user gained
 	 */
 	private int points = 0;
+	/**
+	 * Stores the points the user gained at the backup-point
+	 */
 	private int oldPoints = 0;
-
+	/**
+	 * Stores if a first redoable action was taken
+	 */
 	private boolean firstMove = true;
+	/**
+	 * Stores the GameLifecycleObserver
+	 */
 	private GameLifecycleObserverIf gameLifecycleObserver;
 
 	/**
@@ -324,6 +335,9 @@ public abstract class Game extends MouseAdapter {
 		return points;
 	}
 
+	/**
+	 * Make a backup of the playground
+	 */
 	private void makeBackup() {
 		oldPoints = points;
 		int row = playground.getRows() - 1;
@@ -342,6 +356,9 @@ public abstract class Game extends MouseAdapter {
 		}
 	}
 
+	/**
+	 * Restore a backup of a playground
+	 */
 	private void restoreBackup() {
 		int row = playground.getRows() - 1;
 		int col = playground.getCols() - 1;
@@ -358,6 +375,9 @@ public abstract class Game extends MouseAdapter {
 		points = oldPoints;
 	}
 
+	/**
+	 * Perform a redo
+	 */
 	public void redo() {
 		playgroundPanel.setVisible(false);
 		this.removeAllBubblesFromPlayground();
@@ -370,6 +390,7 @@ public abstract class Game extends MouseAdapter {
 	}
 
 	/**
+	 * Sets the LifecycleObserver for this game
 	 * @param gameLifecycleObserver the gameLifecycleObserver to set
 	 */
 	public void setGameLifecycleObserver(GameLifecycleObserverIf gameLifecycleObserver) {
